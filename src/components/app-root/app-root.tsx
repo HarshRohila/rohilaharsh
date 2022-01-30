@@ -2,17 +2,14 @@ import { Component, h } from '@stencil/core';
 
 @Component({
   tag: 'app-root',
-  styleUrl: 'app-root.css',
+  styleUrl: 'app-root.scss',
   shadow: true,
 })
 export class AppRoot {
   render() {
     return (
       <div>
-        <header>
-          <h1>Stencil App Starter</h1>
-        </header>
-
+        <app-header></app-header>
         <main>
           <stencil-router>
             <stencil-route-switch scrollTopOffset={0}>
