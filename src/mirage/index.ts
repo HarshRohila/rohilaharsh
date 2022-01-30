@@ -13,7 +13,7 @@ export function makeServer({ environment = 'test' }) {
     factories,
 
     seeds(server) {
-      server.createList('mail', 10);
+      server.createList('mail', 50);
     },
 
     routes() {

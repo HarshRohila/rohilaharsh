@@ -26,7 +26,15 @@ export class EmailList {
     return (
       <Host>
         {this.isLoading && <x-icon class="spinner" icon={faSpinner} spin></x-icon>}
-        {!this.isLoading && !!this.emails.length && this.emails.map(email => <Email email={email}></Email>)}
+        {!this.isLoading && !!this.emails.length && (
+          <ul>
+            {this.emails.map(email => (
+              <li>
+                <Email email={email}></Email>
+              </li>
+            ))}
+          </ul>
+        )}
       </Host>
     );
   }
