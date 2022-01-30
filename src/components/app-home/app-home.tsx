@@ -11,9 +11,9 @@ export class AppHome {
       <div class="app-home">
         <email-list></email-list>
 
-        <stencil-route-link url="/profile/stencil">
+        {/* <stencil-route-link url="/profile/stencil">
           <button>Profile page</button>
-        </stencil-route-link>
+        </stencil-route-link> */}
       </div>
     );
   }

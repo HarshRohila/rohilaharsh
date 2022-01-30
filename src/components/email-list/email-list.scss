@@ -1,0 +1,24 @@
+@use '../../global/helpers.scss';
+
+.email {
+  display: flex;
+  background: rgba(255, 255, 255, 0.902);
+  padding: 10px 0;
+  padding-left: 10px;
+}
+
+.from {
+  flex: 3;
+  font-weight: 600;
+}
+
+.text {
+  flex: 12;
+
+  @include helpers.ellipsis();
+}
+
+.time {
+  flex: 1;
+  font-weight: 600;
+}

@@ -4,6 +4,7 @@ import { Email, EmailService } from '../../email/service';
 
 @Component({
   tag: 'email-list',
+  styleUrl: 'email-list.scss',
   shadow: true,
 })
 export class EmailList {
@@ -31,5 +32,11 @@ export class EmailList {
 }
 
 function Email({ email }: { email: Email }) {
-  return <div class="email">{email.subject}</div>;
+  return (
+    <div class="email">
+      <span class="from">{email.from}</span>
+      <span class="text">{email.subject + ' ' + email.text}</span>
+      <span class="time">{email.datetime.toLocaleTimeString()}</span>
+    </div>
+  );
 }

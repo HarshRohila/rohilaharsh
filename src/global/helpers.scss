@@ -10,3 +10,9 @@ $baseFontSize: 16;
 @mixin iconFontSize($fontSizeInPx) {
   --font-size: #{meta.inspect(px2rem($fontSizeInPx))};
 }
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

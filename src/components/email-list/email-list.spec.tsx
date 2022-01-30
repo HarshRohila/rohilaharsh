@@ -18,9 +18,11 @@ describe('email-list | Component', () => {
     EmailService.getEmails = jest.fn().mockResolvedValue([
       {
         subject: 'sub1',
+        datetime: new Date(),
       },
       {
         subject: 'sub2',
+        datetime: new Date(),
       },
     ]);
     const page = await newSpecPage({
