@@ -3,7 +3,10 @@
   "private": true,
   "version": "0.0.1",
   "description": "Stencil App Starter",
+  "homepage": "https://harshrohila.github.io/gmail-clone",
   "scripts": {
+    "predeploy": "npm test && npm run build",
+    "deploy": "gh-pages -d www",
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --verbose",
@@ -17,6 +20,7 @@
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.5.2",
     "@types/jest": "^27.0.3",
+    "gh-pages": "^3.2.3",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
     "miragejs": "^0.1.43",
