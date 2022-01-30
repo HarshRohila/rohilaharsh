@@ -1,5 +1,7 @@
 import { Component, h, getAssetPath } from '@stencil/core';
+import { makeServer } from '../../mirage';
 
+makeServer({ environment: 'development' });
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.scss',
