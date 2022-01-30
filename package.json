@@ -20,6 +20,7 @@
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.5.2",
     "@types/jest": "^27.0.3",
+    "@types/luxon": "^2.0.9",
     "gh-pages": "^3.2.3",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
@@ -32,6 +33,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "axios": "^0.25.0"
+    "axios": "^0.25.0",
+    "luxon": "^2.3.0"
   }
 }

@@ -1,6 +1,7 @@
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Component, Host, h, State } from '@stencil/core';
 import { Email, EmailService } from '../../email/service';
+import { DateUtil } from '../../utils/dateUtil';
 
 @Component({
   tag: 'email-list',
@@ -35,8 +36,10 @@ function Email({ email }: { email: Email }) {
   return (
     <div class="email">
       <span class="from">{email.from}</span>
-      <span class="text">{email.subject + ' ' + email.text}</span>
-      <span class="time">{email.datetime.toLocaleTimeString()}</span>
+      <span class="text">
+        <span class="sub">{email.subject}</span> <span class="content">{email.text}</span>
+      </span>
+      <span class="time">{DateUtil.formatDate(email.datetime, 'H:mm a')}</span>
     </div>
   );
 }
