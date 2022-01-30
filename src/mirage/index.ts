@@ -1,4 +1,5 @@
 import { createServer, Model } from 'miragejs';
+import { API_URL } from '../utils/constants';
 import factories from './factories';
 
 export function makeServer({ environment = 'test' }) {
@@ -16,7 +17,7 @@ export function makeServer({ environment = 'test' }) {
     },
 
     routes() {
-      this.namespace = 'api';
+      this.urlPrefix = API_URL;
 
       this.get('mails');
     },
