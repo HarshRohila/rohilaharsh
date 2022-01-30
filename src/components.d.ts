@@ -17,6 +17,8 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface EmailList {
+    }
     interface XIcon {
         "icon": IconDefinition;
         "spin": boolean;
@@ -47,6 +49,12 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLEmailListElement extends Components.EmailList, HTMLStencilElement {
+    }
+    var HTMLEmailListElement: {
+        prototype: HTMLEmailListElement;
+        new (): HTMLEmailListElement;
+    };
     interface HTMLXIconElement extends Components.XIcon, HTMLStencilElement {
     }
     var HTMLXIconElement: {
@@ -58,6 +66,7 @@ declare global {
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "email-list": HTMLEmailListElement;
         "x-icon": HTMLXIconElement;
     }
 }
@@ -71,6 +80,8 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface EmailList {
+    }
     interface XIcon {
         "icon"?: IconDefinition;
         "spin"?: boolean;
@@ -80,6 +91,7 @@ declare namespace LocalJSX {
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "email-list": EmailList;
         "x-icon": XIcon;
     }
 }
@@ -91,6 +103,7 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "email-list": LocalJSX.EmailList & JSXBase.HTMLAttributes<HTMLEmailListElement>;
             "x-icon": LocalJSX.XIcon & JSXBase.HTMLAttributes<HTMLXIconElement>;
         }
     }
