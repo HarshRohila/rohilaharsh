@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { MatchResults } from "@stencil/router";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 export namespace Components {
     interface AppHeader {
     }
@@ -15,6 +16,10 @@ export namespace Components {
         "match": MatchResults;
     }
     interface AppRoot {
+    }
+    interface XIcon {
+        "icon": IconDefinition;
+        "spin": boolean;
     }
 }
 declare global {
@@ -42,11 +47,18 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLXIconElement extends Components.XIcon, HTMLStencilElement {
+    }
+    var HTMLXIconElement: {
+        prototype: HTMLXIconElement;
+        new (): HTMLXIconElement;
+    };
     interface HTMLElementTagNameMap {
         "app-header": HTMLAppHeaderElement;
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "x-icon": HTMLXIconElement;
     }
 }
 declare namespace LocalJSX {
@@ -59,11 +71,16 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface XIcon {
+        "icon"?: IconDefinition;
+        "spin"?: boolean;
+    }
     interface IntrinsicElements {
         "app-header": AppHeader;
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "x-icon": XIcon;
     }
 }
 export { LocalJSX as JSX };
@@ -74,6 +91,7 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "x-icon": LocalJSX.XIcon & JSXBase.HTMLAttributes<HTMLXIconElement>;
         }
     }
 }

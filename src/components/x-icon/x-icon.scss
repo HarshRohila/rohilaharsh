@@ -1,0 +1,7 @@
+.svg-inline--fa {
+  font-size: var(--font-size);
+}
+
+:host {
+  --font-size: inherit;
+}
