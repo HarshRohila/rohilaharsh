@@ -15,6 +15,11 @@ body {
     'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
+html,
+body {
+  height: 100%;
+}
+
 :root {
   --color-dark: #5f6368;
   --color-light: #fff;

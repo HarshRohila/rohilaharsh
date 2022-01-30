@@ -1,14 +1,15 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, getAssetPath } from '@stencil/core';
 
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.scss',
+  assetsDirs: ['assets'],
   shadow: true,
 })
 export class AppRoot {
   render() {
     return (
-      <div>
+      <div class="root" style={{ backgroundImage: `url(${getAssetPath('./assets/background.jpg')})` }}>
         <app-header></app-header>
         <main>
           <stencil-router>
