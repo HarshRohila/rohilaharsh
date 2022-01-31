@@ -22,6 +22,8 @@ export namespace Components {
     }
     interface EmailList {
     }
+    interface SideBar {
+    }
     interface StarCheckbox {
     }
     interface XIcon {
@@ -67,6 +69,12 @@ declare global {
         prototype: HTMLEmailListElement;
         new (): HTMLEmailListElement;
     };
+    interface HTMLSideBarElement extends Components.SideBar, HTMLStencilElement {
+    }
+    var HTMLSideBarElement: {
+        prototype: HTMLSideBarElement;
+        new (): HTMLSideBarElement;
+    };
     interface HTMLStarCheckboxElement extends Components.StarCheckbox, HTMLStencilElement {
     }
     var HTMLStarCheckboxElement: {
@@ -86,6 +94,7 @@ declare global {
         "app-root": HTMLAppRootElement;
         "check-box": HTMLCheckBoxElement;
         "email-list": HTMLEmailListElement;
+        "side-bar": HTMLSideBarElement;
         "star-checkbox": HTMLStarCheckboxElement;
         "x-icon": HTMLXIconElement;
     }
@@ -105,6 +114,8 @@ declare namespace LocalJSX {
     }
     interface EmailList {
     }
+    interface SideBar {
+    }
     interface StarCheckbox {
     }
     interface XIcon {
@@ -119,6 +130,7 @@ declare namespace LocalJSX {
         "app-root": AppRoot;
         "check-box": CheckBox;
         "email-list": EmailList;
+        "side-bar": SideBar;
         "star-checkbox": StarCheckbox;
         "x-icon": XIcon;
     }
@@ -133,6 +145,7 @@ declare module "@stencil/core" {
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "check-box": LocalJSX.CheckBox & JSXBase.HTMLAttributes<HTMLCheckBoxElement>;
             "email-list": LocalJSX.EmailList & JSXBase.HTMLAttributes<HTMLEmailListElement>;
+            "side-bar": LocalJSX.SideBar & JSXBase.HTMLAttributes<HTMLSideBarElement>;
             "star-checkbox": LocalJSX.StarCheckbox & JSXBase.HTMLAttributes<HTMLStarCheckboxElement>;
             "x-icon": LocalJSX.XIcon & JSXBase.HTMLAttributes<HTMLXIconElement>;
         }

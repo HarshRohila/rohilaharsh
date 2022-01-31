@@ -4,6 +4,16 @@
   flex-direction: column;
 }
 
+.content {
+  flex: 1;
+  display: flex;
+  overflow: auto;
+
+  side-bar {
+    min-width: 240px;
+  }
+}
+
 main {
   flex: 1;
   overflow: auto;
