@@ -9,6 +9,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
 export class XIcon {
   @Prop() icon: IconDefinition;
   @Prop() spin = false;
+  @Prop() mask?: IconDefinition;
 
   get iconClassList() {
     let classes = {
@@ -24,7 +25,9 @@ export class XIcon {
     return (
       <Host>
         <style innerHTML={dom.css()}></style>
-        <span innerHTML={icon(this.icon, { classes: this.iconClassList }).html[0]}></span>
+        <span
+          innerHTML={icon(this.icon, { classes: this.iconClassList, mask: this.mask }).html[0]}
+        ></span>
       </Host>
     );
   }
