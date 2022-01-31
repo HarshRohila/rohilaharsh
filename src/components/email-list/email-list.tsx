@@ -43,6 +43,7 @@ export class EmailList {
 function Email({ email }: { email: Email }) {
   return (
     <div class="email">
+      <star-checkbox></star-checkbox>
       <span class="from">{email.from}</span>
       <span class="text">
         <span class="sub">{email.subject}</span> <span class="content">{email.text}</span>

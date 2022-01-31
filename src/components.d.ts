@@ -17,10 +17,16 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface CheckBox {
+        "value": boolean;
+    }
     interface EmailList {
+    }
+    interface StarCheckbox {
     }
     interface XIcon {
         "icon": IconDefinition;
+        "mask"?: IconDefinition;
         "spin": boolean;
     }
 }
@@ -49,11 +55,23 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLCheckBoxElement extends Components.CheckBox, HTMLStencilElement {
+    }
+    var HTMLCheckBoxElement: {
+        prototype: HTMLCheckBoxElement;
+        new (): HTMLCheckBoxElement;
+    };
     interface HTMLEmailListElement extends Components.EmailList, HTMLStencilElement {
     }
     var HTMLEmailListElement: {
         prototype: HTMLEmailListElement;
         new (): HTMLEmailListElement;
+    };
+    interface HTMLStarCheckboxElement extends Components.StarCheckbox, HTMLStencilElement {
+    }
+    var HTMLStarCheckboxElement: {
+        prototype: HTMLStarCheckboxElement;
+        new (): HTMLStarCheckboxElement;
     };
     interface HTMLXIconElement extends Components.XIcon, HTMLStencilElement {
     }
@@ -66,7 +84,9 @@ declare global {
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "check-box": HTMLCheckBoxElement;
         "email-list": HTMLEmailListElement;
+        "star-checkbox": HTMLStarCheckboxElement;
         "x-icon": HTMLXIconElement;
     }
 }
@@ -80,10 +100,16 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface CheckBox {
+        "value"?: boolean;
+    }
     interface EmailList {
+    }
+    interface StarCheckbox {
     }
     interface XIcon {
         "icon"?: IconDefinition;
+        "mask"?: IconDefinition;
         "spin"?: boolean;
     }
     interface IntrinsicElements {
@@ -91,7 +117,9 @@ declare namespace LocalJSX {
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "check-box": CheckBox;
         "email-list": EmailList;
+        "star-checkbox": StarCheckbox;
         "x-icon": XIcon;
     }
 }
@@ -103,7 +131,9 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "check-box": LocalJSX.CheckBox & JSXBase.HTMLAttributes<HTMLCheckBoxElement>;
             "email-list": LocalJSX.EmailList & JSXBase.HTMLAttributes<HTMLEmailListElement>;
+            "star-checkbox": LocalJSX.StarCheckbox & JSXBase.HTMLAttributes<HTMLStarCheckboxElement>;
             "x-icon": LocalJSX.XIcon & JSXBase.HTMLAttributes<HTMLXIconElement>;
         }
     }
