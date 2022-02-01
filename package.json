@@ -20,6 +20,7 @@
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.5.2",
     "@types/jest": "^27.0.3",
+    "@types/jsonapi-serializer": "^3.6.5",
     "@types/luxon": "^2.0.9",
     "gh-pages": "^3.2.3",
     "jest": "^27.4.5",
@@ -34,6 +35,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "axios": "^0.25.0",
+    "jsonapi-serializer": "^3.6.7",
     "luxon": "^2.3.0"
   }
 }
