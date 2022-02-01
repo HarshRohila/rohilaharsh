@@ -1,6 +1,6 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
-import { Component, Host, h, State } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'star-checkbox',
@@ -8,10 +8,12 @@ import { Component, Host, h, State } from '@stencil/core';
   shadow: true,
 })
 export class StarCheckbox {
-  @State() value = false;
+  @Prop() value = false;
+
+  @Event() toggled: EventEmitter<boolean>;
 
   toggleValue() {
-    this.value = !this.value;
+    this.toggled.emit(!this.value);
   }
 
   render() {

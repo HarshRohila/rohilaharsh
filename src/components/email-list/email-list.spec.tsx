@@ -32,7 +32,7 @@ describe('email-list | Component', () => {
 
     await page.waitForChanges();
 
-    const emails = page.root.shadowRoot.querySelectorAll('.email');
+    const emails = page.root.shadowRoot.querySelectorAll('email-bar');
 
     expect(emails.length).toBe(2);
   });

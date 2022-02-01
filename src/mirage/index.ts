@@ -20,6 +20,7 @@ export function makeServer({ environment = 'test' }) {
       this.urlPrefix = API_URL;
 
       this.get('mails');
+      this.patch('mails/:id');
     },
   });
 }

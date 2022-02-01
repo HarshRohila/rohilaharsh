@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { MatchResults } from "@stencil/router";
+import { Email } from "./email/service";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 export namespace Components {
     interface AppHeader {
@@ -20,11 +21,15 @@ export namespace Components {
     interface CheckBox {
         "value": boolean;
     }
+    interface EmailBar {
+        "email": Email;
+    }
     interface EmailList {
     }
     interface SideBar {
     }
     interface StarCheckbox {
+        "value": boolean;
     }
     interface XIcon {
         "icon": IconDefinition;
@@ -63,6 +68,12 @@ declare global {
         prototype: HTMLCheckBoxElement;
         new (): HTMLCheckBoxElement;
     };
+    interface HTMLEmailBarElement extends Components.EmailBar, HTMLStencilElement {
+    }
+    var HTMLEmailBarElement: {
+        prototype: HTMLEmailBarElement;
+        new (): HTMLEmailBarElement;
+    };
     interface HTMLEmailListElement extends Components.EmailList, HTMLStencilElement {
     }
     var HTMLEmailListElement: {
@@ -93,6 +104,7 @@ declare global {
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
         "check-box": HTMLCheckBoxElement;
+        "email-bar": HTMLEmailBarElement;
         "email-list": HTMLEmailListElement;
         "side-bar": HTMLSideBarElement;
         "star-checkbox": HTMLStarCheckboxElement;
@@ -112,11 +124,16 @@ declare namespace LocalJSX {
     interface CheckBox {
         "value"?: boolean;
     }
+    interface EmailBar {
+        "email"?: Email;
+    }
     interface EmailList {
     }
     interface SideBar {
     }
     interface StarCheckbox {
+        "onToggled"?: (event: CustomEvent<boolean>) => void;
+        "value"?: boolean;
     }
     interface XIcon {
         "icon"?: IconDefinition;
@@ -129,6 +146,7 @@ declare namespace LocalJSX {
         "app-profile": AppProfile;
         "app-root": AppRoot;
         "check-box": CheckBox;
+        "email-bar": EmailBar;
         "email-list": EmailList;
         "side-bar": SideBar;
         "star-checkbox": StarCheckbox;
@@ -144,6 +162,7 @@ declare module "@stencil/core" {
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "check-box": LocalJSX.CheckBox & JSXBase.HTMLAttributes<HTMLCheckBoxElement>;
+            "email-bar": LocalJSX.EmailBar & JSXBase.HTMLAttributes<HTMLEmailBarElement>;
             "email-list": LocalJSX.EmailList & JSXBase.HTMLAttributes<HTMLEmailListElement>;
             "side-bar": LocalJSX.SideBar & JSXBase.HTMLAttributes<HTMLSideBarElement>;
             "star-checkbox": LocalJSX.StarCheckbox & JSXBase.HTMLAttributes<HTMLStarCheckboxElement>;

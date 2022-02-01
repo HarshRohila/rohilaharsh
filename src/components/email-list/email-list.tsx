@@ -1,7 +1,6 @@
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Component, Host, h, State } from '@stencil/core';
 import { Email, EmailService } from '../../email/service';
-import { DateUtil } from '../../utils/dateUtil';
 
 @Component({
   tag: 'email-list',
@@ -30,7 +29,7 @@ export class EmailList {
           <ul>
             {this.emails.map(email => (
               <li>
-                <Email email={email}></Email>
+                <email-bar email={email}></email-bar>
               </li>
             ))}
           </ul>
@@ -38,17 +37,4 @@ export class EmailList {
       </Host>
     );
   }
-}
-
-function Email({ email }: { email: Email }) {
-  return (
-    <div class="email">
-      <star-checkbox></star-checkbox>
-      <span class="from">{email.from}</span>
-      <span class="text">
-        <span class="sub">{email.subject}</span> <span class="content">{email.text}</span>
-      </span>
-      <span class="time">{DateUtil.formatDate(email.datetime, 'H:mm a')}</span>
-    </div>
-  );
 }

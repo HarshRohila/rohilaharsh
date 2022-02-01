@@ -1,4 +1,5 @@
 import { apiClient } from '../services/apiClient';
+import { JsonApi } from '../utils/jsonapi';
 
 export { EmailService, Email };
 
@@ -10,11 +11,22 @@ const EmailService = {
       return mail;
     });
   },
+
+  async saveEdittedEmail(email: Email) {
+    const MailSerializer = JsonApi.newSerializer('mail', {
+      attributes: ['from', 'subject', 'text', 'datetime', 'starred'],
+    });
+
+    const serializedEmail = MailSerializer.serialize(email);
+    await apiClient.patch(`mails/${email.id}`, serializedEmail);
+  },
 };
 
 interface Email {
+  id: string;
   from: string;
   subject: string;
   text: string;
   datetime: Date;
+  starred: boolean;
 }
