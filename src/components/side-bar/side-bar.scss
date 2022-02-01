@@ -16,3 +16,13 @@ x-icon {
   padding-left: 26px;
   padding-right: 12px;
 }
+
+stencil-route-link {
+  a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

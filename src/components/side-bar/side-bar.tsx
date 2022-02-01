@@ -12,10 +12,12 @@ export class SideBar {
     {
       label: 'Inbox',
       icon: faInbox,
+      url: '/',
     },
     {
       label: 'Starred',
       icon: faStar,
+      url: '/profile/stencil',
     },
   ];
 
@@ -37,15 +39,18 @@ export class SideBar {
 interface MenuItem {
   label: string;
   icon: IconDefinition;
+  url: string;
 }
 
 function Menu({ menuItem }: { menuItem: MenuItem }) {
   const id = newId('menu');
 
   return (
-    <div class="menu-item">
-      <x-icon id={id} icon={menuItem.icon}></x-icon>
-      <label htmlFor={id}>{menuItem.label}</label>
-    </div>
+    <stencil-route-link url={menuItem.url}>
+      <div class="menu-item">
+        <x-icon id={id} icon={menuItem.icon}></x-icon>
+        <label htmlFor={id}>{menuItem.label}</label>
+      </div>
+    </stencil-route-link>
   );
 }
