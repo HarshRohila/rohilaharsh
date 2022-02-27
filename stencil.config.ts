@@ -2,6 +2,7 @@ import { Config, Env } from '@stencil/core';
 import { sass } from '@stencil/sass';
 // https://stenciljs.com/docs/config
 const dev: boolean = process.argv && process.argv.indexOf('--dev') > -1;
+console.log(dev);
 const apiEnv: string = dev ? 'dev' : 'prod';
 export const config: Config = {
   globalStyle: 'src/global/app.css',
@@ -16,14 +17,14 @@ export const config: Config = {
     },
   ],
   env: {
-    apiEnv: apiEnv,
+    apiEnv,
   },
   plugins: [sass()],
 };
 
 function getBaseUrl() {
   if (apiEnv === 'prod') {
-    return 'https://harshrohila.github.io/gmail-clone/';
+    return 'https://harshrohila.github.io';
   }
 
   return 'https://myapp.local/';
