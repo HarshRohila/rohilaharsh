@@ -5,7 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults } from "@stencil/router";
 import { Email } from "./email/service";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 export namespace Components {
@@ -14,7 +13,7 @@ export namespace Components {
     interface AppHome {
     }
     interface AppProfile {
-        "match": MatchResults;
+        "name": string;
     }
     interface AppRoot {
     }
@@ -117,7 +116,7 @@ declare namespace LocalJSX {
     interface AppHome {
     }
     interface AppProfile {
-        "match"?: MatchResults;
+        "name"?: string;
     }
     interface AppRoot {
     }

@@ -9,6 +9,7 @@
     "deploy": "gh-pages -d www",
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
+    "start:prod": "stencil build --watch --serve",
     "test": "stencil test --spec --verbose",
     "test:all": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
@@ -17,7 +18,7 @@
   "devDependencies": {
     "@faker-js/faker": "^6.0.0-alpha.5",
     "@stencil/core": "^2.13.0",
-    "@stencil/router": "^1.0.1",
+    "@stencil/router": "^2.0.0-2",
     "@stencil/sass": "^1.5.2",
     "@types/jest": "^27.0.3",
     "@types/jsonapi-serializer": "^3.6.5",

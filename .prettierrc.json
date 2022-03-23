@@ -4,8 +4,9 @@
   "jsxBracketSameLine": false,
   "jsxSingleQuote": false,
   "quoteProps": "consistent",
+  "trailingComma": "none",
   "printWidth": 100,
-  "semi": true,
+  "semi": false,
   "singleQuote": true,
   "tabWidth": 2,
   "useTabs": false

@@ -1,25 +1,30 @@
-import { faInbox, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { Component, Host, h } from '@stencil/core';
-import newId from '../../utils/newId';
+import { faInbox, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { Component, Host, h } from '@stencil/core'
+import { href } from '@stencil/router'
+import { AppRoute } from '../../utils/AppRoute'
+import newId from '../../utils/newId'
 
 @Component({
   tag: 'side-bar',
   styleUrl: 'side-bar.scss',
-  shadow: true,
+  shadow: true
 })
 export class SideBar {
   menuItems = [
     {
       label: 'Inbox',
       icon: faInbox,
-      url: '/',
+      url: '/'
     },
     {
       label: 'Starred',
       icon: faStar,
-      url: '/profile/stencil',
-    },
-  ];
+      url: '/profile/stencil'
+    }
+  ].map(item => {
+    item.url = AppRoute.getPath(item.url)
+    return item
+  })
 
   render() {
     return (
@@ -32,25 +37,25 @@ export class SideBar {
           ))}
         </ul>
       </Host>
-    );
+    )
   }
 }
 
 interface MenuItem {
-  label: string;
-  icon: IconDefinition;
-  url: string;
+  label: string
+  icon: IconDefinition
+  url: string
 }
 
 function Menu({ menuItem }: { menuItem: MenuItem }) {
-  const id = newId('menu');
+  const id = newId('menu')
 
   return (
-    <stencil-route-link url={menuItem.url}>
+    <a {...href(menuItem.url)}>
       <div class="menu-item">
         <x-icon id={id} icon={menuItem.icon}></x-icon>
         <label htmlFor={id}>{menuItem.label}</label>
       </div>
-    </stencil-route-link>
-  );
+    </a>
+  )
 }
