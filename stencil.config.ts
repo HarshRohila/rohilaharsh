@@ -2,7 +2,6 @@ import { Config, Env } from '@stencil/core';
 import { sass } from '@stencil/sass';
 // https://stenciljs.com/docs/config
 const dev: boolean = process.argv && process.argv.indexOf('--dev') > -1;
-console.log(dev);
 const apiEnv: string = dev ? 'dev' : 'prod';
 export const config: Config = {
   globalStyle: 'src/global/app.css',

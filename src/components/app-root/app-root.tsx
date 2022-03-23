@@ -1,24 +1,18 @@
-import { Component, h, getAssetPath, Env } from '@stencil/core';
-import { makeServer } from '../../mirage';
+import { Component, h, getAssetPath } from '@stencil/core'
+import { createRouter, match, Route } from '@stencil/router'
+import { makeServer } from '../../mirage'
+import { AppRoute } from '../../utils/AppRoute'
+makeServer({ environment: 'development' })
 
-makeServer({ environment: 'development' });
+const Router = createRouter()
+
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.scss',
   assetsDirs: ['assets'],
-  shadow: true,
+  shadow: true
 })
 export class AppRoot {
-  getUrl(url: string) {
-    let prefix = '';
-
-    if (Env.apiEnv === 'prod') {
-      prefix = 'gmail-clone';
-    }
-
-    return prefix + url;
-  }
-
   render() {
     return (
       <div
@@ -29,15 +23,18 @@ export class AppRoot {
         <div class="content">
           <side-bar></side-bar>
           <main>
-            <stencil-router>
-              <stencil-route-switch scrollTopOffset={0}>
-                <stencil-route url={this.getUrl('/')} component="app-home" exact />
-                <stencil-route url={this.getUrl('/profile/:name')} component="app-profile" />
-              </stencil-route-switch>
-            </stencil-router>
+            <Router.Switch>
+              <Route path={AppRoute.getPath('/')}>
+                <app-home></app-home>
+              </Route>
+              <Route
+                path={match(AppRoute.getPath('/profile/:name'))}
+                render={({ name }) => <app-profile name={name}></app-profile>}
+              />
+            </Router.Switch>
           </main>
         </div>
       </div>
-    );
+    )
   }
 }
