@@ -1,0 +1,13 @@
+:host {
+  --icon-opacity: 0.3;
+}
+
+x-icon {
+  color: var(--color-dark);
+  &.hollow {
+    opacity: var(--icon-opacity);
+  }
+  &.solid {
+    color: var(--color-yellow);
+  }
+}

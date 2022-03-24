@@ -1,0 +1,80 @@
+@use '../../global/helpers.scss';
+
+header {
+  color: var(--color-light);
+  height: 56px;
+  align-items: center;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+
+  .left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .right {
+    display: flex;
+  }
+}
+
+.brand {
+  display: flex;
+  min-width: 238px;
+  padding-right: 30px;
+}
+
+x-icon {
+  padding: 12px;
+  @include helpers.iconFontSize(20);
+}
+h1 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  padding: 0 12px;
+}
+
+img {
+  width: 109px;
+  height: 40px;
+}
+
+svg.apps {
+  height: 20px;
+  color: var(--color-light);
+}
+
+.search {
+  border-radius: 8px;
+  background: rgba(241, 243, 244, 0.24);
+  flex: 1;
+  max-width: 720px;
+  display: flex;
+  padding: 6px;
+
+  input {
+    background: transparent;
+    border: 0;
+    color: var(--color-light);
+    flex: 1;
+    font-size: helpers.px2rem(16);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:focus-within {
+    background: var(--color-light);
+    input {
+      color: var(--color-dark);
+    }
+    x-icon {
+      color: var(--color-dark);
+    }
+  }
+}

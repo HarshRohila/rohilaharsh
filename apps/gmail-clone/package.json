@@ -1,0 +1,42 @@
+{
+  "name": "gmail-clone",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Stencil App Starter",
+  "homepage": "https://harshrohila.github.io/gmail-clone",
+  "scripts": {
+    "predeploy": "npm test && npm run build",
+    "deploy": "gh-pages -d www",
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "start:prod": "stencil build --watch --serve",
+    "test": "stencil test --spec --verbose",
+    "test:all": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.5",
+    "@stencil/core": "^2.13.0",
+    "@stencil/router": "^2.0.0-2",
+    "@stencil/sass": "^1.5.2",
+    "@types/jest": "^27.0.3",
+    "@types/jsonapi-serializer": "^3.6.5",
+    "@types/luxon": "^2.0.9",
+    "gh-pages": "^3.2.3",
+    "jest": "^27.4.5",
+    "jest-cli": "^27.4.5",
+    "miragejs": "^0.1.43",
+    "puppeteer": "^10.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "axios": "^0.25.0",
+    "jsonapi-serializer": "^3.6.7",
+    "luxon": "^2.3.0"
+  }
+}

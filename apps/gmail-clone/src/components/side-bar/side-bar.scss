@@ -1,0 +1,26 @@
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  color: var(--color-light);
+
+  div {
+    display: flex;
+  }
+}
+
+x-icon {
+  margin-right: 18px;
+}
+
+.menu-item {
+  padding-left: 26px;
+  padding-right: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    cursor: pointer;
+  }
+}

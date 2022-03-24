@@ -1,0 +1,18 @@
+@use 'sass:math';
+@use 'sass:meta';
+
+$baseFontSize: 16;
+
+@function px2rem($fontSizeInPx) {
+  @return math.div($fontSizeInPx, $baseFontSize) + 0rem;
+}
+
+@mixin iconFontSize($fontSizeInPx) {
+  --font-size: #{meta.inspect(px2rem($fontSizeInPx))};
+}
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
