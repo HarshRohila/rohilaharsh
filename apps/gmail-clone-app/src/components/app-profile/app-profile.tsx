@@ -20,8 +20,8 @@ export class AppProfile {
       return (
         <div class="app-profile">
           <p>
-            Hello! My name is {this.normalize(this.name)}. My name was passed in through a route
-            param!
+            Hello! My name is {this.normalize(this.name)}. My name was passed in
+            through a route param!
           </p>
         </div>
       );
