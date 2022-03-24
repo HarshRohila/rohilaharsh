@@ -9,9 +9,22 @@
   },
   "tags": [],
   "targets": {
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx test gmail-clone-app",
+          "nx build gmail-clone-app",
+          "gh-pages -d dist/apps/gmail-clone-app/www -r https://github.com/HarshRohila/gmail-clone.git"
+        ],
+        "parallel": false
+      }
+    },
     "build": {
       "executor": "@nxext/stencil:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "projectType": "application",
         "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
@@ -27,17 +40,22 @@
     },
     "serve": {
       "executor": "@nxext/stencil:serve",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "projectType": "application",
         "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
         "configPath": "apps/gmail-clone-app/stencil.config.ts",
-        "outputPath": "dist/apps/gmail-clone-app"
+        "outputPath": "dist/apps/gmail-clone-app",
+        "dev": true
       }
     },
     "test": {
       "executor": "@nxext/stencil:test",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "projectType": "application",
         "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
@@ -47,7 +65,9 @@
     },
     "e2e": {
       "executor": "@nxext/stencil:e2e",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "projectType": "application",
         "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
@@ -57,9 +77,13 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/gmail-clone-app/**/*.{ts,tsx}"]
+        "lintFilePatterns": [
+          "apps/gmail-clone-app/**/*.{ts,tsx}"
+        ]
       }
     }
   }
