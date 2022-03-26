@@ -20,6 +20,15 @@
         "parallel": false
       }
     },
+    "serve": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx serve:dev gmail-clone-app --dev"
+        ],
+        "parallel": false
+      }
+    },
     "build": {
       "executor": "@nxext/stencil:build",
       "outputs": [
@@ -38,7 +47,7 @@
         }
       }
     },
-    "serve": {
+    "serve:dev": {
       "executor": "@nxext/stencil:serve",
       "outputs": [
         "{options.outputPath}"
