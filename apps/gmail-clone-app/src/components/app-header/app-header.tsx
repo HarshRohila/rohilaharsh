@@ -1,19 +1,34 @@
 import { Component, Host, h } from '@stencil/core';
-import { faBars, faCog, faBraille, faSearch, faSlidersH } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faCog,
+  faBraille,
+  faSearch,
+  faSlidersH,
+} from '@fortawesome/free-solid-svg-icons';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import { pageState } from '../../states/page';
 @Component({
   tag: 'app-header',
   styleUrl: 'app-header.scss',
   shadow: true,
 })
 export class AppHeader {
+  private handleBarsIconClick() {
+    pageState.showSidebar = !pageState.showSidebar;
+  }
+
   render() {
     return (
       <Host>
         <header>
           <div class="left">
             <div class="brand">
-              <x-icon class="bars" icon={faBars}></x-icon>
+              <x-icon
+                class="bars"
+                icon={faBars}
+                onClick={this.handleBarsIconClick}
+              ></x-icon>
               <img
                 class="gb_sc"
                 src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r2.png"
