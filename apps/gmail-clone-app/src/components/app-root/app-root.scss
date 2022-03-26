@@ -10,10 +10,22 @@
   flex: 1;
   display: flex;
   overflow: auto;
+  position: relative;
 
   side-bar {
     min-width: 240px;
     display: none;
+    &.show {
+      display: initial;
+      position: absolute;
+      height: 100%;
+      z-index: 1;
+
+      @include screen.atleastLargePhone() {
+        position: initial;
+      }
+    }
+
     @include screen.atleastLargePhone() {
       display: initial;
     }
