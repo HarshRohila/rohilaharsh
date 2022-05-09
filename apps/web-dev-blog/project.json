@@ -1,0 +1,45 @@
+{
+	"root": "apps/web-dev-blog",
+	"sourceRoot": "apps/web-dev-blog",
+	"projectType": "application",
+	"tags": [],
+	"targets": {
+		"deploy": {
+			"executor": "@nrwl/workspace:run-commands",
+			"options": {
+				"commands": [
+					"echo \"Don't now how to deploy\""
+				],
+				"parallel": false
+			}
+		},
+		"serve": {
+			"executor": "@nrwl/workspace:run-commands",
+			"options": {
+				"commands": [
+					"hugo server -D"
+				],
+				"cwd": "apps/web-dev-blog",
+				"parallel": false
+			}
+		},
+		"build": {
+			"executor": "@nrwl/workspace:run-commands",
+			"options": {
+				"commands": [
+					"echo \"Don't now how to build\""
+				],
+				"parallel": false
+			}
+		},
+		"test": {
+			"executor": "@nrwl/workspace:run-commands",
+			"options": {
+				"commands": [
+					"echo \"Don't now how to test\""
+				],
+				"parallel": false
+			}
+		}
+	}
+}

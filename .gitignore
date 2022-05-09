@@ -62,3 +62,5 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 .env
+
+apps/web-dev-blog/public/
