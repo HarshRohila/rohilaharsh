@@ -32,7 +32,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/master'
         with:
-          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.REPO_ACCESS }}
           external_repository: HarshRohila/harshrohila.github.io
           publish_branch: master
-          publish_dir: ./public
+          publish_dir: ./apps/web-dev-blog/public
