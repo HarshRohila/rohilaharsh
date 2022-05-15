@@ -3,3 +3,20 @@ languageCode = 'en-us'
 title = 'rohilaHarsh'
 theme = "ananke"
 disqusShortname = 'a-web-dev-blog'
+[[params.ananke_socials]]
+name = "github"
+url = "https://github.com/HarshRohila"
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/harsh-rohila-985a56124"
+
+[[params.ananke_socials]]
+name = "stackoverflow"
+url = "https://stackoverflow.com/users/5798816/harsh-rohila"
+
+
+[params]
+  body_classes = "avenir bg-near-white"
+	show_reading_time = true
+
