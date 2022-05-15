@@ -3,6 +3,9 @@ languageCode = 'en-us'
 title = 'rohilaHarsh'
 theme = "ananke"
 disqusShortname = 'a-web-dev-blog'
+enableRobotsTXT = true
+googleAnalytics = ""
+
 [[params.ananke_socials]]
 name = "github"
 url = "https://github.com/HarshRohila"
@@ -17,6 +20,7 @@ url = "https://stackoverflow.com/users/5798816/harsh-rohila"
 
 
 [params]
-  body_classes = "avenir bg-near-white"
+  body_classes = "avenir bg-washed-yellow"
 	show_reading_time = true
+	description = "A blog about web development. Mostly."
 
