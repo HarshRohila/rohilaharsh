@@ -1,8 +1,8 @@
 ---
 title: 'Top 10 Tools I found productive when working with TypeScript'
 date: 2022-05-16T08:01:01+05:30
-draft: true
 author: 'Harsh Rohila'
+featured_image: '/img/dev-prod.jpg'
 ---
 
 ## 1. Volta

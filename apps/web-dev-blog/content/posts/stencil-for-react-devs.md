@@ -2,6 +2,7 @@
 title: 'Stencil for React Devs'
 date: 2022-05-09T08:21:03+05:30
 author: 'Harsh Rohila'
+featured_image: '/img/stencil-react.png'
 ---
 
 # What is Stencil?
