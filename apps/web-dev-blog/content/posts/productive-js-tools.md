@@ -5,6 +5,10 @@ author: 'Harsh Rohila'
 featured_image: '/img/dev-prod.jpg'
 ---
 
+There are lots of software tools freely available to use. Some of them highly impacts the way we work, and they can let us do more in less time
+
+If you are someone working with TypeScript/JavaScript, checkout the following productivity tools if they work for you
+
 ## 1. Volta
 
 Are you telling your team to install a particular version of Node.js for a project? Or working with multiple projects requiring different Node.js versions
