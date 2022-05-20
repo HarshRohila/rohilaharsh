@@ -24,4 +24,6 @@ url = "https://stackoverflow.com/users/5798816/harsh-rohila"
 	post_content_classes = "avenir"
 	show_reading_time = true
 	description = "A blog about web development. Mostly."
+	custom_css = ["custom.scss"]
+
 
