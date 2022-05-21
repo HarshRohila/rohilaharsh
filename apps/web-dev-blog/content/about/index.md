@@ -6,6 +6,18 @@ menu:
     weight: 1
 ---
 
+Hi
+
+I am **Harsh Rohila**, working as a Software Engineer
+
+This blog is to share what I learned from my experience in this profession.
+
+I started with learning JavaScript and got to work on an Ember.js project. If you don't know Ember.js it is an underrated frontend framework with principle of convention over configuration
+
+After learning Ember.js and its conventions, I started looking into other Frontend frameworks. Now working with Stencil.js to build web components
+
+I also worked on Backend side using Serverless Framework
+
 ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label) Fan
 
 Dived into all processes(Frontend, Backend, DevOps) of Hybrid Mobile App and Web development.
