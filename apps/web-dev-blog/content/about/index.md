@@ -1,6 +1,5 @@
 ---
-title: 'About Me'
-draft: true
+title: 'About'
 menu:
   main:
     weight: 1
@@ -10,28 +9,28 @@ Hi
 
 I am **Harsh Rohila**, working as a Software Engineer
 
-This blog is to share what I learned from my experience in this profession.
+This blog is to share what I learned from my experience in this field.
 
-I started with learning JavaScript and got to work on an Ember.js project. If you don't know Ember.js it is an underrated frontend framework with principle of convention over configuration
+### My Experience
 
-After learning Ember.js and its conventions, I started looking into other Frontend frameworks. Now working with Stencil.js to build web components
+I started with learning _JavaScript_ and got to work on an [Ember.js](https://emberjs.com/) project. If you don't know Ember.js it is an underrated frontend framework with principle of convention over configuration
 
-I also worked on Backend side using Serverless Framework
+After learning Ember.js, I started looking into other Frontend frameworks. Now I use [Stencil.js](https://stenciljs.com/) to build web components
 
-![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label) Fan
+I am also having experience with Serverless Backend APIs as I worked with [Serverless Framework](https://www.serverless.com/) to convert Java APIs to Node.js APIs
 
-Dived into all processes(Frontend, Backend, DevOps) of Hybrid Mobile App and Web development.
+Also having experience about DevOps as I used [Jenkins](https://www.jenkins.io/) and [AWS CDK](https://aws.amazon.com/cdk/) to build pipelines to deploy Frontend and Serverless Backend apps
 
-## Tech Stack being used now
+### Tech Stack used
 
-### Frontend
+#### Frontend
 
-![Ember](https://img.shields.io/badge/ember-1C1E24?style=for-the-badge&logo=ember.js&logoColor=#D04A37) Cordova Hybrid App with **Stencil.js** web components ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue)
+**Ember.js** **Cordova** Hybrid App with **Stencil.js** web components ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue)
 
-### Backend
+#### Backend
 
-**Serverless Framework** APIs ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue) hosted on ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+**Serverless Framework** APIs ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue) hosted on AWS
 
-### DevOps
+#### DevOps
 
-AWS CDK ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue) and Jenkins for building Pipelines for deployment
+**AWS CDK** ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue) and **Jenkins** for building Pipelines for deployment
