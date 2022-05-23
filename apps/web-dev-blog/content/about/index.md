@@ -15,7 +15,7 @@ This blog is to share what I learned from my experience in this field.
 
 I started with learning _JavaScript_ and got to work on an [Ember.js](https://emberjs.com/) project. If you don't know Ember.js it is an underrated frontend framework with principle of convention over configuration
 
-After learning Ember.js, I started looking into other Frontend frameworks. Now I use [Stencil.js](https://stenciljs.com/) to build web components
+After learning Ember.js, I started looking into other Frontend techs like React, Svelte and Stencil. Now I use [Stencil.js](https://stenciljs.com/) to build web components.
 
 I am also having experience with Serverless Backend APIs as I worked with [Serverless Framework](https://www.serverless.com/) to convert Java APIs to Node.js APIs
 
