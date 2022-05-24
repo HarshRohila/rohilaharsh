@@ -21,4 +21,14 @@ A code is not clean if it is not having unit tests.
 
 To understand the importance of unit tests, consider this questions
 
--
+- How do you know if the changes you did in code are not breaking existing features? Are you going to test them again _manually_?
+
+Unit tests can remove the manual testing. So it speeds up development, removing the manual step
+
+- Refactoring - Now you know better way to code, are you going to change old code to use the new way or are you scared to touch existing code?
+
+Unit tests remove the fear of touching existing code. Avoiding change to existing code is not the solution. Making the code easily changeable is the way to go.
+
+## Abstraction
+
+Many of you maybe familiar with OOP's Abstraction, but here I am referring to abstraction while
