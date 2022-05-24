@@ -25,5 +25,6 @@ url = "https://stackoverflow.com/users/5798816/harsh-rohila"
 	show_reading_time = true
 	description = "A blog about web development. Mostly."
 	custom_css = ["custom.scss"]
+	site_logo = "img/logo.png"
 
 
