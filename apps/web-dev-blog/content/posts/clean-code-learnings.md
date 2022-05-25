@@ -71,4 +71,45 @@ Using try-catch separates the happy path from error path and clearly indicates c
 
 ## Reducing function parameters
 
+More the number of parameters of a function, the more difficult is to understand it
+
+Functions with 0 or 1 parameters are good. 2 are still not so complicated, but 3 should be very rare
+
+Parameters can be reduced by creating classes/objects. If you notice that same set of parameters are passed to multiple functions, this indicates that a concept is hidden in that. Those functions can be grouped into a class(having name of the concept) and that class's constructor can take those common parameters. So those functions will not need to be passed parameters as they can use it from private properties.
+
 ## Avoiding use of `else`
+
+This is not what I found in clean code, but in [this](https://youtu.be/EumXak7TyQ0) video
+
+Avoiding `else` makes code easy to read
+
+Consider this
+
+```ts
+if (condition) {
+  doThis();
+} else {
+  doThat();
+}
+```
+
+`else` can be avoided by early return
+
+```ts
+if (condition) {
+  doThis();
+  return;
+}
+doThat();
+```
+
+Or in case of assignments default values can be used, instead of assigned default value in else block
+
+```ts
+let a = 'default';
+if (condition) {
+  a = 'changed';
+}
+```
+
+For nested if-else, separate function can be created for nested if-else block and early return can be used
