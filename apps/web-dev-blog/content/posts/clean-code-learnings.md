@@ -3,11 +3,16 @@ title: 'Clean Code Learnings'
 date: 2022-05-16T08:41:09+05:30
 draft: true
 author: 'Harsh Rohila'
+featured_image: '/img/clean-code.png'
 ---
 
 [Clean Code](https://www.amazon.in/Clean-Code-Robert-C-Martin/dp/8131773388) book by Robert C Martin, changed the way I think and write code.
 
 ## Why Clean Code
+
+![Image showing Code Review](/img/clean-code.png)
+
+I love this image which was in clean code book. It shows the frustration of developers reading bad code.
 
 Clean code leads to code which other developers can understand quickly. Developers can easily change code without breaking any existing features.
 
