@@ -38,6 +38,7 @@ function deserialize(emailJsonApiRecord: any) {
 interface Email {
   id: string
   from: string
+  fromEmail: string
   subject: string
   text: string
   datetime: Date

@@ -1,3 +1,4 @@
+import { camelize } from '@orbit/serializers'
 import { createServer, JSONAPISerializer, Model } from 'miragejs'
 import { API_URL } from '../utils/constants'
 import factories from './factories'
@@ -7,7 +8,11 @@ export function makeServer({ environment = 'test' }) {
     environment,
 
     serializers: {
-      application: JSONAPISerializer
+      application: JSONAPISerializer.extend({
+        keyForAttribute(attr) {
+          return camelize(attr)
+        }
+      })
     },
 
     models: {

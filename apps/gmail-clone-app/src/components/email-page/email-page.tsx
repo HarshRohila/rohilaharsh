@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State } from '@stencil/core'
+import { Component, Host, h, Prop, State, Fragment } from '@stencil/core'
 import { Email, EmailService } from '../../email/service'
 
 @Component({
@@ -25,11 +25,26 @@ export class EmailPage {
   render() {
     return (
       <Host>
-        <div>
+        <div class="container">
           {this.isLoading && <h1>Loading...</h1>}
-          {!this.isLoading && this.email.subject}
+          {!this.isLoading && <Email email={this.email} />}
         </div>
       </Host>
     )
   }
+}
+
+function Email({ email }: { email: Email }) {
+  const fromEmail = `<${email.fromEmail}>`
+
+  return (
+    <Fragment>
+      <header>{email.subject}</header>
+      <div>
+        <strong>{email.from}</strong>
+        <span>{fromEmail}</span>
+      </div>
+      <div class="me">to me</div>
+    </Fragment>
+  )
 }
