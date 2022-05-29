@@ -1,26 +1,30 @@
-import { createServer, Model } from 'miragejs';
-import { API_URL } from '../utils/constants';
-import factories from './factories';
+import { createServer, JSONAPISerializer, Model } from 'miragejs'
+import { API_URL } from '../utils/constants'
+import factories from './factories'
 
 export function makeServer({ environment = 'test' }) {
   return createServer({
     environment,
 
+    serializers: {
+      application: JSONAPISerializer
+    },
+
     models: {
-      mail: Model,
+      mail: Model
     },
 
     factories,
 
     seeds(server) {
-      server.createList('mail', 50);
+      server.createList('mail', 50)
     },
 
     routes() {
-      this.urlPrefix = API_URL;
+      this.urlPrefix = API_URL
 
-      this.get('mails');
-      this.patch('mails/:id');
-    },
-  });
+      this.get('mails')
+      this.patch('mails/:id')
+    }
+  })
 }

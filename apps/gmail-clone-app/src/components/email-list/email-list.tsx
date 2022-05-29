@@ -1,36 +1,33 @@
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Component, Host, h, State } from '@stencil/core';
-import { href } from '@stencil/router';
-import { Email, EmailService } from '../../email/service';
-
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { Component, Host, h, State } from '@stencil/core'
+import { href } from '@stencil/router'
+import { Email, EmailService } from '../../email/service'
 @Component({
   tag: 'email-list',
   styleUrl: 'email-list.scss',
-  shadow: true,
+  shadow: true
 })
 export class EmailList {
-  @State() isLoading = true;
-  @State() emails: Email[];
+  @State() isLoading = true
+  @State() emails: Email[]
 
   componentWillLoad() {
     EmailService.getEmails()
-      .then((emails) => {
-        this.emails = emails;
+      .then(emails => {
+        this.emails = emails
       })
       .finally(() => {
-        this.isLoading = false;
-      });
+        this.isLoading = false
+      })
   }
 
   render() {
     return (
       <Host>
-        {this.isLoading && (
-          <x-icon class="spinner" icon={faSpinner} spin></x-icon>
-        )}
+        {this.isLoading && <x-icon class="spinner" icon={faSpinner} spin></x-icon>}
         {!this.isLoading && !!this.emails.length && (
           <ul>
-            {this.emails.map((email) => (
+            {this.emails.map(email => (
               <li>
                 <a {...href(`emails/${email.id}`)}>
                   <email-bar email={email}></email-bar>
@@ -40,6 +37,6 @@ export class EmailList {
           </ul>
         )}
       </Host>
-    );
+    )
   }
 }

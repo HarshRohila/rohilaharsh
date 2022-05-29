@@ -2,6 +2,7 @@
 import { Component, h, getAssetPath } from '@stencil/core'
 import { createRouter, match, Route } from '@stencil/router'
 import { makeServer } from '../../mirage'
+import { OrbitJs } from '../../orbitjs'
 import { AppRoute } from '../../utils/AppRoute'
 makeServer({ environment: 'development' })
 
@@ -14,6 +15,10 @@ const Router = createRouter()
   shadow: true
 })
 export class AppRoot {
+  async componentWillLoad() {
+    await OrbitJs.activate()
+  }
+
   render() {
     return (
       <div
