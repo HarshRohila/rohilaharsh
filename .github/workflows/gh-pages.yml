@@ -71,6 +71,14 @@ jobs:
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
       - uses: nrwl/nx-set-shas@v2
       - run: npm ci
-      - run: npx nx deploy gmail-clone-app
+      - run: nx test gmail-clone-app
+      - run: nx build gmail-clone-app
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
         with:
           personal_token: ${{ secrets.REPO_ACCESS }}
+          external_repository: HarshRohila/gmail-clone
+          publish_branch: gh-pages
+          publish_dir: ./dist/apps/gmail-clone-app/www
