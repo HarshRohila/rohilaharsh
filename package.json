@@ -35,7 +35,7 @@
     "@nrwl/web": "13.9.4",
     "@nrwl/workspace": "13.9.4",
     "@stencil/core": "^2.14.0",
-    "@stencil/eslint-plugin": "0.3.1",
+    "@stencil/eslint-plugin": "github:HarshRohila/stencil-eslint#eslint8-support",
     "@stencil/router": "^2.0.0-2",
     "@stencil/sass": "1.5.2",
     "@stencil/store": "^1.5.0",
