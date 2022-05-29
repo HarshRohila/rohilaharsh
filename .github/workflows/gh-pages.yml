@@ -7,7 +7,26 @@ on:
   pull_request:
 
 jobs:
-  deploy:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-20.04
+    # Set job outputs to values from filter step
+    outputs:
+      gmail-clone-app: ${{ steps.filter.outputs.gmail-clone-app }}
+      web-dev-blog: ${{ steps.filter.outputs.web-dev-blog }}
+    steps:
+      # For pull requests it's not necessary to checkout the code
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            gmail-clone-app:
+              - 'apps/gmail-clone-app/**'
+            web-dev-blog:
+              - 'apps/web-dev-blog/**'
+  deploy-web-dev-blog:
+    needs: changes
+    if: ${{ needs.changes.outputs.web-dev-blog == 'true' }}
     runs-on: ubuntu-20.04
     defaults:
       run:
@@ -36,3 +55,17 @@ jobs:
           external_repository: HarshRohila/harshrohila.github.io
           publish_branch: master
           publish_dir: ./apps/web-dev-blog/public
+  deploy-gmail-clone-app:
+    needs: changes
+    if: ${{ needs.changes.outputs.gmail-clone-app == 'true' }}
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+      - uses: nrwl/nx-set-shas@v2
+      - run: npm ci
+      - run: npx nx deploy gmail-clone-app
