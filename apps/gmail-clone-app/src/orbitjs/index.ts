@@ -25,15 +25,17 @@ const OrbitJs = {
         action: 'query',
 
         blocking: transform => {
-          console.log(transform)
           // @ts-ignore
           const data = memory.cache.query(transform)
 
-          // @ts-ignore
-          if (data.length) {
-            return false
+          if (!data) {
+            return true
           }
-          return true
+          if (Array.isArray(data) && !data.length) {
+            return true
+          }
+
+          return false
         }
       })
     )

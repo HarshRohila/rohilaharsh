@@ -7,14 +7,9 @@ export { EmailService, Email }
 const EmailService = {
   async getEmails(): Promise<Email[]> {
     const response = await store.query(q => q.findRecords('mail'))
-    console.log(response)
 
     // @ts-ignore
-    return response.map(mail => {
-      mail.attributes.id = mail.id
-      mail.attributes.datetime = new Date(mail.attributes.datetime)
-      return mail.attributes
-    })
+    return response.map(deserialize)
   },
 
   async saveEdittedEmail(email: Email) {
@@ -24,7 +19,20 @@ const EmailService = {
 
     const serializedEmail = MailSerializer.serialize(email)
     await apiClient.patch(`mails/${email.id}`, serializedEmail)
+  },
+
+  async getEmail(emailId: string): Promise<Email> {
+    const email = await store.query(q => q.findRecord({ type: 'mail', id: emailId }))
+
+    return deserialize(email)
   }
+}
+
+function deserialize(emailJsonApiRecord: any) {
+  const mail = emailJsonApiRecord
+  mail.attributes.id = mail.id
+  mail.attributes.datetime = new Date(mail.attributes.datetime)
+  return mail.attributes
 }
 
 interface Email {

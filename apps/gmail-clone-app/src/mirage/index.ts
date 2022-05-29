@@ -24,6 +24,7 @@ export function makeServer({ environment = 'test' }) {
       this.urlPrefix = API_URL
 
       this.get('mails')
+      this.get('mails/:id')
       this.patch('mails/:id')
     }
   })
