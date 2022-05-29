@@ -1,24 +1,24 @@
-import { IconDefinition, icon, dom } from '@fortawesome/fontawesome-svg-core';
-import { Component, Host, h, Prop } from '@stencil/core';
+import { IconDefinition, icon, dom } from '@fortawesome/fontawesome-svg-core'
+import { Component, Host, h, Prop } from '@stencil/core'
 
 @Component({
   tag: 'x-icon',
   styleUrl: 'x-icon.scss',
-  shadow: true,
+  shadow: true
 })
 export class XIcon {
-  @Prop() icon: IconDefinition;
-  @Prop() spin = false;
-  @Prop() mask?: IconDefinition;
+  @Prop() icon: IconDefinition
+  @Prop() spin = false
+  @Prop() mask?: IconDefinition
 
   get iconClassList() {
-    let classes = {
-      'fa-spin': this.spin,
-    };
+    const classes = {
+      'fa-spin': this.spin
+    }
 
     return Object.keys(classes)
       .map(key => (classes[key] ? key : null))
-      .filter(key => key);
+      .filter(key => key)
   }
 
   render() {
@@ -29,6 +29,6 @@ export class XIcon {
           innerHTML={icon(this.icon, { classes: this.iconClassList, mask: this.mask }).html[0]}
         ></span>
       </Host>
-    );
+    )
   }
 }
