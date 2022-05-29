@@ -1,4 +1,4 @@
-# Gmail Clone
+## Gmail Clone
 
 Hosted on [GitHub Pages](https://rohilaharsh.in/gmail-clone)
 

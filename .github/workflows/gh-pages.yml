@@ -71,8 +71,8 @@ jobs:
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
       - uses: nrwl/nx-set-shas@v2
       - run: npm ci
-      - run: nx test gmail-clone-app
-      - run: nx build gmail-clone-app
+      - run: npx nx test gmail-clone-app
+      - run: npx nx build gmail-clone-app
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
