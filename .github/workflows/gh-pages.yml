@@ -15,6 +15,9 @@ jobs:
       gmail-clone-app: ${{ steps.filter.outputs.gmail-clone-app }}
       web-dev-blog: ${{ steps.filter.outputs.web-dev-blog }}
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
       # For pull requests it's not necessary to checkout the code
       - uses: dorny/paths-filter@v2
         id: filter
