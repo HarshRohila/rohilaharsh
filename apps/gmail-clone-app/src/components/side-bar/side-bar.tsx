@@ -10,7 +10,7 @@ import newId from '../../utils/newId'
   shadow: true
 })
 export class SideBar {
-  menuItems = [
+  private menuItems = [
     {
       label: 'Inbox',
       icon: faInbox,

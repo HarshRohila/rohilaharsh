@@ -25,6 +25,9 @@ export namespace Components {
     }
     interface EmailList {
     }
+    interface GcaEmailPage {
+        "emailId": string;
+    }
     interface SideBar {
     }
     interface StarCheckbox {
@@ -79,6 +82,12 @@ declare global {
         prototype: HTMLEmailListElement;
         new (): HTMLEmailListElement;
     };
+    interface HTMLGcaEmailPageElement extends Components.GcaEmailPage, HTMLStencilElement {
+    }
+    var HTMLGcaEmailPageElement: {
+        prototype: HTMLGcaEmailPageElement;
+        new (): HTMLGcaEmailPageElement;
+    };
     interface HTMLSideBarElement extends Components.SideBar, HTMLStencilElement {
     }
     var HTMLSideBarElement: {
@@ -105,6 +114,7 @@ declare global {
         "check-box": HTMLCheckBoxElement;
         "email-bar": HTMLEmailBarElement;
         "email-list": HTMLEmailListElement;
+        "gca-email-page": HTMLGcaEmailPageElement;
         "side-bar": HTMLSideBarElement;
         "star-checkbox": HTMLStarCheckboxElement;
         "x-icon": HTMLXIconElement;
@@ -128,6 +138,9 @@ declare namespace LocalJSX {
     }
     interface EmailList {
     }
+    interface GcaEmailPage {
+        "emailId"?: string;
+    }
     interface SideBar {
     }
     interface StarCheckbox {
@@ -147,6 +160,7 @@ declare namespace LocalJSX {
         "check-box": CheckBox;
         "email-bar": EmailBar;
         "email-list": EmailList;
+        "gca-email-page": GcaEmailPage;
         "side-bar": SideBar;
         "star-checkbox": StarCheckbox;
         "x-icon": XIcon;
@@ -163,6 +177,7 @@ declare module "@stencil/core" {
             "check-box": LocalJSX.CheckBox & JSXBase.HTMLAttributes<HTMLCheckBoxElement>;
             "email-bar": LocalJSX.EmailBar & JSXBase.HTMLAttributes<HTMLEmailBarElement>;
             "email-list": LocalJSX.EmailList & JSXBase.HTMLAttributes<HTMLEmailListElement>;
+            "gca-email-page": LocalJSX.GcaEmailPage & JSXBase.HTMLAttributes<HTMLGcaEmailPageElement>;
             "side-bar": LocalJSX.SideBar & JSXBase.HTMLAttributes<HTMLSideBarElement>;
             "star-checkbox": LocalJSX.StarCheckbox & JSXBase.HTMLAttributes<HTMLStarCheckboxElement>;
             "x-icon": LocalJSX.XIcon & JSXBase.HTMLAttributes<HTMLXIconElement>;

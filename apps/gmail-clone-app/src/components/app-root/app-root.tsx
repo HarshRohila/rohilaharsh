@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import { Component, h, getAssetPath } from '@stencil/core'
 import { createRouter, match, Route } from '@stencil/router'
 import { makeServer } from '../../mirage'
@@ -17,7 +18,9 @@ export class AppRoot {
     return (
       <div
         class="root"
-        style={{ backgroundImage: `url(${getAssetPath('./assets/background.jpg')})` }}
+        style={{
+          backgroundImage: `url(${getAssetPath('./assets/background.jpg')})`
+        }}
       >
         <app-header></app-header>
         <div class="content">
@@ -30,6 +33,10 @@ export class AppRoot {
               <Route
                 path={match(AppRoute.getPath('/profile/:name'))}
                 render={({ name }) => <app-profile name={name}></app-profile>}
+              />
+              <Route
+                path={match(AppRoute.getPath('/emails/:emailId'))}
+                render={({ emailId }) => <gca-email-page emailId={emailId}></gca-email-page>}
               />
             </Router.Switch>
           </main>
