@@ -72,3 +72,5 @@ jobs:
       - uses: nrwl/nx-set-shas@v2
       - run: npm ci
       - run: npx nx deploy gmail-clone-app
+        with:
+          personal_token: ${{ secrets.REPO_ACCESS }}
