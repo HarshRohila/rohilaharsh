@@ -1,18 +1,20 @@
 ---
-title: 'Clean Code Learnings'
+title: 'Clean Code Book Summary'
+description: 'What I learnt from the book'
 date: 2022-05-16T08:41:09+05:30
-draft: true
 author: 'Harsh Rohila'
 featured_image: '/img/clean-code.png'
 ---
 
-[Clean Code](https://www.amazon.in/Clean-Code-Robert-C-Martin/dp/8131773388) book by Robert C Martin, changed the way I think and write code.
+The book [Clean Code](https://www.amazon.in/Clean-Code-Robert-C-Martin/dp/8131773388) by Robert C Martin, changed the way I think about and write code.
 
-## Why Clean Code
+## Why Clean Code?
+
+Have a look at the image below which is from the book
 
 ![Image showing Code Review](/img/clean-code.png)
 
-I love this image which was in clean code book. It shows the frustration of developers reading bad code.
+I love this image. It clearly shows the frustration of developers reading bad code.
 
 Clean code leads to code which other developers can understand quickly. Developers can easily change code without breaking any existing features.
 
@@ -82,6 +84,17 @@ Functions with 0 or 1 parameters are good. 2 are still not so complicated, but 3
 
 Parameters can be reduced by creating classes/objects. If you notice that same set of parameters are passed to multiple functions, this indicates that a concept is hidden in that. Those functions can be grouped into a class(having name of the concept) and that class's constructor can take those common parameters. So those functions will not need to be passed parameters as they can use it from private properties.
 
+## Avoid Comments
+
+Commented code is useless if we are using version control system like Git. We can easily see previous versions of files using it. Also, such comments lose its meaning after few months/years. People will forget why it was commented, or those comments will move to some other line after many changes in that file. Most readers will ignore such comment.
+
+Commented explanation of code indicates failure to write readable code. Instead of comments, code should be refactored to make more sense. Also commented explanation is repetition of information already expressed in code form, which is violation DRY principle.
+
+## Meaningful Names
+
+- Class names should be nouns like `Processor`, `Customer`
+- Method names should be verbs like `getPage`. Prefixes like `get`, `set` and `is` can be used to indicate if method is getting, setting a value or checking a condition, respectively. e.g. `getName`, `setEmail`, `isHoliday`
+
 ## Avoiding use of `else`
 
 This is not what I found in clean code, but in [this](https://youtu.be/EumXak7TyQ0) video
@@ -92,9 +105,9 @@ Consider this
 
 ```ts
 if (condition) {
-  doThis();
+  doThis()
 } else {
-  doThat();
+  doThat()
 }
 ```
 
@@ -102,18 +115,18 @@ if (condition) {
 
 ```ts
 if (condition) {
-  doThis();
-  return;
+  doThis()
+  return
 }
-doThat();
+doThat()
 ```
 
 Or in case of assignments default values can be used, instead of assigned default value in else block
 
 ```ts
-let a = 'default';
+let a = 'default'
 if (condition) {
-  a = 'changed';
+  a = 'changed'
 }
 ```
 
