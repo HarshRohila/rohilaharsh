@@ -13,6 +13,12 @@
     display: block;
     height: 100%;
     width: 75%;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
     background-color: #000000;
+
+    &.loaded {
+      transform: translateX(0);
+    }
   }
 }

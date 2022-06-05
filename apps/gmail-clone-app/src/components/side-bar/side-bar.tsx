@@ -1,5 +1,6 @@
+/* eslint-disable @stencil/required-jsdoc */
 import { faInbox, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import { Component, Host, h } from '@stencil/core'
+import { Component, Host, h, Element, Event, EventEmitter, State } from '@stencil/core'
 import { href } from '@stencil/router'
 import { AppRoute } from '../../utils/AppRoute'
 import newId from '../../utils/newId'
@@ -10,6 +11,10 @@ import newId from '../../utils/newId'
   shadow: true
 })
 export class SideBar {
+  @Element() el: HTMLSideBarElement
+
+  @State() isLoaded = false
+
   private menuItems = [
     {
       label: 'Inbox',
@@ -26,9 +31,13 @@ export class SideBar {
     return item
   })
 
+  componentDidLoad() {
+    this.isLoaded = true
+  }
+
   render() {
     return (
-      <Host>
+      <Host class={`${this.isLoaded ? 'loaded' : ''}`}>
         <ul>
           {this.menuItems.map(menuItem => (
             <li>
