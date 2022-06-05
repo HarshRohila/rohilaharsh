@@ -23,7 +23,10 @@ export class AppRoot {
 
   async componentWillLoad() {
     await OrbitJs.activate()
+    this.requestEmails()
+  }
 
+  private requestEmails() {
     EmailService.getEmails()
       .then(emails => {
         this.emails = emails
@@ -50,7 +53,10 @@ export class AppRoot {
               <main>
                 <Router.Switch>
                   <Route path={AppRoute.getPath('/')}>
-                    <app-home emails={this.emails}></app-home>
+                    <app-home
+                      emails={this.emails}
+                      onWillLoadCalled={() => this.requestEmails()}
+                    ></app-home>
                   </Route>
                   <Route
                     path={match(AppRoute.getPath('/profile/:name'))}

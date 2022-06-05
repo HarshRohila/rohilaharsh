@@ -5,7 +5,14 @@ import { JSONAPISource, JSONAPISerializers } from '@orbit/jsonapi'
 import { buildSerializerSettingsFor, buildInflector } from '@orbit/serializers'
 
 import { API_URL } from '../utils/constants'
-import { Coordinator, RequestStrategy, SyncStrategy, LogLevel } from '@orbit/coordinator'
+import {
+  Coordinator,
+  RequestStrategy,
+  SyncStrategy,
+  LogLevel,
+  EventLoggingStrategy
+} from '@orbit/coordinator'
+import models from './models'
 
 export { OrbitJs, store }
 
@@ -62,6 +69,8 @@ const OrbitJs = {
       })
     )
 
+    coordinator.addStrategy(new EventLoggingStrategy())
+
     // `activate` resolves when all strategies have been activated
     await coordinator.activate({ logLevel: LogLevel.Info }).then(() => {
       console.log('Coordinator will be chatty')
@@ -70,18 +79,7 @@ const OrbitJs = {
 }
 
 const schema = new RecordSchema({
-  models: {
-    mail: {
-      attributes: {
-        from: { type: 'string' },
-        fromEmail: { type: 'string' },
-        subject: { type: 'string' },
-        text: { type: 'string' },
-        datetime: { type: 'string' },
-        starred: { type: 'boolean' }
-      }
-    }
-  }
+  models
 })
 const memory = new MemorySource({ schema })
 

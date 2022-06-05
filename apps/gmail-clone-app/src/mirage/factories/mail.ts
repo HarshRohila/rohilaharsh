@@ -20,5 +20,9 @@ export default Factory.extend({
 
   datetime() {
     return faker.datatype.datetime()
+  },
+
+  starred() {
+    return false
   }
 })

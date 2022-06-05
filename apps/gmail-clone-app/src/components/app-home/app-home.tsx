@@ -1,4 +1,5 @@
-import { Component, h, Prop } from '@stencil/core'
+/* eslint-disable @stencil/required-jsdoc */
+import { Component, Event, EventEmitter, h, Prop } from '@stencil/core'
 import { Email } from '../../email/service'
 
 @Component({
@@ -8,6 +9,11 @@ import { Email } from '../../email/service'
 })
 export class AppHome {
   @Prop() emails: Email[]
+  @Event() willLoadCalled: EventEmitter<void>
+
+  componentWillLoad() {
+    this.willLoadCalled.emit()
+  }
 
   render() {
     return (

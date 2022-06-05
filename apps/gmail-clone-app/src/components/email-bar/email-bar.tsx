@@ -1,4 +1,6 @@
-import { Component, Host, h, Prop, State } from '@stencil/core'
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable @stencil/required-jsdoc */
+import { Component, Host, h, Prop, State, Watch } from '@stencil/core'
 import { href } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
 import { DateUtil } from '../../utils/dateUtil'
@@ -9,20 +11,33 @@ import { DateUtil } from '../../utils/dateUtil'
   shadow: true
 })
 export class EmailBar {
+  // don't use email prop at any other place, use localEmail instead
   @Prop() email: Email
+  @Watch('email')
+  onEmailChange() {
+    this.localEmail = this.email
+  }
 
-  @State() starred = false
+  @State() localEmail: Email
 
-  onStarToggle(starred: boolean) {
-    const email = { ...this.email }
+  get starred() {
+    return this.localEmail.starred
+  }
+
+  componentWillLoad() {
+    this.onEmailChange()
+  }
+
+  private onStarToggle(starred: boolean) {
+    const email = { ...this.localEmail }
     email.starred = starred
     EmailService.saveEdittedEmail(email)
 
-    this.starred = starred
+    this.localEmail = { ...this.localEmail, starred }
   }
 
   render() {
-    const { email } = this
+    const { localEmail: email } = this
 
     return (
       <Host>

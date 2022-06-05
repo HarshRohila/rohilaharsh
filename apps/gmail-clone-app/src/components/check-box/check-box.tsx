@@ -1,15 +1,18 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+/* eslint-disable @stencil/required-jsdoc */
+import { Component, Host, h, Prop } from '@stencil/core'
 
 @Component({
   tag: 'check-box',
-  shadow: true,
+  shadow: true
 })
 export class CheckBox {
-  @Prop() value = false;
+  @Prop() value = false
 
   render() {
     return (
-      <Host>{this.value ? <slot name="checked"></slot> : <slot name="unchecked"></slot>}</Host>
-    );
+      <Host>
+        <slot></slot>
+      </Host>
+    )
   }
 }

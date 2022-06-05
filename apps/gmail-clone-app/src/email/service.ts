@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { store } from '../orbitjs'
-import { apiClient } from '../services/apiClient'
+import mail from '../orbitjs/models/mail'
 import { JsonApi } from '../utils/jsonapi'
 export { EmailService, Email }
 
@@ -14,11 +14,17 @@ const EmailService = {
 
   async saveEdittedEmail(email: Email) {
     const MailSerializer = JsonApi.newSerializer('mail', {
-      attributes: ['from', 'subject', 'text', 'datetime', 'starred']
+      attributes: Object.keys(mail.attributes)
     })
 
-    const serializedEmail = MailSerializer.serialize(email)
-    await apiClient.patch(`mails/${email.id}`, serializedEmail)
+    const serializedEmail = MailSerializer.serialize(email).data
+
+    serializedEmail.type = 'mail'
+    serializedEmail.attributes.datetime = (
+      serializedEmail.attributes.datetime as Date
+    ).toISOString()
+
+    await store.update(t => t.updateRecord(serializedEmail))
   },
 
   async getEmail(emailId: string): Promise<Email> {
