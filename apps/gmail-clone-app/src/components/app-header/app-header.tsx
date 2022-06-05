@@ -1,10 +1,12 @@
-import { Component, Host, h } from '@stencil/core';
-import { faBars, faCog, faBraille, faSearch, faSlidersH } from '@fortawesome/free-solid-svg-icons';
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+/* eslint-disable react/jsx-no-bind */
+import { Component, Host, h } from '@stencil/core'
+import { faBars, faCog, faBraille, faSearch, faSlidersH } from '@fortawesome/free-solid-svg-icons'
+import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+import { SideBar } from '../../states/sideBar'
 @Component({
   tag: 'app-header',
   styleUrl: 'app-header.scss',
-  shadow: true,
+  shadow: true
 })
 export class AppHeader {
   render() {
@@ -13,7 +15,13 @@ export class AppHeader {
         <header>
           <div class="left">
             <div class="brand">
-              <x-icon class="bars" icon={faBars}></x-icon>
+              <x-icon
+                class="bars"
+                icon={faBars}
+                onClick={() => {
+                  SideBar.toggle()
+                }}
+              ></x-icon>
               <img
                 class="gb_sc"
                 src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r2.png"
@@ -37,6 +45,6 @@ export class AppHeader {
           </div>
         </header>
       </Host>
-    );
+    )
   }
 }

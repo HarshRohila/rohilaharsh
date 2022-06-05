@@ -1,4 +1,5 @@
 @use '../../global/helpers.scss';
+@use '../../global/screen.scss';
 
 header {
   color: var(--color-light);
@@ -25,6 +26,12 @@ header {
   display: flex;
   min-width: 238px;
   padding-right: 30px;
+
+  x-icon {
+    @include screen.atleastLargePhone() {
+      pointer-events: none;
+    }
+  }
 }
 
 x-icon {

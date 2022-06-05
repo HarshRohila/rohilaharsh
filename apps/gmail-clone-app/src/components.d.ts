@@ -30,6 +30,8 @@ export namespace Components {
     interface GcaEmailPage {
         "emailId": string;
     }
+    interface GcaMobileSideBar {
+    }
     interface GcaStarredEmails {
         "starredEmails": Email[];
     }
@@ -94,6 +96,12 @@ declare global {
         prototype: HTMLGcaEmailPageElement;
         new (): HTMLGcaEmailPageElement;
     };
+    interface HTMLGcaMobileSideBarElement extends Components.GcaMobileSideBar, HTMLStencilElement {
+    }
+    var HTMLGcaMobileSideBarElement: {
+        prototype: HTMLGcaMobileSideBarElement;
+        new (): HTMLGcaMobileSideBarElement;
+    };
     interface HTMLGcaStarredEmailsElement extends Components.GcaStarredEmails, HTMLStencilElement {
     }
     var HTMLGcaStarredEmailsElement: {
@@ -127,6 +135,7 @@ declare global {
         "email-bar": HTMLEmailBarElement;
         "email-list": HTMLEmailListElement;
         "gca-email-page": HTMLGcaEmailPageElement;
+        "gca-mobile-side-bar": HTMLGcaMobileSideBarElement;
         "gca-starred-emails": HTMLGcaStarredEmailsElement;
         "side-bar": HTMLSideBarElement;
         "star-checkbox": HTMLStarCheckboxElement;
@@ -157,6 +166,9 @@ declare namespace LocalJSX {
     interface GcaEmailPage {
         "emailId"?: string;
     }
+    interface GcaMobileSideBar {
+        "onClickedOutside"?: (event: CustomEvent<void>) => void;
+    }
     interface GcaStarredEmails {
         "starredEmails"?: Email[];
     }
@@ -181,6 +193,7 @@ declare namespace LocalJSX {
         "email-bar": EmailBar;
         "email-list": EmailList;
         "gca-email-page": GcaEmailPage;
+        "gca-mobile-side-bar": GcaMobileSideBar;
         "gca-starred-emails": GcaStarredEmails;
         "side-bar": SideBar;
         "star-checkbox": StarCheckbox;
@@ -199,6 +212,7 @@ declare module "@stencil/core" {
             "email-bar": LocalJSX.EmailBar & JSXBase.HTMLAttributes<HTMLEmailBarElement>;
             "email-list": LocalJSX.EmailList & JSXBase.HTMLAttributes<HTMLEmailListElement>;
             "gca-email-page": LocalJSX.GcaEmailPage & JSXBase.HTMLAttributes<HTMLGcaEmailPageElement>;
+            "gca-mobile-side-bar": LocalJSX.GcaMobileSideBar & JSXBase.HTMLAttributes<HTMLGcaMobileSideBarElement>;
             "gca-starred-emails": LocalJSX.GcaStarredEmails & JSXBase.HTMLAttributes<HTMLGcaStarredEmailsElement>;
             "side-bar": LocalJSX.SideBar & JSXBase.HTMLAttributes<HTMLSideBarElement>;
             "star-checkbox": LocalJSX.StarCheckbox & JSXBase.HTMLAttributes<HTMLStarCheckboxElement>;

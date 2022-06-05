@@ -6,6 +6,7 @@ import { makeServer } from '../../mirage'
 import { OrbitJs } from '../../orbitjs'
 import { AppRoute } from '../../utils/AppRoute'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { SideBar } from '../../states/sideBar'
 
 makeServer({ environment: 'development' })
 
@@ -45,6 +46,13 @@ export class AppRoot {
         }}
       >
         <app-header></app-header>
+        {SideBar.state.isOpen && (
+          <gca-mobile-side-bar
+            onClickedOutside={() => {
+              SideBar.toggle()
+            }}
+          ></gca-mobile-side-bar>
+        )}
         <div class={`content ${this.isLoading ? 'loading' : ''}`}>
           {this.isLoading && <x-icon class="spinner" icon={faSpinner} spin></x-icon>}
           {!this.isLoading && (
