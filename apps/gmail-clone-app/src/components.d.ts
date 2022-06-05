@@ -128,6 +128,7 @@ declare namespace LocalJSX {
     }
     interface AppHome {
         "emails"?: Email[];
+        "onWillLoadCalled"?: (event: CustomEvent<void>) => void;
     }
     interface AppProfile {
         "name"?: string;
