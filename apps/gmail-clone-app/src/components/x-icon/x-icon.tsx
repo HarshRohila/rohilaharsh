@@ -10,10 +10,12 @@ export class XIcon {
   @Prop() icon: IconDefinition
   @Prop() spin = false
   @Prop() mask?: IconDefinition
+  @Prop() size?: string
 
   get iconClassList() {
     const classes = {
-      'fa-spin': this.spin
+      'fa-spin': this.spin,
+      [`fa-${this.size}`]: this.size
     }
 
     return Object.keys(classes)

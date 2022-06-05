@@ -11,6 +11,7 @@ export namespace Components {
     interface AppHeader {
     }
     interface AppHome {
+        "emails": Email[];
     }
     interface AppProfile {
         "name": string;
@@ -24,6 +25,7 @@ export namespace Components {
         "email": Email;
     }
     interface EmailList {
+        "emails": Email[];
     }
     interface GcaEmailPage {
         "emailId": string;
@@ -36,6 +38,7 @@ export namespace Components {
     interface XIcon {
         "icon": IconDefinition;
         "mask"?: IconDefinition;
+        "size"?: string;
         "spin": boolean;
     }
 }
@@ -124,6 +127,7 @@ declare namespace LocalJSX {
     interface AppHeader {
     }
     interface AppHome {
+        "emails"?: Email[];
     }
     interface AppProfile {
         "name"?: string;
@@ -137,6 +141,7 @@ declare namespace LocalJSX {
         "email"?: Email;
     }
     interface EmailList {
+        "emails"?: Email[];
     }
     interface GcaEmailPage {
         "emailId"?: string;
@@ -150,6 +155,7 @@ declare namespace LocalJSX {
     interface XIcon {
         "icon"?: IconDefinition;
         "mask"?: IconDefinition;
+        "size"?: string;
         "spin"?: boolean;
     }
     interface IntrinsicElements {

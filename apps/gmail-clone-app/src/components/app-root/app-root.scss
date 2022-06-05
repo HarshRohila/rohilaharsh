@@ -1,5 +1,4 @@
 @use '../../global/screen.scss';
-
 .root {
   height: 100%;
   display: flex;
@@ -9,9 +8,12 @@
 .content {
   flex: 1;
   display: flex;
+  &.loading {
+    align-items: center;
+    justify-content: center;
+  }
   overflow: auto;
   position: relative;
-
   side-bar {
     min-width: 240px;
     display: none;
@@ -20,12 +22,10 @@
       position: absolute;
       height: 100%;
       z-index: 1;
-
       @include screen.atleastLargePhone() {
         position: initial;
       }
     }
-
     @include screen.atleastLargePhone() {
       display: initial;
     }
@@ -35,4 +35,8 @@
 main {
   flex: 1;
   overflow: auto;
+}
+x-icon {
+  font-size: 3em;
+  color: white;
 }

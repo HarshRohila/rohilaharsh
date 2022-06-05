@@ -6,27 +6,12 @@ jest.mock('@stencil/router', () => {
 })
 
 import { newSpecPage } from '@stencil/core/testing'
-import { EmailService } from '../../email/service'
 import { EmailList } from './email-list'
+import { h } from '@stencil/core'
 
 describe('email-list | Component', () => {
-  it('shows spinner on render', async () => {
-    const promise = new Promise(res => setTimeout(() => res([]), 100))
-    EmailService.getEmails = jest.fn().mockImplementation(() => promise)
-
-    const page = await newSpecPage({
-      components: [EmailList],
-      html: '<email-list></email-list>'
-    })
-
-    const spinner = page.root.shadowRoot.querySelector('.spinner')
-    expect(spinner).toBeTruthy()
-
-    await promise
-  })
-
   it('shows lists of emails', async () => {
-    EmailService.getEmails = jest.fn().mockResolvedValue([
+    const emails = [
       {
         subject: 'sub1',
         datetime: new Date()
@@ -35,16 +20,16 @@ describe('email-list | Component', () => {
         subject: 'sub2',
         datetime: new Date()
       }
-    ])
+    ]
     const page = await newSpecPage({
       components: [EmailList],
-      html: '<email-list></email-list>'
+      template: () => <email-list emails={emails}></email-list>
     })
 
     await page.waitForChanges()
 
-    const emails = page.root.shadowRoot.querySelectorAll('email-bar')
+    const emailsElement = page.root.shadowRoot.querySelectorAll('email-bar')
 
-    expect(emails.length).toBe(2)
+    expect(emailsElement.length).toBe(2)
   })
 })

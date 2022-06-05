@@ -1,20 +1,19 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, Prop } from '@stencil/core'
+import { Email } from '../../email/service'
 
 @Component({
   tag: 'app-home',
   styleUrl: 'app-home.scss',
-  shadow: true,
+  shadow: true
 })
 export class AppHome {
+  @Prop() emails: Email[]
+
   render() {
     return (
       <div class="app-home">
-        <email-list></email-list>
-
-        {/* <stencil-route-link url="/profile/stencil">
-          <button>Profile page</button>
-        </stencil-route-link> */}
+        <email-list emails={this.emails}></email-list>
       </div>
-    );
+    )
   }
 }
