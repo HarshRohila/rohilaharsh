@@ -34,8 +34,8 @@
             "options": {
                 "commands": [
                     "nx test gmail-clone-app",
-                    "nx build gmail-clone-app",
                     "nx run gmail-clone-app:generateIndexHtmlProd",
+                    "nx build gmail-clone-app",
                     "gh-pages -d dist/apps/gmail-clone-app/www -r https://github.com/HarshRohila/gmail-clone.git"
                 ],
                 "parallel": false
