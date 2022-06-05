@@ -1,5 +1,4 @@
 import { Component, Host, h, Prop } from '@stencil/core'
-import { href } from '@stencil/router'
 import { Email } from '../../email/service'
 @Component({
   tag: 'email-list',
@@ -16,9 +15,7 @@ export class EmailList {
           <ul>
             {this.emails.map(email => (
               <li>
-                <a {...href(`emails/${email.id}`)}>
-                  <email-bar email={email}></email-bar>
-                </a>
+                <email-bar email={email}></email-bar>
               </li>
             ))}
           </ul>
