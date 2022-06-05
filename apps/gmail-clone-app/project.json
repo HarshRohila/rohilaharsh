@@ -1,99 +1,121 @@
 {
-  "root": "apps/gmail-clone-app",
-  "sourceRoot": "apps/gmail-clone-app/src",
-  "projectType": "application",
-  "generators": {
-    "@nxext/stencil:component": {
-      "style": "scss"
-    }
-  },
-  "tags": [],
-  "targets": {
-    "deploy": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "nx test gmail-clone-app",
-          "nx build gmail-clone-app",
-          "gh-pages -d dist/apps/gmail-clone-app/www -r https://github.com/HarshRohila/gmail-clone.git"
-        ],
-        "parallel": false
-      }
-    },
-    "serve": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "nx serve:dev gmail-clone-app --dev"
-        ],
-        "parallel": false
-      }
-    },
-    "build": {
-      "executor": "@nxext/stencil:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "projectType": "application",
-        "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
-        "configPath": "apps/gmail-clone-app/stencil.config.ts",
-        "outputPath": "dist/apps/gmail-clone-app"
-      },
-      "configurations": {
-        "production": {
-          "dev": false,
-          "prod": true
+    "root": "apps/gmail-clone-app",
+    "sourceRoot": "apps/gmail-clone-app/src",
+    "projectType": "application",
+    "generators": {
+        "@nxext/stencil:component": {
+            "style": "scss"
         }
-      }
     },
-    "serve:dev": {
-      "executor": "@nxext/stencil:serve",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "projectType": "application",
-        "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
-        "configPath": "apps/gmail-clone-app/stencil.config.ts",
-        "outputPath": "dist/apps/gmail-clone-app",
-        "dev": true
-      }
-    },
-    "test": {
-      "executor": "@nxext/stencil:test",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "projectType": "application",
-        "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
-        "configPath": "apps/gmail-clone-app/stencil.config.ts",
-        "outputPath": "dist/apps/gmail-clone-app"
-      }
-    },
-    "e2e": {
-      "executor": "@nxext/stencil:e2e",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "projectType": "application",
-        "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
-        "configPath": "apps/gmail-clone-app/stencil.config.ts",
-        "outputPath": "dist/apps/gmail-clone-app"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "apps/gmail-clone-app/**/*.{ts,tsx}"
-        ]
-      }
+    "tags": [],
+    "targets": {
+        "generateIndexHtmlProd": {
+            "executor": "@nrwl/workspace:run-commands",
+            "options": {
+                "commands": [
+                    "sed \"s/{{rootUrl}}/\\/gmail-clone\\//g\" src/indexTemplate.html > src/index.html"
+                ],
+                "cwd": "apps/gmail-clone-app",
+                "parallel": false
+            }
+        },
+        "generateIndexHtmlDev": {
+            "executor": "@nrwl/workspace:run-commands",
+            "options": {
+                "commands": [
+                    "sed \"s/{{rootUrl}}/\\//g\" src/indexTemplate.html > src/index.html"
+                ],
+                "cwd": "apps/gmail-clone-app",
+                "parallel": false
+            }
+        },
+        "deploy": {
+            "executor": "@nrwl/workspace:run-commands",
+            "options": {
+                "commands": [
+                    "nx test gmail-clone-app",
+                    "nx build gmail-clone-app",
+                    "nx run gmail-clone-app:generateIndexHtmlProd",
+                    "gh-pages -d dist/apps/gmail-clone-app/www -r https://github.com/HarshRohila/gmail-clone.git"
+                ],
+                "parallel": false
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/workspace:run-commands",
+            "options": {
+                "commands": [
+                    "nx run gmail-clone-app:generateIndexHtmlDev",
+                    "nx serve:dev gmail-clone-app --dev"
+                ],
+                "parallel": false
+            }
+        },
+        "build": {
+            "executor": "@nxext/stencil:build",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "options": {
+                "projectType": "application",
+                "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
+                "configPath": "apps/gmail-clone-app/stencil.config.ts",
+                "outputPath": "dist/apps/gmail-clone-app"
+            },
+            "configurations": {
+                "production": {
+                    "dev": false,
+                    "prod": true
+                }
+            }
+        },
+        "serve:dev": {
+            "executor": "@nxext/stencil:serve",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "options": {
+                "projectType": "application",
+                "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
+                "configPath": "apps/gmail-clone-app/stencil.config.ts",
+                "outputPath": "dist/apps/gmail-clone-app",
+                "dev": true
+            }
+        },
+        "test": {
+            "executor": "@nxext/stencil:test",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "options": {
+                "projectType": "application",
+                "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
+                "configPath": "apps/gmail-clone-app/stencil.config.ts",
+                "outputPath": "dist/apps/gmail-clone-app"
+            }
+        },
+        "e2e": {
+            "executor": "@nxext/stencil:e2e",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "options": {
+                "projectType": "application",
+                "tsConfig": "apps/gmail-clone-app/tsconfig.app.json",
+                "configPath": "apps/gmail-clone-app/stencil.config.ts",
+                "outputPath": "dist/apps/gmail-clone-app"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": [
+                "{options.outputFile}"
+            ],
+            "options": {
+                "lintFilePatterns": [
+                    "apps/gmail-clone-app/**/*.{ts,tsx}"
+                ]
+            }
+        }
     }
-  }
 }
