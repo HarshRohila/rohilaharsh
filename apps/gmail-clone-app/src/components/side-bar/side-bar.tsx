@@ -19,7 +19,7 @@ export class SideBar {
     {
       label: 'Starred',
       icon: faStar,
-      url: '/profile/stencil'
+      url: '/emails/starred'
     }
   ].map(item => {
     item.url = AppRoute.getPath(item.url)

@@ -23,6 +23,6 @@ export default Factory.extend({
   },
 
   starred() {
-    return false
+    return faker.datatype.boolean()
   }
 })

@@ -59,8 +59,8 @@ export class AppRoot {
                     ></app-home>
                   </Route>
                   <Route
-                    path={match(AppRoute.getPath('/profile/:name'))}
-                    render={({ name }) => <app-profile name={name}></app-profile>}
+                    path={match(AppRoute.getPath('/emails/starred'))}
+                    render={() => <gca-starred-emails></gca-starred-emails>}
                   />
                   <Route
                     path={match(AppRoute.getPath('/emails/:emailId'))}

@@ -9,8 +9,8 @@ import {
   Coordinator,
   RequestStrategy,
   SyncStrategy,
-  LogLevel,
-  EventLoggingStrategy
+  LogLevel
+  // EventLoggingStrategy
 } from '@orbit/coordinator'
 import models from './models'
 
@@ -69,7 +69,7 @@ const OrbitJs = {
       })
     )
 
-    coordinator.addStrategy(new EventLoggingStrategy())
+    // coordinator.addStrategy(new EventLoggingStrategy())
 
     // `activate` resolves when all strategies have been activated
     await coordinator.activate({ logLevel: LogLevel.Info }).then(() => {

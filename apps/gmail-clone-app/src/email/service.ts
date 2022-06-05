@@ -12,6 +12,15 @@ const EmailService = {
     return response.map(deserialize)
   },
 
+  async getStarredEmails(): Promise<Email[]> {
+    const response = await store.query(q =>
+      q.findRecords('mail').filter({ attribute: 'starred', value: true })
+    )
+
+    // @ts-ignore
+    return response.map(deserialize)
+  },
+
   async saveEdittedEmail(email: Email) {
     const MailSerializer = JsonApi.newSerializer('mail', {
       attributes: Object.keys(mail.attributes)
