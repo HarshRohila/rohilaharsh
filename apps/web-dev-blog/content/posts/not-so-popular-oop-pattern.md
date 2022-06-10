@@ -2,7 +2,7 @@
 title: 'A not so popular class pattern - TypeScript'
 date: 2022-06-09T09:29:09+05:30
 author: 'Harsh Rohila'
-draft: true
+draft: false
 ---
 
 TypeScript is a flexible language. Using it you can write code doing the same thing in multiple ways. This can be considered as both disadvantage and advantage of the language.
