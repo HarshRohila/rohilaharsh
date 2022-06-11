@@ -1,12 +1,6 @@
 const CACHE_VERSION = 1
 
-const BASE_CACHE_FILES = [
-  '/ananke/css/main.min.css',
-  '/manifest.json',
-  '/favicon.ico',
-  '/img/logo.png',
-  '/img/cover.jpg'
-]
+const BASE_CACHE_FILES = ['/manifest.json', '/favicon.ico', '/img/logo.png', '/img/cover.jpg']
 
 const OFFLINE_CACHE_FILES = ['/', '/img/dev-prod.jpg']
 
