@@ -1,17 +1,16 @@
 const CACHE_VERSION = 1
 
 const BASE_CACHE_FILES = [
-  '/main.min.css',
+  '/ananke/css/main.min.css',
   '/manifest.json',
-  '/favicon.png',
   '/favicon.ico',
-  '/logo.png',
-  '/cover.jpg'
+  '/img/logo.png',
+  '/img/cover.jpg'
 ]
 
-const OFFLINE_CACHE_FILES = ['/', '/dev-prod.jpg', '/offline/index.html']
+const OFFLINE_CACHE_FILES = ['/', '/img/dev-prod.jpg']
 
-const NOT_FOUND_CACHE_FILES = ['/style.css', '/script.js', '/404.html']
+const NOT_FOUND_CACHE_FILES = ['/404.html']
 
 const OFFLINE_PAGE = '/offline/index.html'
 const NOT_FOUND_PAGE = '/404.html'
