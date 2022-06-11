@@ -97,7 +97,7 @@ Commented explanation of code indicates failure to write readable code. Instead 
 
 ## Avoiding use of `else`
 
-This is not what I found in clean code, but in [this](https://youtu.be/EumXak7TyQ0) video
+This is not what I found in clean code, but in a [video](https://youtu.be/EumXak7TyQ0)
 
 Avoiding `else` makes code easy to read
 

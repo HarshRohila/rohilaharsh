@@ -29,7 +29,7 @@ I have seen most Windows users using Git bash. Git bash lets you run most common
 
 After using WSL 2 you will not get back to Git bash
 
-And you will notice speed difference when working with Node.js tools. Checkout [this](https://levelup.gitconnected.com/working-with-front-end-tools-on-linux-and-windows-the-grand-performance-test-b51a77a71636)
+And you will notice [performance difference](https://levelup.gitconnected.com/working-with-front-end-tools-on-linux-and-windows-the-grand-performance-test-b51a77a71636) when working with Node.js tools.
 
 ## 3. Windows Terminal (windows only)
 
@@ -49,7 +49,7 @@ Install [fish shell](https://fishshell.com/) to add modern features to your term
 
 2. _Highlighting_ - Shows word in red if command is invalid, blue if valid
 
-There are some minor differences from bash which you would want to know before using it. See [this](https://fishshell.com/docs/current/fish_for_bash_users.html#fish-for-bash-users)
+There are some [minor differences](https://fishshell.com/docs/current/fish_for_bash_users.html#fish-for-bash-users) from bash which you would want to know before using it.
 
 ## 5. Starship Prompt
 
