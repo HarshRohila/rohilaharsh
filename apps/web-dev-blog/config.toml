@@ -4,7 +4,7 @@ title = 'rohilaHarsh'
 theme = "ananke"
 disqusShortname = 'a-web-dev-blog'
 enableRobotsTXT = true
-googleAnalytics = ""
+googleAnalytics = "G-EFC3FRJ2GM"
 
 [[params.ananke_socials]]
 name = "github"
