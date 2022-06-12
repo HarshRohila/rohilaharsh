@@ -53,7 +53,9 @@
       {{- .Content -}}
       {{- partial "tags.html" . -}}
       <div class="mt6 instapaper_ignoref">
-				<applause-button style="width: 58px; height: 58px" multiclap="true" url="{{ .Permalink }}"/>
+				<div>
+					<applause-button style="width: 58px; height: 58px" multiclap="true" url="{{ .Permalink }}"/>
+				</div>
       {{ if .Site.DisqusShortname }}
         {{ template "_internal/disqus.html" . }}
       {{ end }}
