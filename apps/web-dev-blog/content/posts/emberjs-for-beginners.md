@@ -51,6 +51,8 @@ Run below command to run project in dev mode
 
 This command will print a localhost URL (http://localhost:4200) when it finishes. Visit that url in browser to see the app running. It shows the contents of the file `app/templates/application.hbs`.
 
+## Templates
+
 `.hbs` files are called Handlebars files. In these files we can write HTML tags for our app. These files are in templates folder. The HTML parts of your app are called templates.
 
 ### Why .hbs instead of .html
@@ -66,4 +68,10 @@ HTML files are limited in syntax. Handlebar files allow for extra syntax which c
 
 This double curly bracket syntax allows to write conditional logic in templates. `showHeader` is a JS variable, simply changing that variable value to `false` can remove header from our page, cool right?
 
-Think about how you will do it using JavaScript only, it needs lots of code to do this simple thing.
+Think about how you will do it using JavaScript only. It needs lots of code to do this simple thing.
+
+We can write all HTML of our app in `application.hbs` file. But when our app gets bigger the file size of this file will increase, making it difficult to maintain. For that Ember is having components
+
+## Components
+
+Large Template files (.hbs files) can be divided into smaller templates files. So that it is easier to manage. And these small templates can be used multiple times. These small templates are called components.
