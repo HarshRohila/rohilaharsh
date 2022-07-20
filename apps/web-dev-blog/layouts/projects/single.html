@@ -1,6 +1,6 @@
 {{ define "header" }}{{ partial "page-header.html" . }}
 {{ $js := resources.Get "ts/app/index.ts" | js.Build }}
-<script src="{{ $js.Permalink }}" defer></script>
+<script type="module" src="{{ $js.Permalink }}" defer></script>
 {{ end }}
 {{ define "main" }}
   <div class="flex-l mt2 mw8 center">
