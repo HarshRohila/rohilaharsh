@@ -2,7 +2,7 @@
 title: 'JavaScript Prototype Easy Explaination'
 date: 2022-08-15T15:07:09+05:30
 author: 'Harsh Rohila'
-draft: true
+draft: false
 ---
 
 JavaScript prototype is an interesting feature which I read about many times, but I forget that easily, because of so many similar terms and concepts. This post aims to be an easy explanation for Prototype feature
