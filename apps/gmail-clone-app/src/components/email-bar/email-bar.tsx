@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable @stencil/required-jsdoc */
+import { faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core'
 import { href } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
@@ -53,8 +54,20 @@ export class EmailBar {
             </span>
             <span class="time">{DateUtil.formatDate(email.datetime, 'H:mm a')}</span>
           </a>
+          <span class="actions">
+            <Icon></Icon>
+          </span>
         </div>
       </Host>
     )
   }
+}
+
+function Icon() {
+  return (
+    <button class="icon">
+      <x-icon class="circle" icon={faCircle}></x-icon>
+      <x-icon class="trash" icon={faTrash}></x-icon>
+    </button>
+  )
 }

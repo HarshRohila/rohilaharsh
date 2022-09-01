@@ -20,6 +20,10 @@ body {
   height: 100%;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 :root {
   --color-dark: #5f6368;
   --color-light: #fff;
