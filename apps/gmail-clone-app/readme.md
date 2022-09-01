@@ -2,4 +2,4 @@
 
 Hosted on [GitHub Pages](https://rohilaharsh.in/gmail-clone)
 
-Built with [Stencil](https://stenciljs.com/)
+Built with [Stencil](https://stenciljs.com)
