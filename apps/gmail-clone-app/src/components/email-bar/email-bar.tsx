@@ -4,6 +4,7 @@ import { faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core'
 import { href } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
+import { AppRoute } from '../../utils/AppRoute'
 import { DateUtil } from '../../utils/dateUtil'
 
 @Component({
@@ -45,6 +46,8 @@ export class EmailBar {
   render() {
     const { localEmail: email } = this
 
+    const emailPath = AppRoute.getPath(`/emails/${email.id}`)
+
     return (
       <Host>
         <div class="email">
@@ -52,7 +55,7 @@ export class EmailBar {
             value={this.starred}
             onToggled={({ detail }) => this.onStarToggle(detail)}
           ></star-checkbox>
-          <a {...href(`/emails/${email.id}`)}>
+          <a {...href(emailPath)}>
             <span class="from">{email.from}</span>
             <span class="text">
               <span class="subject">{email.subject}</span> <span class="content">{email.text}</span>
