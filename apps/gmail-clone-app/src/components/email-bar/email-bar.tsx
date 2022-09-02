@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable @stencil/required-jsdoc */
 import { faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Component, Host, h, Prop, State, Watch } from '@stencil/core'
+import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core'
 import { href } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
 import { DateUtil } from '../../utils/dateUtil'
@@ -20,6 +20,7 @@ export class EmailBar {
   }
 
   @State() localEmail: Email
+  @Event() delete: EventEmitter<Email>
 
   get starred() {
     return this.localEmail.starred
@@ -37,6 +38,10 @@ export class EmailBar {
     this.localEmail = { ...this.localEmail, starred }
   }
 
+  handleDelete(email: Email) {
+    this.delete.emit(email)
+  }
+
   render() {
     const { localEmail: email } = this
 
@@ -47,7 +52,7 @@ export class EmailBar {
             value={this.starred}
             onToggled={({ detail }) => this.onStarToggle(detail)}
           ></star-checkbox>
-          <a {...href(`emails/${email.id}`)}>
+          <a {...href(`/emails/${email.id}`)}>
             <span class="from">{email.from}</span>
             <span class="text">
               <span class="subject">{email.subject}</span> <span class="content">{email.text}</span>
@@ -55,7 +60,7 @@ export class EmailBar {
             <span class="time">{DateUtil.formatDate(email.datetime, 'H:mm a')}</span>
           </a>
           <span class="actions">
-            <Icon></Icon>
+            <Icon onClick={() => this.handleDelete(email)}></Icon>
           </span>
         </div>
       </Host>
@@ -63,9 +68,9 @@ export class EmailBar {
   }
 }
 
-function Icon() {
+function Icon({ onClick }) {
   return (
-    <button class="icon">
+    <button class="icon" onClick={onClick}>
       <x-icon class="circle" icon={faCircle}></x-icon>
       <x-icon class="trash" icon={faTrash}></x-icon>
     </button>

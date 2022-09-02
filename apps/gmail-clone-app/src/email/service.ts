@@ -22,6 +22,12 @@ const EmailService = {
   },
 
   async saveEdittedEmail(email: Email) {
+    const serializedEmail = EmailService._serializeEmail(email)
+
+    await store.update(t => t.updateRecord(serializedEmail))
+  },
+
+  _serializeEmail(email: Email) {
     const MailSerializer = JsonApi.newSerializer('mail', {
       attributes: Object.keys(mail.attributes)
     })
@@ -33,13 +39,18 @@ const EmailService = {
       serializedEmail.attributes.datetime as Date
     ).toISOString()
 
-    await store.update(t => t.updateRecord(serializedEmail))
+    return serializedEmail
   },
 
   async getEmail(emailId: string): Promise<Email> {
     const email = await store.query(q => q.findRecord({ type: 'mail', id: emailId }))
 
     return deserialize(email)
+  },
+
+  async deleteEmail(email: Email) {
+    const serializedEmail = EmailService._serializeEmail(email)
+    await store.update(t => t.removeRecord(serializedEmail))
   }
 }
 

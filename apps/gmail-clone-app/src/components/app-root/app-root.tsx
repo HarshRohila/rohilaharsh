@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import { Component, h, getAssetPath, State, Fragment } from '@stencil/core'
+import { Component, h, getAssetPath, State, Fragment, Listen } from '@stencil/core'
 import { createRouter, match, Route } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
 import { makeServer } from '../../mirage'
@@ -21,6 +21,14 @@ const Router = createRouter()
 export class AppRoot {
   @State() isLoading = true
   @State() emails: Email[]
+
+  @Listen('delete')
+  handleDeleteEmail(ev: CustomEvent<Email>) {
+    const emailToDelete = ev.detail
+    this.emails = this.emails.filter(e => e.id !== emailToDelete.id)
+
+    EmailService.deleteEmail(emailToDelete)
+  }
 
   async componentWillLoad() {
     await OrbitJs.activate()

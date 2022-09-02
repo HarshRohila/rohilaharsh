@@ -33,7 +33,6 @@ export namespace Components {
     interface GcaMobileSideBar {
     }
     interface GcaStarredEmails {
-        "starredEmails": Email[];
     }
     interface SideBar {
     }
@@ -159,6 +158,7 @@ declare namespace LocalJSX {
     }
     interface EmailBar {
         "email"?: Email;
+        "onDelete"?: (event: CustomEvent<Email>) => void;
     }
     interface EmailList {
         "emails"?: Email[];
@@ -170,7 +170,6 @@ declare namespace LocalJSX {
         "onClickedOutside"?: (event: CustomEvent<void>) => void;
     }
     interface GcaStarredEmails {
-        "starredEmails"?: Email[];
     }
     interface SideBar {
     }

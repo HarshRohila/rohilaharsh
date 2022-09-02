@@ -31,6 +31,7 @@ export function makeServer({ environment = 'test' }) {
       this.get('mails')
       this.get('mails/:id')
       this.patch('mails/:id')
+      this.delete('mails/:id')
     }
   })
 }
