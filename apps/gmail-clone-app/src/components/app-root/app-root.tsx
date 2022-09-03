@@ -26,9 +26,9 @@ export class AppRoot {
   @Listen('delete')
   handleDeleteEmail(ev: CustomEvent<Email>) {
     const emailToDelete = ev.detail
-    this.handleDeleteClick(new Set(emailToDelete.id))
+    this.handleDeleteClick(new Set([emailToDelete.id]))
 
-    EmailService.deleteEmail(emailToDelete)
+    EmailService.deleteEmails([emailToDelete.id])
   }
 
   handleDeleteClick(emailIds: Set<string>) {
@@ -37,7 +37,7 @@ export class AppRoot {
     }
 
     this.emails = this.emails.filter(notIn(emailIds))
-    this.starredEmails = this.starredEmails.filter(e => !emailIds.has(e.id))
+    this.starredEmails = this.starredEmails.filter(notIn(emailIds))
   }
 
   async componentWillLoad() {

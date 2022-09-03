@@ -139,6 +139,9 @@ star-checkbox {
 }
 .email > a {
   width: calc(100% - (30px + $avatar-width));
+  @include screen.atleastMedium() {
+    width: calc(100% - 30px);
+  }
 
   flex-direction: column;
   @include screen.atleastMedium() {
