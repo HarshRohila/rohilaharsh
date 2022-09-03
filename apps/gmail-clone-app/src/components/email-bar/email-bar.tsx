@@ -21,6 +21,7 @@ export class EmailBar {
   }
 
   @State() localEmail: Email
+  @State() selected = false
   @Event() delete: EventEmitter<Email>
 
   get starred() {
@@ -43,20 +44,31 @@ export class EmailBar {
     this.delete.emit(email)
   }
 
+  handleEnterSelectionMode(ev: Event) {
+    ev.preventDefault()
+
+    this.selected = true
+  }
+
   render() {
     const { localEmail: email } = this
 
     const emailPath = AppRoute.getPath(`/emails/${email.id}`)
 
+    const classes = {
+      email: true,
+      selected: this.selected
+    }
+
     return (
       <Host>
-        <div class="email">
+        <div class={classList(classes)}>
           <star-checkbox
             value={this.starred}
             onToggled={({ detail }) => this.onStarToggle(detail)}
           ></star-checkbox>
           <Avatar email={this.email} />
-          <a {...href(emailPath)}>
+          <a {...href(emailPath)} onContextMenu={this.handleEnterSelectionMode.bind(this)}>
             <span class="from">{email.from}</span>
             <span class="text">
               <span class="subject">{email.subject}</span> <span class="content">{email.text}</span>
@@ -83,4 +95,13 @@ function Icon({ onClick }) {
       <x-icon class="trash" icon={faTrash}></x-icon>
     </button>
   )
+}
+
+function classList(classes: Record<string, boolean>) {
+  return Object.keys(classes)
+    .filter(c => classes[c])
+    .reduce((acc, c) => {
+      acc += ' ' + c
+      return acc
+    })
 }

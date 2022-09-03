@@ -82,6 +82,9 @@ star-checkbox {
 }
 
 .email {
+  &.selected {
+    background-color: aqua;
+  }
   display: flex;
 
   background: rgba(255, 255, 255, 0.902);
