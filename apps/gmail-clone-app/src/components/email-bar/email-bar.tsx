@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable @stencil/required-jsdoc */
-import { faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core'
 import { href } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
+import { EmailSelection } from '../../states/emailSelection'
 import { AppRoute } from '../../utils/AppRoute'
 import { DateUtil } from '../../utils/dateUtil'
 
@@ -44,10 +45,14 @@ export class EmailBar {
     this.delete.emit(email)
   }
 
-  handleEnterSelectionMode(ev: Event) {
-    ev.preventDefault()
+  handleEnterSelectionMode() {
+    this.selected = !this.selected
+    EmailSelection.selectEmail(this.email)
+  }
 
-    this.selected = true
+  handleRightClick(ev: Event) {
+    ev.preventDefault()
+    this.handleEnterSelectionMode()
   }
 
   render() {
@@ -67,8 +72,12 @@ export class EmailBar {
             value={this.starred}
             onToggled={({ detail }) => this.onStarToggle(detail)}
           ></star-checkbox>
-          <Avatar email={this.email} />
-          <a {...href(emailPath)} onContextMenu={this.handleEnterSelectionMode.bind(this)}>
+          <Avatar
+            email={this.email}
+            onClick={this.handleEnterSelectionMode.bind(this)}
+            selected={this.selected}
+          />
+          <a {...href(emailPath)} onContextMenu={this.handleRightClick.bind(this)}>
             <span class="from">{email.from}</span>
             <span class="text">
               <span class="subject">{email.subject}</span> <span class="content">{email.text}</span>
@@ -84,8 +93,30 @@ export class EmailBar {
   }
 }
 
-function Avatar({ email }: { email: Email }) {
-  return <img class="avatar" src={email.imageUrl} alt={`${email.from}'s avatar`} />
+function Avatar({
+  email,
+  onClick,
+  selected
+}: {
+  email: Email
+  onClick: (email: Email) => void
+  selected: boolean
+}) {
+  const avatar = (
+    <img
+      onClick={() => onClick(email)}
+      class="avatar"
+      src={email.imageUrl}
+      alt={`${email.from}'s avatar`}
+    />
+  )
+
+  const clickedButton = (
+    <button class="clicked-button" onClick={() => onClick(email)}>
+      <x-icon icon={faCheck}></x-icon>
+    </button>
+  )
+  return selected ? clickedButton : avatar
 }
 
 function Icon({ onClick }) {

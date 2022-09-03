@@ -55,17 +55,25 @@
 
 $avatar-width: 48px;
 
-.avatar {
+@mixin avatar() {
   $dim: $avatar-width;
   height: $dim;
   width: $dim;
   border-radius: 50%;
   margin: auto 0;
   margin-right: 10px;
+}
+
+.avatar {
+  @include avatar();
 
   @include screen.atleastMedium() {
     display: none;
   }
+}
+.clicked-button {
+  @include avatar();
+  border: 0;
 }
 
 $padding: 10px;
@@ -104,7 +112,9 @@ star-checkbox {
     cursor: pointer;
 
     star-checkbox {
-      --icon-opacity: 1;
+      @include screen.atleastMedium() {
+        --icon-opacity: 1;
+      }
     }
 
     .actions {
@@ -154,7 +164,9 @@ star-checkbox {
       }
     }
     .time {
-      visibility: hidden;
+      @include screen.atleastMedium() {
+        visibility: hidden;
+      }
     }
   }
 }
