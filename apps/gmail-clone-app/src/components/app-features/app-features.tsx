@@ -12,10 +12,12 @@ export class AppFeatures {
         <section>
           <h1>About</h1>
           <p>
-            This app is a mock of Gmail app created using <b>Stencil.js</b>
+            This app is a mock of Gmail app created using{' '}
+            <a href="https://stenciljs.com/">Stencil.js</a>
           </p>
           <p>
-            Its using a mock local server - <b>Mirage.js</b> and using <b>Faker.js</b> for mock data
+            Its using a mock local server - <a href="https://miragejs.com/">Mirage.js</a> and using{' '}
+            <a href="https://fakerjs.dev/">Faker.js</a> for mock data
           </p>
         </section>
 
@@ -30,6 +32,10 @@ export class AppFeatures {
           <h4>Delete Email</h4>
           <ul>
             <li>Desktop only - hover on email to see Delete button</li>
+            <li>
+              Mobile only - click on Avatar to select email or tap and hold on email to select, then
+              click delete button to delete emails
+            </li>
           </ul>
         </section>
       </div>
