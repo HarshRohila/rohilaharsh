@@ -165,6 +165,7 @@ declare namespace LocalJSX {
     interface AppFeatures {
     }
     interface AppHeader {
+        "onDeleteClicked"?: (event: CustomEvent<Set<string>>) => void;
     }
     interface AppHome {
         "emails"?: Email[];

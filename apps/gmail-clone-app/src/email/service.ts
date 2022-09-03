@@ -51,6 +51,15 @@ const EmailService = {
   async deleteEmail(email: Email) {
     const serializedEmail = EmailService._serializeEmail(email)
     await store.update(t => t.removeRecord(serializedEmail))
+  },
+
+  async deleteEmails(emailIds: string[]) {
+    await store.update(t => {
+      return emailIds.map(id => {
+        const record = { type: 'mail', id }
+        return t.removeRecord(record)
+      })
+    })
   }
 }
 

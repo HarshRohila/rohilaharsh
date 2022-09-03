@@ -30,6 +30,10 @@ export class AppRoot {
     EmailService.deleteEmail(emailToDelete)
   }
 
+  handleDeleteClick(emailIds: Set<string>) {
+    this.emails = this.emails.filter(e => !emailIds.has(e.id))
+  }
+
   async componentWillLoad() {
     await OrbitJs.activate()
     this.requestEmails()
@@ -53,7 +57,7 @@ export class AppRoot {
           backgroundImage: `url(${getAssetPath('./assets/background.jpg')})`
         }}
       >
-        <app-header></app-header>
+        <app-header onDeleteClicked={ev => this.handleDeleteClick(ev.detail)}></app-header>
         {SideBar.state.isOpen && (
           <gca-mobile-side-bar
             onClickedOutside={() => {

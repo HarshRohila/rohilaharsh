@@ -4,7 +4,7 @@ import { Email } from '../email/service'
 export { EmailSelection }
 
 const { state } = createStore({
-  selectedEmailIds: new Set()
+  selectedEmailIds: new Set() as Set<string>
 })
 
 const EmailSelection = {

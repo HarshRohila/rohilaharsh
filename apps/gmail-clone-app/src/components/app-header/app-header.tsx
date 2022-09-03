@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import { Component, Host, h } from '@stencil/core'
+import { Component, Host, h, Event, EventEmitter } from '@stencil/core'
 import {
   faBars,
   faCog,
@@ -12,6 +12,7 @@ import {
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 import { SideBar } from '../../states/sideBar'
 import { EmailSelection } from '../../states/emailSelection'
+import { EmailService } from '../../email/service'
 @Component({
   tag: 'app-header',
   styleUrl: 'app-header.scss',
@@ -22,12 +23,29 @@ export class AppHeader {
     return !!EmailSelection.state.selectedEmailIds.size
   }
 
+  @Event() deleteClicked: EventEmitter<Set<string>>
+
+  deleteSelectedEmails() {
+    const emailIds = [...EmailSelection.state.selectedEmailIds.values()]
+    EmailService.deleteEmails(emailIds)
+    this.deleteClicked.emit(EmailSelection.state.selectedEmailIds)
+    EmailSelection.reset()
+  }
+
   render() {
-    return <Host>{this.isSelectionMode ? <SelectionModeHeader /> : <Header />}</Host>
+    return (
+      <Host>
+        {this.isSelectionMode ? (
+          <SelectionModeHeader onDeleteClick={this.deleteSelectedEmails.bind(this)} />
+        ) : (
+          <Header />
+        )}
+      </Host>
+    )
   }
 }
 
-function SelectionModeHeader() {
+function SelectionModeHeader({ onDeleteClick }: { onDeleteClick: () => void }) {
   function exitSelectionMode() {
     EmailSelection.reset()
   }
@@ -35,7 +53,7 @@ function SelectionModeHeader() {
   return (
     <header class="selection-mode-header">
       <icon-button class="back-button" icon={faArrowLeft} onClick={exitSelectionMode}></icon-button>
-      <icon-button class="delete-button" icon={faTrash}></icon-button>
+      <icon-button class="delete-button" icon={faTrash} onClick={onDeleteClick}></icon-button>
     </header>
   )
 }
