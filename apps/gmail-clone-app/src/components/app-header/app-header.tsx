@@ -6,7 +6,8 @@ import {
   faBraille,
   faSearch,
   faSlidersH,
-  faTrash
+  faTrash,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons'
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 import { SideBar } from '../../states/sideBar'
@@ -27,8 +28,13 @@ export class AppHeader {
 }
 
 function SelectionModeHeader() {
+  function exitSelectionMode() {
+    EmailSelection.reset()
+  }
+
   return (
-    <header>
+    <header class="selection-mode-header">
+      <icon-button class="back-button" icon={faArrowLeft} onClick={exitSelectionMode}></icon-button>
       <icon-button class="delete-button" icon={faTrash}></icon-button>
     </header>
   )

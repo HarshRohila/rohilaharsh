@@ -22,7 +22,11 @@ export class EmailBar {
   }
 
   @State() localEmail: Email
-  @State() selected = false
+
+  get selected() {
+    return EmailSelection.state.selectedEmailIds.has(this.email.id)
+  }
+
   @Event() delete: EventEmitter<Email>
 
   get starred() {
@@ -46,7 +50,6 @@ export class EmailBar {
   }
 
   handleEnterSelectionMode() {
-    this.selected = !this.selected
     EmailSelection.selectEmail(this.email)
   }
 
