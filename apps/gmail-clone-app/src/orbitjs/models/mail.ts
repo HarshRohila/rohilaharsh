@@ -5,6 +5,7 @@ export default {
     subject: { type: 'string' },
     text: { type: 'string' },
     datetime: { type: 'string' },
-    starred: { type: 'boolean' }
+    starred: { type: 'boolean' },
+    imageUrl: { type: 'string' }
   }
 }

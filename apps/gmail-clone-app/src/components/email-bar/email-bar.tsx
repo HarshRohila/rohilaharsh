@@ -55,6 +55,7 @@ export class EmailBar {
             value={this.starred}
             onToggled={({ detail }) => this.onStarToggle(detail)}
           ></star-checkbox>
+          <Avatar email={this.email} />
           <a {...href(emailPath)}>
             <span class="from">{email.from}</span>
             <span class="text">
@@ -69,6 +70,10 @@ export class EmailBar {
       </Host>
     )
   }
+}
+
+function Avatar({ email }: { email: Email }) {
+  return <img class="avatar" src={email.imageUrl} alt={`${email.from}'s avatar`} />
 }
 
 function Icon({ onClick }) {

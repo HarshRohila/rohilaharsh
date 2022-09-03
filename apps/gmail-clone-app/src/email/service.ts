@@ -69,4 +69,5 @@ interface Email {
   text: string
   datetime: Date
   starred: boolean
+  imageUrl: string
 }

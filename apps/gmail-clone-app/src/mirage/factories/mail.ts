@@ -24,5 +24,9 @@ export default Factory.extend({
 
   starred() {
     return faker.datatype.boolean()
+  },
+
+  imageUrl() {
+    return faker.image.avatar()
   }
 })

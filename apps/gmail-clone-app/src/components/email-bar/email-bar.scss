@@ -53,6 +53,21 @@
   }
 }
 
+$avatar-width: 48px;
+
+.avatar {
+  $dim: $avatar-width;
+  height: $dim;
+  width: $dim;
+  border-radius: 50%;
+  margin: auto 0;
+  margin-right: 10px;
+
+  @include screen.atleastMedium() {
+    display: none;
+  }
+}
+
 $padding: 10px;
 
 star-checkbox {
@@ -141,7 +156,7 @@ star-checkbox {
   }
 }
 .email > a {
-  width: calc(100% - 30px);
+  width: calc(100% - (30px + $avatar-width));
 
   flex-direction: column;
   @include screen.atleastMedium() {
