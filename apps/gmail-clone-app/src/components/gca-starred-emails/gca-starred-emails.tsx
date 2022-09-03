@@ -1,6 +1,7 @@
 /* eslint-disable @stencil/required-jsdoc */
 import { Component, Host, h, State, Listen } from '@stencil/core'
 import { Email, EmailService } from '../../email/service'
+import { EmailSelection } from '../../states/emailSelection'
 
 @Component({
   tag: 'gca-starred-emails',
@@ -22,6 +23,10 @@ export class GcaStarredEmails {
     EmailService.getStarredEmails().then(e => {
       this.starredEmails = e
     })
+  }
+
+  disconnectedCallback() {
+    EmailSelection.reset()
   }
 
   render() {

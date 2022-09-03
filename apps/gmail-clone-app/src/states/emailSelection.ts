@@ -18,5 +18,8 @@ const EmailSelection = {
     }
     state.selectedEmailIds = new Set(selectedEmailIds)
   },
+  reset() {
+    state.selectedEmailIds = new Set()
+  },
   state
 }

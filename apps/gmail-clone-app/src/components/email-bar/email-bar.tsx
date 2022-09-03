@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable @stencil/required-jsdoc */
-import { faCheck, faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core'
 import { href } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
@@ -120,12 +120,7 @@ function Avatar({
 }
 
 function Icon({ onClick }) {
-  return (
-    <button class="icon" onClick={onClick}>
-      <x-icon class="circle" icon={faCircle}></x-icon>
-      <x-icon class="trash" icon={faTrash}></x-icon>
-    </button>
-  )
+  return <icon-button icon={faTrash} onClicked={onClick}></icon-button>
 }
 
 function classList(classes: Record<string, boolean>) {
