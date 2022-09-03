@@ -1,0 +1,23 @@
+@use '../../global/helpers.scss';
+
+:host {
+  display: block;
+}
+
+h1 {
+  font-size: helpers.px2rem(20);
+}
+h4 {
+  margin: 0;
+}
+ul {
+  margin: 8px;
+}
+.container {
+  background-color: white;
+  opacity: 0.6;
+  padding: 10px;
+
+  border-radius: 8px;
+  margin: 8px;
+}

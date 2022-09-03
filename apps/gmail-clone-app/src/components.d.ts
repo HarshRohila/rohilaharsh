@@ -8,6 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Email } from "./email/service";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 export namespace Components {
+    interface AppFeatures {
+    }
     interface AppHeader {
     }
     interface AppHome {
@@ -47,6 +49,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLAppFeaturesElement extends Components.AppFeatures, HTMLStencilElement {
+    }
+    var HTMLAppFeaturesElement: {
+        prototype: HTMLAppFeaturesElement;
+        new (): HTMLAppFeaturesElement;
+    };
     interface HTMLAppHeaderElement extends Components.AppHeader, HTMLStencilElement {
     }
     var HTMLAppHeaderElement: {
@@ -126,6 +134,7 @@ declare global {
         new (): HTMLXIconElement;
     };
     interface HTMLElementTagNameMap {
+        "app-features": HTMLAppFeaturesElement;
         "app-header": HTMLAppHeaderElement;
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
@@ -142,6 +151,8 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface AppFeatures {
+    }
     interface AppHeader {
     }
     interface AppHome {
@@ -184,6 +195,7 @@ declare namespace LocalJSX {
         "spin"?: boolean;
     }
     interface IntrinsicElements {
+        "app-features": AppFeatures;
         "app-header": AppHeader;
         "app-home": AppHome;
         "app-profile": AppProfile;
@@ -203,6 +215,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-features": LocalJSX.AppFeatures & JSXBase.HTMLAttributes<HTMLAppFeaturesElement>;
             "app-header": LocalJSX.AppHeader & JSXBase.HTMLAttributes<HTMLAppHeaderElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;

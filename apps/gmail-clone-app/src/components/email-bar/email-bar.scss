@@ -90,7 +90,9 @@ star-checkbox {
     }
 
     .actions {
-      display: block;
+      @include screen.atleastMedium() {
+        display: block;
+      }
       right: calc($padding + 5px);
       height: 100%;
 

@@ -75,6 +75,10 @@ export class AppRoot {
                     ></app-home>
                   </Route>
                   <Route
+                    path={match(AppRoute.getPath('/about'))}
+                    render={() => <app-features></app-features>}
+                  />
+                  <Route
                     path={match(AppRoute.getPath('/emails/starred'))}
                     render={() => <gca-starred-emails></gca-starred-emails>}
                   />

@@ -1,5 +1,10 @@
 /* eslint-disable @stencil/required-jsdoc */
-import { faInbox, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import {
+  faInbox,
+  faQuestionCircle,
+  faStar,
+  IconDefinition
+} from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Element, State } from '@stencil/core'
 import { href } from '@stencil/router'
 import { AppRoute } from '../../utils/AppRoute'
@@ -25,6 +30,11 @@ export class SideBar {
       label: 'Starred',
       icon: faStar,
       url: '/emails/starred'
+    },
+    {
+      label: 'About',
+      icon: faQuestionCircle,
+      url: '/about'
     }
   ].map(item => {
     item.url = AppRoute.getPath(item.url)
