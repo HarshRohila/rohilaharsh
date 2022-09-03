@@ -16,3 +16,14 @@ $baseFontSize: 16;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin hover($selector) {
+  @media (hover: hover) {
+    #{$selector}:hover {
+      @content;
+    }
+  }
+  #{$selector}:active {
+    @content;
+  }
+}

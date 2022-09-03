@@ -1,6 +1,9 @@
 @use '../../global/helpers.scss';
 @use '../../global/screen.scss';
 
+.delete-button {
+  --icon-button-color: white;
+}
 header {
   color: var(--color-light);
   height: 56px;

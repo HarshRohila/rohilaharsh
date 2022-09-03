@@ -1,15 +1,19 @@
-button.icon {
-  height: 100%;
-  width: 38px;
-  padding: 0;
+@use '../../global/helpers.scss';
 
-  &:hover {
-    cursor: pointer;
-    .circle {
-      transform: scale(1);
-    }
+@include helpers.hover('button.icon') {
+  cursor: pointer;
+  .circle {
+    transform: scale(1);
   }
+}
+button.icon {
+  $dim: 38px;
+  height: $dim;
+  width: $dim;
+  padding: 0;
+  position: relative;
 
+  $color: #353432;
   .circle {
     width: 100%;
     height: 100%;
@@ -18,7 +22,8 @@ button.icon {
     top: 0;
     font-size: 24px;
     position: absolute;
-    color: #e9e3d9;
+    color: var(--icon-button-circle-color, var(--icon-button-color, $color));
+    opacity: 0.6;
     transition: transform 0.2s;
     transform: scale(0);
   }
@@ -27,7 +32,7 @@ button.icon {
     top: 50%;
     transform: translate(-50%, -50%);
     --font-size: 16px;
-    color: #353432;
+    color: var(--icon-button-color, $color);
     position: absolute;
   }
   border: 0;
