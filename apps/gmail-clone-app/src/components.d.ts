@@ -6,7 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Email } from "./email/service";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition as IconDefinition1 } from "@fortawesome/fontawesome-svg-core";
 export namespace Components {
     interface AppFeatures {
     }
@@ -35,6 +36,10 @@ export namespace Components {
     interface GcaMobileSideBar {
     }
     interface GcaStarredEmails {
+        "starredEmails": Email[];
+    }
+    interface IconButton {
+        "icon": IconDefinition;
     }
     interface SideBar {
     }
@@ -115,6 +120,12 @@ declare global {
         prototype: HTMLGcaStarredEmailsElement;
         new (): HTMLGcaStarredEmailsElement;
     };
+    interface HTMLIconButtonElement extends Components.IconButton, HTMLStencilElement {
+    }
+    var HTMLIconButtonElement: {
+        prototype: HTMLIconButtonElement;
+        new (): HTMLIconButtonElement;
+    };
     interface HTMLSideBarElement extends Components.SideBar, HTMLStencilElement {
     }
     var HTMLSideBarElement: {
@@ -145,6 +156,7 @@ declare global {
         "gca-email-page": HTMLGcaEmailPageElement;
         "gca-mobile-side-bar": HTMLGcaMobileSideBarElement;
         "gca-starred-emails": HTMLGcaStarredEmailsElement;
+        "icon-button": HTMLIconButtonElement;
         "side-bar": HTMLSideBarElement;
         "star-checkbox": HTMLStarCheckboxElement;
         "x-icon": HTMLXIconElement;
@@ -154,6 +166,7 @@ declare namespace LocalJSX {
     interface AppFeatures {
     }
     interface AppHeader {
+        "onDeleteClicked"?: (event: CustomEvent<Set<string>>) => void;
     }
     interface AppHome {
         "emails"?: Email[];
@@ -181,6 +194,12 @@ declare namespace LocalJSX {
         "onClickedOutside"?: (event: CustomEvent<void>) => void;
     }
     interface GcaStarredEmails {
+        "onChangedStarredEmails"?: (event: CustomEvent<Email[]>) => void;
+        "starredEmails"?: Email[];
+    }
+    interface IconButton {
+        "icon"?: IconDefinition;
+        "onClicked"?: (event: CustomEvent<void>) => void;
     }
     interface SideBar {
     }
@@ -206,6 +225,7 @@ declare namespace LocalJSX {
         "gca-email-page": GcaEmailPage;
         "gca-mobile-side-bar": GcaMobileSideBar;
         "gca-starred-emails": GcaStarredEmails;
+        "icon-button": IconButton;
         "side-bar": SideBar;
         "star-checkbox": StarCheckbox;
         "x-icon": XIcon;
@@ -226,6 +246,7 @@ declare module "@stencil/core" {
             "gca-email-page": LocalJSX.GcaEmailPage & JSXBase.HTMLAttributes<HTMLGcaEmailPageElement>;
             "gca-mobile-side-bar": LocalJSX.GcaMobileSideBar & JSXBase.HTMLAttributes<HTMLGcaMobileSideBarElement>;
             "gca-starred-emails": LocalJSX.GcaStarredEmails & JSXBase.HTMLAttributes<HTMLGcaStarredEmailsElement>;
+            "icon-button": LocalJSX.IconButton & JSXBase.HTMLAttributes<HTMLIconButtonElement>;
             "side-bar": LocalJSX.SideBar & JSXBase.HTMLAttributes<HTMLSideBarElement>;
             "star-checkbox": LocalJSX.StarCheckbox & JSXBase.HTMLAttributes<HTMLStarCheckboxElement>;
             "x-icon": LocalJSX.XIcon & JSXBase.HTMLAttributes<HTMLXIconElement>;

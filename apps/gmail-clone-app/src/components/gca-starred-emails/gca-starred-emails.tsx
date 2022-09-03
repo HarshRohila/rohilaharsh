@@ -1,6 +1,7 @@
 /* eslint-disable @stencil/required-jsdoc */
-import { Component, Host, h, State, Listen } from '@stencil/core'
+import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core'
 import { Email, EmailService } from '../../email/service'
+import { EmailSelection } from '../../states/emailSelection'
 
 @Component({
   tag: 'gca-starred-emails',
@@ -8,20 +9,18 @@ import { Email, EmailService } from '../../email/service'
   shadow: true
 })
 export class GcaStarredEmails {
-  @State() starredEmails: Email[] = []
+  @Prop() starredEmails: Email[] = []
 
-  @Listen('delete')
-  handleDeleteEmail(ev: CustomEvent<Email>) {
-    const emailToDelete = ev.detail
-    this.starredEmails = this.starredEmails.filter(e => e.id !== emailToDelete.id)
-
-    EmailService.deleteEmail(emailToDelete)
-  }
+  @Event() changedStarredEmails: EventEmitter<Email[]>
 
   componentWillLoad() {
     EmailService.getStarredEmails().then(e => {
-      this.starredEmails = e
+      this.changedStarredEmails.emit(e)
     })
+  }
+
+  disconnectedCallback() {
+    EmailSelection.reset()
   }
 
   render() {

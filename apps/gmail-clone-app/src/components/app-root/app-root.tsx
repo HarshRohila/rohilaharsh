@@ -21,13 +21,23 @@ const Router = createRouter()
 export class AppRoot {
   @State() isLoading = true
   @State() emails: Email[]
+  @State() starredEmails: Email[] = []
 
   @Listen('delete')
   handleDeleteEmail(ev: CustomEvent<Email>) {
     const emailToDelete = ev.detail
-    this.emails = this.emails.filter(e => e.id !== emailToDelete.id)
+    this.handleDeleteClick(new Set([emailToDelete.id]))
 
-    EmailService.deleteEmail(emailToDelete)
+    EmailService.deleteEmails([emailToDelete.id])
+  }
+
+  handleDeleteClick(emailIds: Set<string>) {
+    const notIn = (emailIds: Set<string>) => {
+      return (e: Email) => !emailIds.has(e.id)
+    }
+
+    this.emails = this.emails.filter(notIn(emailIds))
+    this.starredEmails = this.starredEmails.filter(notIn(emailIds))
   }
 
   async componentWillLoad() {
@@ -53,7 +63,7 @@ export class AppRoot {
           backgroundImage: `url(${getAssetPath('./assets/background.jpg')})`
         }}
       >
-        <app-header></app-header>
+        <app-header onDeleteClicked={ev => this.handleDeleteClick(ev.detail)}></app-header>
         {SideBar.state.isOpen && (
           <gca-mobile-side-bar
             onClickedOutside={() => {
@@ -80,7 +90,14 @@ export class AppRoot {
                   />
                   <Route
                     path={match(AppRoute.getPath('/emails/starred'))}
-                    render={() => <gca-starred-emails></gca-starred-emails>}
+                    render={() => (
+                      <gca-starred-emails
+                        starredEmails={this.starredEmails}
+                        onChangedStarredEmails={ev => {
+                          this.starredEmails = ev.detail
+                        }}
+                      ></gca-starred-emails>
+                    )}
                   />
                   <Route
                     path={match(AppRoute.getPath('/emails/:emailId'))}

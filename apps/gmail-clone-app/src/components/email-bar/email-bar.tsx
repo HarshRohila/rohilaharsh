@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable @stencil/required-jsdoc */
-import { faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core'
 import { href } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
+import { EmailSelection } from '../../states/emailSelection'
 import { AppRoute } from '../../utils/AppRoute'
 import { DateUtil } from '../../utils/dateUtil'
 
@@ -21,6 +22,11 @@ export class EmailBar {
   }
 
   @State() localEmail: Email
+
+  get selected() {
+    return EmailSelection.state.selectedEmailIds.has(this.email.id)
+  }
+
   @Event() delete: EventEmitter<Email>
 
   get starred() {
@@ -43,20 +49,38 @@ export class EmailBar {
     this.delete.emit(email)
   }
 
+  handleEnterSelectionMode() {
+    EmailSelection.selectEmail(this.email)
+  }
+
+  handleRightClick(ev: Event) {
+    ev.preventDefault()
+    this.handleEnterSelectionMode()
+  }
+
   render() {
     const { localEmail: email } = this
 
     const emailPath = AppRoute.getPath(`/emails/${email.id}`)
 
+    const classes = {
+      email: true,
+      selected: this.selected
+    }
+
     return (
       <Host>
-        <div class="email">
+        <div class={classList(classes)}>
           <star-checkbox
             value={this.starred}
             onToggled={({ detail }) => this.onStarToggle(detail)}
           ></star-checkbox>
-          <Avatar email={this.email} />
-          <a {...href(emailPath)}>
+          <Avatar
+            email={this.email}
+            onClick={this.handleEnterSelectionMode.bind(this)}
+            selected={this.selected}
+          />
+          <a {...href(emailPath)} onContextMenu={this.handleRightClick.bind(this)}>
             <span class="from">{email.from}</span>
             <span class="text">
               <span class="subject">{email.subject}</span> <span class="content">{email.text}</span>
@@ -72,15 +96,41 @@ export class EmailBar {
   }
 }
 
-function Avatar({ email }: { email: Email }) {
-  return <img class="avatar" src={email.imageUrl} alt={`${email.from}'s avatar`} />
+function Avatar({
+  email,
+  onClick,
+  selected
+}: {
+  email: Email
+  onClick: (email: Email) => void
+  selected: boolean
+}) {
+  const avatar = (
+    <img
+      onClick={() => onClick(email)}
+      class="avatar"
+      src={email.imageUrl}
+      alt={`${email.from}'s avatar`}
+    />
+  )
+
+  const clickedButton = (
+    <button class="clicked-button" onClick={() => onClick(email)}>
+      <x-icon icon={faCheck}></x-icon>
+    </button>
+  )
+  return selected ? clickedButton : avatar
 }
 
 function Icon({ onClick }) {
-  return (
-    <button class="icon" onClick={onClick}>
-      <x-icon class="circle" icon={faCircle}></x-icon>
-      <x-icon class="trash" icon={faTrash}></x-icon>
-    </button>
-  )
+  return <icon-button icon={faTrash} onClicked={onClick}></icon-button>
+}
+
+function classList(classes: Record<string, boolean>) {
+  return Object.keys(classes)
+    .filter(c => classes[c])
+    .reduce((acc, c) => {
+      acc += ' ' + c
+      return acc
+    })
 }

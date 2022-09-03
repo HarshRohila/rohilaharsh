@@ -1,6 +1,14 @@
 @use '../../global/helpers.scss';
 @use '../../global/screen.scss';
 
+.delete-button,
+.back-button {
+  --icon-button-color: white;
+}
+.selection-mode-header {
+  display: flex;
+  justify-content: space-between;
+}
 header {
   color: var(--color-light);
   height: 56px;
