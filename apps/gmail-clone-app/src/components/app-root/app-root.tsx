@@ -21,17 +21,23 @@ const Router = createRouter()
 export class AppRoot {
   @State() isLoading = true
   @State() emails: Email[]
+  @State() starredEmails: Email[] = []
 
   @Listen('delete')
   handleDeleteEmail(ev: CustomEvent<Email>) {
     const emailToDelete = ev.detail
-    this.emails = this.emails.filter(e => e.id !== emailToDelete.id)
+    this.handleDeleteClick(new Set(emailToDelete.id))
 
     EmailService.deleteEmail(emailToDelete)
   }
 
   handleDeleteClick(emailIds: Set<string>) {
-    this.emails = this.emails.filter(e => !emailIds.has(e.id))
+    const notIn = (emailIds: Set<string>) => {
+      return (e: Email) => !emailIds.has(e.id)
+    }
+
+    this.emails = this.emails.filter(notIn(emailIds))
+    this.starredEmails = this.starredEmails.filter(e => !emailIds.has(e.id))
   }
 
   async componentWillLoad() {
@@ -84,7 +90,14 @@ export class AppRoot {
                   />
                   <Route
                     path={match(AppRoute.getPath('/emails/starred'))}
-                    render={() => <gca-starred-emails></gca-starred-emails>}
+                    render={() => (
+                      <gca-starred-emails
+                        starredEmails={this.starredEmails}
+                        onChangedStarredEmails={ev => {
+                          this.starredEmails = ev.detail
+                        }}
+                      ></gca-starred-emails>
+                    )}
                   />
                   <Route
                     path={match(AppRoute.getPath('/emails/:emailId'))}

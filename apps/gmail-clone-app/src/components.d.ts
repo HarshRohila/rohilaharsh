@@ -36,6 +36,7 @@ export namespace Components {
     interface GcaMobileSideBar {
     }
     interface GcaStarredEmails {
+        "starredEmails": Email[];
     }
     interface IconButton {
         "icon": IconDefinition;
@@ -193,6 +194,8 @@ declare namespace LocalJSX {
         "onClickedOutside"?: (event: CustomEvent<void>) => void;
     }
     interface GcaStarredEmails {
+        "onChangedStarredEmails"?: (event: CustomEvent<Email[]>) => void;
+        "starredEmails"?: Email[];
     }
     interface IconButton {
         "icon"?: IconDefinition;
