@@ -18,18 +18,38 @@ header {
   }
 
   .right {
-    display: flex;
+    display: none;
+
+    @include screen.atleastLargePhone() {
+      display: flex;
+    }
   }
 }
 
 .brand {
   display: flex;
-  min-width: 238px;
-  padding-right: 30px;
+
+  .menu-toggler {
+    display: none;
+    @include screen.atleastLargePhone() {
+      display: initial;
+    }
+  }
+
+  @include screen.atleastLargePhone() {
+    min-width: 238px;
+    padding-right: 30px;
+  }
 
   x-icon {
     @include screen.atleastLargePhone() {
       pointer-events: none;
+    }
+  }
+  img {
+    display: none;
+    @include screen.atleastLargePhone() {
+      display: initial;
     }
   }
 }
@@ -62,6 +82,19 @@ svg.apps {
   max-width: 720px;
   display: flex;
   padding: 6px;
+
+  .menu-toggler {
+    @include screen.atleastLargePhone() {
+      display: none;
+    }
+  }
+
+  .settings-icon {
+    display: none;
+    @include screen.atleastLargePhone() {
+      display: initial;
+    }
+  }
 
   input {
     background: transparent;

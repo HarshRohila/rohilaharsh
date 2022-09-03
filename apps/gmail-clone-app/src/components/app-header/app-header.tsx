@@ -15,13 +15,7 @@ export class AppHeader {
         <header>
           <div class="left">
             <div class="brand">
-              <x-icon
-                class="bars"
-                icon={faBars}
-                onClick={() => {
-                  SideBar.toggle()
-                }}
-              ></x-icon>
+              <MenuToggler />
               <img
                 class="gb_sc"
                 src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r2.png"
@@ -32,9 +26,10 @@ export class AppHeader {
             </div>
 
             <div class="search">
+              <MenuToggler />
               <x-icon icon={faSearch}></x-icon>
               <input type="search" placeholder="Search mail" />
-              <x-icon icon={faSlidersH}></x-icon>
+              <x-icon class="settings-icon" icon={faSlidersH}></x-icon>
             </div>
           </div>
 
@@ -47,4 +42,16 @@ export class AppHeader {
       </Host>
     )
   }
+}
+
+function MenuToggler() {
+  return (
+    <x-icon
+      class="menu-toggler"
+      icon={faBars}
+      onClick={() => {
+        SideBar.toggle()
+      }}
+    ></x-icon>
+  )
 }
