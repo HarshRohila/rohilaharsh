@@ -1,3 +1,5 @@
+@use '../../global/helpers.scss';
+
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -12,19 +14,32 @@ ul {
 
 x-icon {
   margin-right: 18px;
+  --font-size: 20px;
 }
 
 .menu-item {
-  padding: 6px 0;
+  padding: 10px 0;
   padding-left: 26px;
   padding-right: 12px;
   font-size: 0.875rem;
+  > label {
+    cursor: inherit;
+  }
 }
 
+@include helpers.hover('a') {
+  cursor: pointer;
+}
 a {
   text-decoration: none;
   color: inherit;
-  &:hover {
-    cursor: pointer;
+  padding-right: 5px;
+  display: block;
+
+  &.active > div {
+    background-color: rgba(255, 255, 255, 0.3);
+    $rad: 20px;
+    border-top-right-radius: $rad;
+    border-bottom-right-radius: $rad;
   }
 }

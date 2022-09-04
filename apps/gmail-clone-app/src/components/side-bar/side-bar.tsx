@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Element, State } from '@stencil/core'
 import { href } from '@stencil/router'
-import { AppRoute } from '../../utils/AppRoute'
+import { AppRoute, Router } from '../../utils/AppRoute'
 import newId from '../../utils/newId'
 
 @Component({
@@ -68,9 +68,10 @@ interface MenuItem {
 
 function Menu({ menuItem }: { menuItem: MenuItem }) {
   const id = newId('menu')
+  const activePath = Router.path
 
   return (
-    <a {...href(menuItem.url)}>
+    <a {...href(menuItem.url)} class={{ active: activePath === menuItem.url }}>
       <div class="menu-item">
         <x-icon id={id} icon={menuItem.icon}></x-icon>
         <label htmlFor={id}>{menuItem.label}</label>

@@ -1,16 +1,14 @@
 /* eslint-disable react/jsx-no-bind */
 import { Component, h, getAssetPath, State, Fragment, Listen } from '@stencil/core'
-import { createRouter, match, Route } from '@stencil/router'
+import { match, Route } from '@stencil/router'
 import { Email, EmailService } from '../../email/service'
 import { makeServer } from '../../mirage'
 import { OrbitJs } from '../../orbitjs'
-import { AppRoute } from '../../utils/AppRoute'
+import { AppRoute, Router } from '../../utils/AppRoute'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { SideBar } from '../../states/sideBar'
 
 makeServer({ environment: 'development' })
-
-const Router = createRouter()
 
 @Component({
   tag: 'app-root',
