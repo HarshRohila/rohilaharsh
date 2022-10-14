@@ -7,11 +7,13 @@ menu:
 
 Hi
 
-I am **Harsh Rohila**, working as a Software Engineer
+I am **Harsh Rohila**, working as a Software Engineer.
+
+I am a **TypeScript Full Stack** Developer, developing **Serverless** Apps(AWS) and **Web Components**(Stencil.js), and also doing **CI/CD** with Jenkins and AWS CodePipelines. I am using TypeScript(AWS CDK) to create all AWS **Cloud infrastructure**
 
 This blog is to share what I learned from my experience in this field.
 
-### My Experience
+### Background
 
 I started with learning _JavaScript_ and got to work on an [Ember.js](https://emberjs.com/) project. If you don't know Ember.js it is an underrated frontend framework with principle of convention over configuration
 
