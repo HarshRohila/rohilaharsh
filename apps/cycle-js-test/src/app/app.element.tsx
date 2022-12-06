@@ -1,24 +1,32 @@
 import './app.element.css'
-import { h1, makeDOMDriver } from '@cycle/dom'
+import { makeDOMDriver } from '@cycle/dom'
 import { run } from '@cycle/run'
-import xs from 'xstream'
+import Snabbdom from 'snabbdom-pragma'
 
 export class AppElement extends HTMLElement {
   public static observedAttributes = []
 
   connectedCallback() {
-    // const title = 'cycle-js-test'
-
     this.innerHTML = `
     <div id="app">Hello</div>
     `
+    console.log(Snabbdom)
     run(main, drivers)
   }
 }
 
-function main() {
+function main(sources) {
   const sinks = {
-    DOM: xs.periodic(1000).map(i => h1('' + i + ' seconds elapsed'))
+    DOM: sources.DOM.select('input')
+      .events('click')
+      .map(ev => ev.target.checked)
+      .startWith(false)
+      .map(toggled => (
+        <div>
+          <input type="checkbox" /> Toggle me
+          <p>{toggled ? 'ON' : 'off'}</p>
+        </div>
+      ))
   }
   return sinks
 }

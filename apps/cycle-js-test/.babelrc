@@ -1,3 +1,4 @@
 {
-  "presets": ["@nrwl/web/babel"]
+  "presets": ["@nrwl/web/babel"],
+  "plugins": ["syntax-jsx", ["transform-react-jsx", { "pragma": "Snabbdom.createElement" }]]
 }

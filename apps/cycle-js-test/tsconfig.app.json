@@ -2,8 +2,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": ["node"]
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"],
+    "jsx": "react",
+    "jsxFactory": "Snabbdom.createElement"
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "src/app/app.element.tsx"]
 }
