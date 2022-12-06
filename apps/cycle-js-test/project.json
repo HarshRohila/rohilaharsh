@@ -1,0 +1,67 @@
+{
+  "projectType": "application",
+  "root": "apps/cycle-js-test",
+  "sourceRoot": "apps/cycle-js-test/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/cycle-js-test",
+        "compiler": "babel",
+        "index": "apps/cycle-js-test/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cycle-js-test/src/main.ts",
+        "polyfills": "apps/cycle-js-test/src/polyfills.ts",
+        "tsConfig": "apps/cycle-js-test/tsconfig.app.json",
+        "assets": ["apps/cycle-js-test/src/favicon.ico", "apps/cycle-js-test/src/assets"],
+        "styles": ["apps/cycle-js-test/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cycle-js-test/src/environments/environment.ts",
+              "with": "apps/cycle-js-test/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "cycle-js-test:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "cycle-js-test:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cycle-js-test/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cycle-js-test"],
+      "options": {
+        "jestConfig": "apps/cycle-js-test/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
