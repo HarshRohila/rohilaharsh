@@ -12,6 +12,7 @@
     "@cycle/dom": "^23.1.0",
     "@cycle/isolate": "^5.2.0",
     "@cycle/run": "^5.7.0",
+    "@cycle/state": "^1.7.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
