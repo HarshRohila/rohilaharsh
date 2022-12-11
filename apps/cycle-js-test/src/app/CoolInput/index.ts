@@ -69,7 +69,7 @@ function view(state$: MemoryStream<State>) {
     .map(text =>
       // prettier-ignore
       div([
-        input('.harsh', {attrs: {type: 'text'}}),
+        input('.harsh', { props: { value: text }, attrs: { type: 'text' } }),
         p(text)
       ])
     )

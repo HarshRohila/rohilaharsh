@@ -37,10 +37,13 @@ export function TodoApp(sources: Sources): Sinks {
 
   const updateReducer$ = add$.map(
     () =>
-      function addReducer(prevState: State) {
+      function addReducer(prevState: State): State {
         return {
           ...prevState,
-          todos: [...prevState.todos, prevState.input.uInput]
+          todos: [...prevState.todos, prevState.input.uInput],
+          input: {
+            uInput: ''
+          }
         }
       }
   )
