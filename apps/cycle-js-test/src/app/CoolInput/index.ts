@@ -66,7 +66,6 @@ function intent(domSource: DOMSource) {
 function view(state$: MemoryStream<State>) {
   return state$
     .map((s: State) => s.uInput)
-    .debug('test')
     .map(text =>
       // prettier-ignore
       div([
