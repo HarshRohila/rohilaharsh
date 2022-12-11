@@ -2,7 +2,7 @@ import './app.element.css'
 import { makeDOMDriver } from '@cycle/dom'
 import { run } from '@cycle/run'
 import { withState } from '@cycle/state'
-import { CoolInput } from './CoolInput'
+import { TodoApp } from './TodoApp'
 
 export class AppElement extends HTMLElement {
   public static observedAttributes = []
@@ -12,7 +12,7 @@ export class AppElement extends HTMLElement {
     <div id="app"></div>
     `
 
-    const wrappedMain = withState(CoolInput)
+    const wrappedMain = withState(TodoApp)
     run(wrappedMain, drivers)
   }
 }
