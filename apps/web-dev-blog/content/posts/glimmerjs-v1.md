@@ -3,6 +3,7 @@ title: 'Using Glimmer.js v1 in Production'
 date: 2022-12-18T09:29:13+05:30
 author: 'Harsh Rohila'
 draft: false
+featured_image: '/img/glimmer.png'
 ---
 
 ## TL;DR
