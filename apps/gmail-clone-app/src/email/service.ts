@@ -55,6 +55,14 @@ const EmailService = {
         return t.removeRecord(record)
       })
     })
+  },
+
+  async sendEmail() {
+    return new Promise(res => {
+      setTimeout(() => {
+        res(undefined)
+      }, 2000)
+    })
   }
 }
 

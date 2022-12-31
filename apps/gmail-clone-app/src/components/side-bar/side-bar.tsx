@@ -7,6 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Element, State } from '@stencil/core'
 import { href } from '@stencil/router'
+import { ComposeEmail } from '../../states/compose-email'
 import { AppRoute, Router } from '../../utils/AppRoute'
 import newId from '../../utils/newId'
 
@@ -48,6 +49,9 @@ export class SideBar {
   render() {
     return (
       <Host class={`${this.isLoaded ? 'loaded' : ''}`}>
+        <button onClick={ComposeEmail.activate} disabled={ComposeEmail.state.isActive}>
+          Compose
+        </button>
         <ul>
           {this.menuItems.map(menuItem => (
             <li>

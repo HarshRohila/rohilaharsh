@@ -7,6 +7,7 @@ import { OrbitJs } from '../../orbitjs'
 import { AppRoute, Router } from '../../utils/AppRoute'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { SideBar } from '../../states/sideBar'
+import { ComposeEmail } from '../../states/compose-email'
 
 makeServer({ environment: 'development' })
 
@@ -102,6 +103,7 @@ export class AppRoot {
                     render={({ emailId }) => <gca-email-page emailId={emailId}></gca-email-page>}
                   />
                 </Router.Switch>
+                {ComposeEmail.state.isActive && <compose-window />}
               </main>
             </Fragment>
           )}

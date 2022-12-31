@@ -24,6 +24,8 @@ export namespace Components {
     interface CheckBox {
         "value": boolean;
     }
+    interface ComposeWindow {
+    }
     interface EmailBar {
         "email": Email;
     }
@@ -90,6 +92,12 @@ declare global {
         prototype: HTMLCheckBoxElement;
         new (): HTMLCheckBoxElement;
     };
+    interface HTMLComposeWindowElement extends Components.ComposeWindow, HTMLStencilElement {
+    }
+    var HTMLComposeWindowElement: {
+        prototype: HTMLComposeWindowElement;
+        new (): HTMLComposeWindowElement;
+    };
     interface HTMLEmailBarElement extends Components.EmailBar, HTMLStencilElement {
     }
     var HTMLEmailBarElement: {
@@ -151,6 +159,7 @@ declare global {
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
         "check-box": HTMLCheckBoxElement;
+        "compose-window": HTMLComposeWindowElement;
         "email-bar": HTMLEmailBarElement;
         "email-list": HTMLEmailListElement;
         "gca-email-page": HTMLGcaEmailPageElement;
@@ -179,6 +188,8 @@ declare namespace LocalJSX {
     }
     interface CheckBox {
         "value"?: boolean;
+    }
+    interface ComposeWindow {
     }
     interface EmailBar {
         "email"?: Email;
@@ -220,6 +231,7 @@ declare namespace LocalJSX {
         "app-profile": AppProfile;
         "app-root": AppRoot;
         "check-box": CheckBox;
+        "compose-window": ComposeWindow;
         "email-bar": EmailBar;
         "email-list": EmailList;
         "gca-email-page": GcaEmailPage;
@@ -241,6 +253,7 @@ declare module "@stencil/core" {
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "check-box": LocalJSX.CheckBox & JSXBase.HTMLAttributes<HTMLCheckBoxElement>;
+            "compose-window": LocalJSX.ComposeWindow & JSXBase.HTMLAttributes<HTMLComposeWindowElement>;
             "email-bar": LocalJSX.EmailBar & JSXBase.HTMLAttributes<HTMLEmailBarElement>;
             "email-list": LocalJSX.EmailList & JSXBase.HTMLAttributes<HTMLEmailListElement>;
             "gca-email-page": LocalJSX.GcaEmailPage & JSXBase.HTMLAttributes<HTMLGcaEmailPageElement>;
