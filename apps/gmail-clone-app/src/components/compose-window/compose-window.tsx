@@ -1,5 +1,6 @@
-import { Component, h, Host } from '@stencil/core'
-import { ComposeEmail } from '../../states/compose-email'
+import { Component, h, Host, State, Element } from '@stencil/core'
+import { BehaviorSubject, fromEvent, merge, Observable, skip, Subscription, switchMap } from 'rxjs'
+import { ComposeEmail, State as ComposeEmailState } from '../../states/compose-email'
 
 @Component({
   tag: 'compose-window',
@@ -7,14 +8,52 @@ import { ComposeEmail } from '../../states/compose-email'
   shadow: true
 })
 export class ComposeWindow {
+  private subscription: Subscription
+
+  @State() state: ComposeEmailState
+
+  @Element() el: HTMLComposeWindowElement
+
+  private afterLoadState$: Observable<ComposeEmailState>
+
+  private isLoaded$ = new BehaviorSubject<boolean>(false)
+
+  connectedCallback() {
+    this.subscription = this.isLoaded$
+      .pipe(
+        switchMap(isLoaded => {
+          if (isLoaded) {
+            return this.afterLoadState$
+          }
+          return ComposeEmail.state$
+        })
+      )
+      .subscribe(state => {
+        this.state = { ...state }
+      })
+  }
+
+  disconnectedCallback() {
+    this.subscription.unsubscribe()
+  }
+
+  componentDidLoad() {
+    const formElement = this.el.shadowRoot.querySelector('form')
+    const submit$ = fromEvent(formElement, 'submit')
+    const send$ = ComposeEmail.transformToSend$(submit$)
+
+    this.afterLoadState$ = merge(ComposeEmail.state$, send$).pipe(skip(1))
+    this.isLoaded$.next(true)
+  }
+
   render() {
     return (
       <Host>
         <div class="container">
           <button onClick={ComposeEmail.deactivate}>X</button>
-          <form onSubmit={ComposeEmail.send}>
+          <form>
             <textarea name="message" cols={60} rows={30}></textarea>
-            <button disabled={ComposeEmail.state.isSending}>Send</button>
+            <button disabled={this.state.isSending}>Send</button>
           </form>
         </div>
       </Host>

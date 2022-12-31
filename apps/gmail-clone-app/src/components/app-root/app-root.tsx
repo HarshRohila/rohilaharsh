@@ -7,7 +7,8 @@ import { OrbitJs } from '../../orbitjs'
 import { AppRoute, Router } from '../../utils/AppRoute'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { SideBar } from '../../states/sideBar'
-import { ComposeEmail } from '../../states/compose-email'
+import { ComposeEmail, State as ComposeEmailState } from '../../states/compose-email'
+import { Subscription } from 'rxjs'
 
 makeServer({ environment: 'development' })
 
@@ -21,6 +22,18 @@ export class AppRoot {
   @State() isLoading = true
   @State() emails: Email[]
   @State() starredEmails: Email[] = []
+  private subscription: Subscription
+  @State() state: ComposeEmailState
+
+  connectedCallback() {
+    this.subscription = ComposeEmail.state$.subscribe(state => {
+      this.state = { ...state }
+    })
+  }
+
+  disconnectedCallback() {
+    this.subscription.unsubscribe()
+  }
 
   @Listen('delete')
   handleDeleteEmail(ev: CustomEvent<Email>) {
@@ -103,7 +116,7 @@ export class AppRoot {
                     render={({ emailId }) => <gca-email-page emailId={emailId}></gca-email-page>}
                   />
                 </Router.Switch>
-                {ComposeEmail.state.isActive && <compose-window />}
+                {this.state.isActive && <compose-window />}
               </main>
             </Fragment>
           )}

@@ -1,28 +1,42 @@
-import { createStore } from '@stencil/store'
-import { defer, of, switchMap, tap } from 'rxjs'
+import { BehaviorSubject, defer, map, Observable, startWith, switchMap, tap } from 'rxjs'
 import { EmailService } from '../email/service'
-export { ComposeEmail }
+export { ComposeEmail, State }
 
-const { state } = createStore({
+const state = {
   isActive: false,
   isSending: false
-})
+}
+
+const state$ = new BehaviorSubject<State>(state)
 
 const ComposeEmail = {
-  state,
+  state$,
   activate() {
     state.isActive = true
+    state$.next(state)
   },
   deactivate() {
     state.isActive = false
+    state$.next(state)
   },
-  send(ev: Event) {
-    return of(ev).pipe(
+  transformToSend$(ev$: Observable<Event>) {
+    return ev$.pipe(
       tap(ev => ev.preventDefault()),
-      switchMap(() => defer(() => EmailService.sendEmail())),
-      tap(() => {
+      switchMap(() => defer(() => EmailService.sendEmail()).pipe(startWith('loading'))),
+      map(v => {
+        if (v === 'loading') {
+          state.isSending = true
+          return state
+        }
+
         state.isSending = false
+        return state
       })
     )
   }
+}
+
+interface State {
+  isActive: boolean
+  isSending: boolean
 }
