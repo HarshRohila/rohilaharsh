@@ -38,19 +38,32 @@ export class ComposeWindow {
   }
 
   componentDidLoad() {
+    // user actions
+    const submit$ = this.getSubmit$()
+    const close$ = this.getClose$()
+
+    this.afterLoadState$ = merge(ComposeEmail.state$, submit$, close$).pipe(skip(1))
+    this.isLoaded$.next(true)
+  }
+
+  private getSubmit$() {
     const formElement = this.el.shadowRoot.querySelector('form')
     const submit$ = fromEvent(formElement, 'submit')
-    const send$ = ComposeEmail.transformToSend$(submit$)
+    const send$ = ComposeEmail.stateFromSubmit$(submit$)
+    return send$
+  }
 
-    this.afterLoadState$ = merge(ComposeEmail.state$, send$).pipe(skip(1))
-    this.isLoaded$.next(true)
+  private getClose$() {
+    const closeBtn = this.el.shadowRoot.querySelector('.close')
+    const close$ = fromEvent(closeBtn, 'click')
+    return ComposeEmail.stateFromCloseClick(close$)
   }
 
   render() {
     return (
       <Host>
         <div class="container">
-          <button onClick={ComposeEmail.deactivate}>X</button>
+          <button class="close">X</button>
           <form>
             <textarea name="message" cols={60} rows={30}></textarea>
             <button disabled={this.state.isSending}>Send</button>

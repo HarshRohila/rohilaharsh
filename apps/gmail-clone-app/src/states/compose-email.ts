@@ -11,15 +11,29 @@ const state$ = new BehaviorSubject<State>(state)
 
 const ComposeEmail = {
   state$,
-  activate() {
-    state.isActive = true
-    state$.next(state)
+  stateFromCloseClick(close$: Observable<Event>) {
+    return close$.pipe(
+      map(() => {
+        state.isActive = false
+        return state
+      }),
+      tap(state => {
+        state$.next(state)
+      })
+    )
   },
-  deactivate() {
-    state.isActive = false
-    state$.next(state)
+  stateFromComposeClick(composeClick$: Observable<Event>) {
+    return composeClick$.pipe(
+      map(() => {
+        state.isActive = true
+        return state
+      }),
+      tap(state => {
+        state$.next(state)
+      })
+    )
   },
-  transformToSend$(ev$: Observable<Event>) {
+  stateFromSubmit$(ev$: Observable<Event>) {
     return ev$.pipe(
       tap(ev => ev.preventDefault()),
       switchMap(() => defer(() => EmailService.sendEmail()).pipe(startWith('loading'))),

@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Component, Host, h, Element, State } from '@stencil/core'
 import { href } from '@stencil/router'
-import { Subscription } from 'rxjs'
+import { BehaviorSubject, fromEvent, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs'
 import { ComposeEmail, State as ComponseEmailState } from '../../states/compose-email'
 import { AppRoute, Router } from '../../utils/AppRoute'
 import newId from '../../utils/newId'
@@ -23,16 +23,25 @@ export class SideBar {
   @State() isLoaded = false
 
   @State() state: ComponseEmailState
-  private subscription: Subscription
+
+  private disconnected$ = new Subject<void>()
+  private isLoaded$ = new BehaviorSubject<boolean>(false)
+  private afterLoadState$: Observable<ComponseEmailState>
 
   connectedCallback() {
-    this.subscription = ComposeEmail.state$.subscribe(state => {
-      this.state = { ...state }
-    })
+    this.isLoaded$
+      .pipe(
+        switchMap(isLoaded => (isLoaded ? this.afterLoadState$ : ComposeEmail.state$)),
+        takeUntil(this.disconnected$)
+      )
+      .subscribe(state => {
+        this.state = { ...state }
+      })
   }
 
   disconnectedCallback() {
-    this.subscription.unsubscribe()
+    this.disconnected$.next()
+    this.disconnected$.complete()
   }
 
   private menuItems = [
@@ -58,14 +67,25 @@ export class SideBar {
 
   componentDidLoad() {
     this.isLoaded = true
+
+    const compose$ = this.getComposeAction()
+
+    this.afterLoadState$ = merge(ComposeEmail.state$, compose$)
+
+    this.isLoaded$.next(true)
+  }
+
+  private getComposeAction() {
+    const composeBtn = this.el.shadowRoot.querySelector('button')
+    const composeClick$ = fromEvent(composeBtn, 'click').pipe(takeUntil(this.disconnected$))
+    const compose$ = ComposeEmail.stateFromComposeClick(composeClick$)
+    return compose$
   }
 
   render() {
     return (
       <Host class={`${this.isLoaded ? 'loaded' : ''}`}>
-        <button onClick={ComposeEmail.activate} disabled={this.state.isActive}>
-          Compose
-        </button>
+        <button disabled={this.state.isActive}>Compose</button>
         <ul>
           {this.menuItems.map(menuItem => (
             <li>
