@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { store } from '../orbitjs'
 import mail from '../orbitjs/models/mail'
+import { EmailForm } from '../states/compose-email'
 import { JsonApi } from '../utils/jsonapi'
 export { EmailService, Email }
 
@@ -27,7 +28,7 @@ const EmailService = {
     await store.update(t => t.updateRecord(serializedEmail))
   },
 
-  _serializeEmail(email: Email) {
+  _serializeEmail(email: Partial<Email>) {
     const MailSerializer = JsonApi.newSerializer('mail', {
       attributes: Object.keys(mail.attributes)
     })
@@ -57,12 +58,21 @@ const EmailService = {
     })
   },
 
-  async sendEmail() {
-    return new Promise(res => {
-      setTimeout(() => {
-        res(undefined)
-      }, 2000)
-    })
+  async sendEmail(emailForm: EmailForm) {
+    const myEmail = 'rohilaharsh@gmail.com'
+    const myName = 'Harsh Rohila'
+    const email: Omit<Email, 'id'> = {
+      datetime: new Date(),
+      imageUrl: '',
+      starred: false,
+      subject: 'default',
+      from: myName,
+      fromEmail: myEmail,
+      text: emailForm.message
+    }
+    const serializedEmail = EmailService._serializeEmail(email)
+
+    await store.update(t => t.addRecord(serializedEmail))
   }
 }
 

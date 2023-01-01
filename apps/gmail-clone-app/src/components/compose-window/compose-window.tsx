@@ -1,7 +1,7 @@
 import { untilDestroyed } from '@ngneat/until-destroy'
 import { Component, h, Host, State, Element } from '@stencil/core'
-import { merge, skip, Subject } from 'rxjs'
-import { ComposeEmail, State as ComposeEmailState } from '../../states/compose-email'
+import { BehaviorSubject, Subject, switchMap, tap } from 'rxjs'
+import { ComposeEmail, EmailForm, State as ComposeEmailState } from '../../states/compose-email'
 
 @Component({
   tag: 'compose-window',
@@ -14,21 +14,27 @@ export class ComposeWindow {
   @Element() el: HTMLComposeWindowElement
 
   connectedCallback() {
-    this.state = ComposeEmail.state$.value
+    ComposeEmail.state$.pipe(untilDestroyed(this, 'disconnectedCallback')).subscribe(state => {
+      this.state = { ...state }
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   disconnectedCallback() {}
 
   componentDidLoad() {
-    const stateFromSubmit$ = ComposeEmail.stateFromSubmit$(this.submit$)
-    const stateFromClose$ = ComposeEmail.stateFromCloseClick(this.close$)
+    ComposeEmail.sendEmail$(
+      this.submit$.pipe(
+        tap(ev => ev.preventDefault()),
+        switchMap(() => this.emailForm$)
+      )
+    )
+      .pipe(untilDestroyed(this, 'disconnectedCallback'))
+      .subscribe(() => undefined)
 
-    const state$ = merge(ComposeEmail.state$.pipe(skip(1)), stateFromSubmit$, stateFromClose$)
-
-    state$.pipe(untilDestroyed(this, 'disconnectedCallback')).subscribe(state => {
-      this.state = { ...state }
-    })
+    ComposeEmail.closeWindow$(this.close$)
+      .pipe(untilDestroyed(this, 'disconnectedCallback'))
+      .subscribe(() => undefined)
   }
 
   private submit$ = new Subject<Event>()
@@ -41,6 +47,14 @@ export class ComposeWindow {
     this.close$.next(ev)
   }
 
+  private emailForm$ = new BehaviorSubject<EmailForm>({ message: '' })
+  private handleMessageChange = (ev: Event) => {
+    const textArea = ev.target as HTMLTextAreaElement
+    this.emailForm$.next({
+      message: textArea.value
+    })
+  }
+
   render() {
     return (
       <Host>
@@ -49,7 +63,12 @@ export class ComposeWindow {
             X
           </button>
           <form onSubmit={this.handleSubmit}>
-            <textarea name="message" cols={60} rows={30}></textarea>
+            <textarea
+              name="message"
+              onInput={this.handleMessageChange}
+              cols={60}
+              rows={30}
+            ></textarea>
             <button disabled={this.state.isSending}>Send</button>
           </form>
         </div>

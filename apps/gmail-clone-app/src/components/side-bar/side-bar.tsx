@@ -8,7 +8,7 @@ import {
 import { untilDestroyed } from '@ngneat/until-destroy'
 import { Component, Host, h, Element, State } from '@stencil/core'
 import { href } from '@stencil/router'
-import { merge, Subject } from 'rxjs'
+import { Subject } from 'rxjs'
 import { ComposeEmail, State as ComponseEmailState } from '../../states/compose-email'
 import { AppRoute, Router } from '../../utils/AppRoute'
 import newId from '../../utils/newId'
@@ -26,7 +26,9 @@ export class SideBar {
   @State() state: ComponseEmailState
 
   connectedCallback() {
-    this.state = ComposeEmail.state$.value
+    ComposeEmail.state$.pipe(untilDestroyed(this, 'disconnectedCallback')).subscribe(state => {
+      this.state = { ...state }
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -56,12 +58,9 @@ export class SideBar {
   componentDidLoad() {
     this.isLoaded = true
 
-    const stateFromCompose$ = ComposeEmail.stateFromComposeClick(this.compose$)
-    const state$ = merge(ComposeEmail.state$, stateFromCompose$)
-
-    state$.pipe(untilDestroyed(this, 'disconnectedCallback')).subscribe(state => {
-      this.state = { ...state }
-    })
+    ComposeEmail.openComposeWindow$(this.compose$)
+      .pipe(untilDestroyed(this, 'disconnectedCallback'))
+      .subscribe(() => undefined)
   }
 
   private compose$ = new Subject<Event>()

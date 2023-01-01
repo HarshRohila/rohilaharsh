@@ -11,7 +11,7 @@ const state$ = new BehaviorSubject<State>(state)
 
 const ComposeEmail = {
   state$,
-  stateFromCloseClick(close$: Observable<Event>) {
+  closeWindow$(close$: Observable<Event>) {
     return close$.pipe(
       map(() => {
         state.isActive = false
@@ -22,7 +22,7 @@ const ComposeEmail = {
       })
     )
   },
-  stateFromComposeClick(composeClick$: Observable<Event>) {
+  openComposeWindow$(composeClick$: Observable<Event>) {
     return composeClick$.pipe(
       map(() => {
         state.isActive = true
@@ -33,10 +33,11 @@ const ComposeEmail = {
       })
     )
   },
-  stateFromSubmit$(ev$: Observable<Event>) {
-    return ev$.pipe(
-      tap(ev => ev.preventDefault()),
-      switchMap(() => defer(() => EmailService.sendEmail()).pipe(startWith('loading'))),
+  sendEmail$(emailForm$: Observable<EmailForm>) {
+    return emailForm$.pipe(
+      switchMap(emailForm =>
+        defer(() => EmailService.sendEmail(emailForm)).pipe(startWith('loading'))
+      ),
       map(v => {
         if (v === 'loading') {
           state.isSending = true
@@ -44,7 +45,11 @@ const ComposeEmail = {
         }
 
         state.isSending = false
+        state.isActive = false
         return state
+      }),
+      tap(state => {
+        state$.next(state)
       })
     )
   }
@@ -53,4 +58,8 @@ const ComposeEmail = {
 interface State {
   isActive: boolean
   isSending: boolean
+}
+
+export interface EmailForm {
+  message: string
 }
