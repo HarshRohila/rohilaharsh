@@ -5,9 +5,10 @@ import {
   faStar,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons'
+import { untilDestroyed } from '@ngneat/until-destroy'
 import { Component, Host, h, Element, State } from '@stencil/core'
 import { href } from '@stencil/router'
-import { BehaviorSubject, fromEvent, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs'
+import { merge, Subject } from 'rxjs'
 import { ComposeEmail, State as ComponseEmailState } from '../../states/compose-email'
 import { AppRoute, Router } from '../../utils/AppRoute'
 import newId from '../../utils/newId'
@@ -24,25 +25,12 @@ export class SideBar {
 
   @State() state: ComponseEmailState
 
-  private disconnected$ = new Subject<void>()
-  private isLoaded$ = new BehaviorSubject<boolean>(false)
-  private afterLoadState$: Observable<ComponseEmailState>
-
   connectedCallback() {
-    this.isLoaded$
-      .pipe(
-        switchMap(isLoaded => (isLoaded ? this.afterLoadState$ : ComposeEmail.state$)),
-        takeUntil(this.disconnected$)
-      )
-      .subscribe(state => {
-        this.state = { ...state }
-      })
+    this.state = ComposeEmail.state$.value
   }
 
-  disconnectedCallback() {
-    this.disconnected$.next()
-    this.disconnected$.complete()
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  disconnectedCallback() {}
 
   private menuItems = [
     {
@@ -68,24 +56,25 @@ export class SideBar {
   componentDidLoad() {
     this.isLoaded = true
 
-    const compose$ = this.getComposeAction()
+    const stateFromCompose$ = ComposeEmail.stateFromComposeClick(this.compose$)
+    const state$ = merge(ComposeEmail.state$, stateFromCompose$)
 
-    this.afterLoadState$ = merge(ComposeEmail.state$, compose$)
-
-    this.isLoaded$.next(true)
+    state$.pipe(untilDestroyed(this, 'disconnectedCallback')).subscribe(state => {
+      this.state = { ...state }
+    })
   }
 
-  private getComposeAction() {
-    const composeBtn = this.el.shadowRoot.querySelector('button')
-    const composeClick$ = fromEvent(composeBtn, 'click').pipe(takeUntil(this.disconnected$))
-    const compose$ = ComposeEmail.stateFromComposeClick(composeClick$)
-    return compose$
+  private compose$ = new Subject<Event>()
+  private handleCompose = (ev: Event) => {
+    this.compose$.next(ev)
   }
 
   render() {
     return (
       <Host class={`${this.isLoaded ? 'loaded' : ''}`}>
-        <button disabled={this.state.isActive}>Compose</button>
+        <button onClick={this.handleCompose} disabled={this.state.isActive}>
+          Compose
+        </button>
         <ul>
           {this.menuItems.map(menuItem => (
             <li>
