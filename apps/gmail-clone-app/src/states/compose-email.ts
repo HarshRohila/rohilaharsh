@@ -9,6 +9,10 @@ const state = {
 
 const state$ = new BehaviorSubject<State>(state)
 
+function updateState(state: State) {
+  state$.next(state)
+}
+
 const ComposeEmail = {
   state$,
   closeWindow$(close$: Observable<Event>) {
@@ -17,9 +21,7 @@ const ComposeEmail = {
         state.isActive = false
         return state
       }),
-      tap(state => {
-        state$.next(state)
-      })
+      tap(updateState)
     )
   },
   openComposeWindow$(composeClick$: Observable<Event>) {
@@ -28,9 +30,7 @@ const ComposeEmail = {
         state.isActive = true
         return state
       }),
-      tap(state => {
-        state$.next(state)
-      })
+      tap(updateState)
     )
   },
   sendEmail$(emailForm$: Observable<EmailForm>) {
@@ -48,9 +48,7 @@ const ComposeEmail = {
         state.isActive = false
         return state
       }),
-      tap(state => {
-        state$.next(state)
-      })
+      tap(updateState)
     )
   }
 }

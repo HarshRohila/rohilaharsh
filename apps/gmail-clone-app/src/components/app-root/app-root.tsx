@@ -9,6 +9,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { SideBar } from '../../states/sideBar'
 import { ComposeEmail, State as ComposeEmailState } from '../../states/compose-email'
 import { Subscription } from 'rxjs'
+import { loggedInUser } from '../../utils/constants'
 
 makeServer({ environment: 'development' })
 
@@ -43,13 +44,25 @@ export class AppRoot {
     EmailService.deleteEmails([emailToDelete.id])
   }
 
-  handleDeleteClick(emailIds: Set<string>) {
+  private handleDeleteClick(emailIds: Set<string>) {
     const notIn = (emailIds: Set<string>) => {
       return (e: Email) => !emailIds.has(e.id)
     }
 
     this.emails = this.emails.filter(notIn(emailIds))
     this.starredEmails = this.starredEmails.filter(notIn(emailIds))
+  }
+
+  get filteredEmails() {
+    return this.emails.filter(e => !this.isEmailFromLoggedInUser(e))
+  }
+
+  get filteredStarredEmails() {
+    return this.starredEmails.filter(e => !this.isEmailFromLoggedInUser(e))
+  }
+
+  private isEmailFromLoggedInUser(email: Email) {
+    return email.fromEmail === loggedInUser.email
   }
 
   async componentWillLoad() {
@@ -92,7 +105,7 @@ export class AppRoot {
                 <Router.Switch>
                   <Route path={AppRoute.getPath('/')}>
                     <app-home
-                      emails={this.emails}
+                      emails={this.filteredEmails}
                       onWillLoadCalled={() => this.requestEmails()}
                     ></app-home>
                   </Route>
@@ -101,10 +114,14 @@ export class AppRoot {
                     render={() => <app-features></app-features>}
                   />
                   <Route
+                    path={match(AppRoute.getPath('/emails/sent'))}
+                    render={() => <sent-emails></sent-emails>}
+                  />
+                  <Route
                     path={match(AppRoute.getPath('/emails/starred'))}
                     render={() => (
                       <gca-starred-emails
-                        starredEmails={this.starredEmails}
+                        starredEmails={this.filteredStarredEmails}
                         onChangedStarredEmails={ev => {
                           this.starredEmails = ev.detail
                         }}

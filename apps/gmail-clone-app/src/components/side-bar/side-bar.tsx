@@ -1,6 +1,7 @@
 /* eslint-disable @stencil/required-jsdoc */
 import {
   faInbox,
+  faPaperPlane,
   faQuestionCircle,
   faStar,
   IconDefinition
@@ -44,6 +45,11 @@ export class SideBar {
       label: 'Starred',
       icon: faStar,
       url: '/emails/starred'
+    },
+    {
+      label: 'Sent',
+      icon: faPaperPlane,
+      url: '/emails/sent'
     },
     {
       label: 'About',

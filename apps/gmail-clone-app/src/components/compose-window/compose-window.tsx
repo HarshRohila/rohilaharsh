@@ -30,11 +30,11 @@ export class ComposeWindow {
       )
     )
       .pipe(untilDestroyed(this, 'disconnectedCallback'))
-      .subscribe(() => undefined)
+      .subscribe()
 
     ComposeEmail.closeWindow$(this.close$)
       .pipe(untilDestroyed(this, 'disconnectedCallback'))
-      .subscribe(() => undefined)
+      .subscribe()
   }
 
   private submit$ = new Subject<Event>()

@@ -2,6 +2,7 @@
 import { store } from '../orbitjs'
 import mail from '../orbitjs/models/mail'
 import { EmailForm } from '../states/compose-email'
+import { loggedInUser } from '../utils/constants'
 import { JsonApi } from '../utils/jsonapi'
 export { EmailService, Email }
 
@@ -59,15 +60,13 @@ const EmailService = {
   },
 
   async sendEmail(emailForm: EmailForm) {
-    const myEmail = 'rohilaharsh@gmail.com'
-    const myName = 'Harsh Rohila'
     const email: Omit<Email, 'id'> = {
       datetime: new Date(),
       imageUrl: '',
       starred: false,
       subject: 'default',
-      from: myName,
-      fromEmail: myEmail,
+      from: loggedInUser.name,
+      fromEmail: loggedInUser.email,
       text: emailForm.message
     }
     const serializedEmail = EmailService._serializeEmail(email)
