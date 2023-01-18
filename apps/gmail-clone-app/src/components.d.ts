@@ -46,6 +46,8 @@ export namespace Components {
     interface StarCheckbox {
         "value": boolean;
     }
+    interface TodoApp {
+    }
     interface XIcon {
         "icon": IconDefinition;
         "mask"?: IconDefinition;
@@ -138,6 +140,12 @@ declare global {
         prototype: HTMLStarCheckboxElement;
         new (): HTMLStarCheckboxElement;
     };
+    interface HTMLTodoAppElement extends Components.TodoApp, HTMLStencilElement {
+    }
+    var HTMLTodoAppElement: {
+        prototype: HTMLTodoAppElement;
+        new (): HTMLTodoAppElement;
+    };
     interface HTMLXIconElement extends Components.XIcon, HTMLStencilElement {
     }
     var HTMLXIconElement: {
@@ -159,6 +167,7 @@ declare global {
         "icon-button": HTMLIconButtonElement;
         "side-bar": HTMLSideBarElement;
         "star-checkbox": HTMLStarCheckboxElement;
+        "todo-app": HTMLTodoAppElement;
         "x-icon": HTMLXIconElement;
     }
 }
@@ -207,6 +216,8 @@ declare namespace LocalJSX {
         "onToggled"?: (event: CustomEvent<boolean>) => void;
         "value"?: boolean;
     }
+    interface TodoApp {
+    }
     interface XIcon {
         "icon"?: IconDefinition;
         "mask"?: IconDefinition;
@@ -228,6 +239,7 @@ declare namespace LocalJSX {
         "icon-button": IconButton;
         "side-bar": SideBar;
         "star-checkbox": StarCheckbox;
+        "todo-app": TodoApp;
         "x-icon": XIcon;
     }
 }
@@ -249,6 +261,7 @@ declare module "@stencil/core" {
             "icon-button": LocalJSX.IconButton & JSXBase.HTMLAttributes<HTMLIconButtonElement>;
             "side-bar": LocalJSX.SideBar & JSXBase.HTMLAttributes<HTMLSideBarElement>;
             "star-checkbox": LocalJSX.StarCheckbox & JSXBase.HTMLAttributes<HTMLStarCheckboxElement>;
+            "todo-app": LocalJSX.TodoApp & JSXBase.HTMLAttributes<HTMLTodoAppElement>;
             "x-icon": LocalJSX.XIcon & JSXBase.HTMLAttributes<HTMLXIconElement>;
         }
     }

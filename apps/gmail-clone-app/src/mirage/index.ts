@@ -16,17 +16,21 @@ export function makeServer({ environment = 'test' }) {
     },
 
     models: {
-      mail: Model
+      mail: Model,
+      todo: Model
     },
 
     factories,
 
     seeds(server) {
       server.createList('mail', 50)
+      server.createList('todo', 5)
     },
 
     routes() {
       this.urlPrefix = API_URL
+
+      this.get('todos')
 
       this.get('mails')
       this.get('mails/:id')

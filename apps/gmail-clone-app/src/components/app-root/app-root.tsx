@@ -83,6 +83,10 @@ export class AppRoot {
                     ></app-home>
                   </Route>
                   <Route
+                    path={match(AppRoute.getPath('/todo-app'))}
+                    render={() => <todo-app></todo-app>}
+                  />
+                  <Route
                     path={match(AppRoute.getPath('/about'))}
                     render={() => <app-features></app-features>}
                   />
