@@ -56,7 +56,7 @@ const OrbitJs = {
         target: 'remote',
         action: 'update',
 
-        blocking: false
+        blocking: true
       })
     )
 

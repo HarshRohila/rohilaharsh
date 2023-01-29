@@ -16,8 +16,10 @@ export class TodoApp {
     todosFacade
       .selectTodos()
       .pipe(tillDestroyed(this))
-      .subscribe(todos => {
-        this.todos = todos
+      .subscribe({
+        next: todos => {
+          this.todos = todos
+        }
       })
   }
 
@@ -25,11 +27,24 @@ export class TodoApp {
     return undefined
   }
 
+  private handleDelete = (todo: Todo) => {
+    todosFacade.deleteTodo(todo).pipe(tillDestroyed(this)).subscribe()
+  }
+
+  private createDeleteHandler = (todo: Todo) => {
+    return () => {
+      this.handleDelete(todo)
+    }
+  }
+
   render() {
     return (
       <ul>
         {this.todos.map(t => (
-          <li>{t.text}</li>
+          <li>
+            {t.text}
+            <button onClick={this.createDeleteHandler(t)}>X</button>
+          </li>
         ))}
       </ul>
     )

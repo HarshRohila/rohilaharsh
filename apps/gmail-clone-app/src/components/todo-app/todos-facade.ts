@@ -19,6 +19,18 @@ class TodosFacade {
   selectTodos() {
     return this.state$.pipe(map(s => s.todos))
   }
+
+  deleteTodo(todo: Todo) {
+    return defer(() => todosService.deleteTodo(todo)).pipe(
+      tap(() => {
+        this.state$.next({ todos: this.state$.value.todos.filter(t => t.id !== todo.id) })
+      })
+    )
+  }
+
+  updateState(state: State) {
+    this.state$.next({ ...this.state$.value, ...state })
+  }
 }
 
 interface State {

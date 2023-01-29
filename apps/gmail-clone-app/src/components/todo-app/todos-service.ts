@@ -11,6 +11,15 @@ class TodosService {
 
     return todos
   }
+
+  async deleteTodo(todo: Todo) {
+    await store.update(t => {
+      return [todo.id].map(id => {
+        const record = { type: 'todo', id }
+        return t.removeRecord(record)
+      })
+    })
+  }
 }
 
 function deserialize(emailJsonApiRecord: any) {

@@ -1,0 +1,16 @@
+{
+  "name": "gmail-clone-app",
+  "version": "1",
+  "main": "../../dist/apps/gmail-clone-app/dist/index.cjs.js",
+  "module": "../../dist/apps/gmail-clone-app/dist/index.js",
+  "es2015": "../../dist/apps/gmail-clone-app/dist/esm/index.mjs",
+  "es2017": "../../dist/apps/gmail-clone-app/dist/esm/index.mjs",
+  "types": "../../dist/apps/gmail-clone-app/dist/types/index.d.ts",
+  "collection": "../../dist/apps/gmail-clone-app/dist/collection/collection-manifest.json",
+  "collection:main": "../../dist/apps/gmail-clone-app/dist/collection/index.js",
+  "unpkg": "../../dist/apps/gmail-clone-app/dist/gmail-clone-app/gmail-clone-app.js",
+  "files": [
+    "../../dist/apps/gmail-clone-app/dist/",
+    "../../dist/apps/gmail-clone-app/loader/"
+  ]
+}

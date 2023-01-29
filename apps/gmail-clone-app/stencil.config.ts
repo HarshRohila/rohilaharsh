@@ -20,6 +20,9 @@ export const config: Config = {
   env: {
     apiEnv
   },
+  testing: {
+    testPathIgnorePatterns: ['.+\\.e2e\\.json']
+  },
   plugins: [sass()]
 }
 

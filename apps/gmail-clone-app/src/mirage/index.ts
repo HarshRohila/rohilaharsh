@@ -31,6 +31,13 @@ export function makeServer({ environment = 'test' }) {
       this.urlPrefix = API_URL
 
       this.get('todos')
+      this.delete(
+        'todos/:id',
+        function () {
+          return undefined
+        },
+        { timing: 2000 }
+      )
 
       this.get('mails')
       this.get('mails/:id')
