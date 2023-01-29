@@ -71,8 +71,8 @@ class Simulator {
   }
 
   private handlePrintSummaryRequest() {
-    console.log(this.centralStation.getCollection())
-    console.log(this.airport.getCollection())
+    this.centralStation.printSummary()
+    this.airport.printSummary()
   }
 }
 
@@ -82,17 +82,17 @@ export function main(fileContent: string) {
 
 class Adult extends Passenger {
   constructor(card: MetroCard) {
-    super(card, 200)
+    super(card, 200, 'ADULT')
   }
 }
 class Kid extends Passenger {
   constructor(card: MetroCard) {
-    super(card, 50)
+    super(card, 50, 'KID')
   }
 }
 class SeniorCitizen extends Passenger {
   constructor(card: MetroCard) {
-    super(card, 100)
+    super(card, 100, 'SENIOR_CITIZEN')
   }
 }
 

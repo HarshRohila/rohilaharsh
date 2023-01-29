@@ -3,7 +3,7 @@ import { MetroCard } from './MetroCard'
 
 export abstract class Passenger {
   protected todayJourneys: Journey[]
-  constructor(protected metroCard: MetroCard, protected baseCost: number) {
+  constructor(protected metroCard: MetroCard, protected baseCost: number, protected type) {
     this.todayJourneys = []
   }
 
@@ -28,16 +28,32 @@ export abstract class Passenger {
     return this.metroCard.isSameAs(card)
   }
 
-  calculateJourneyCost(journey: Journey) {
-    let baseCost = this.baseCost
-
+  isReturnJourney(journey: Journey) {
     const returnJourney = journey.getReturnJourney()
     const isReturnJourney = this.getTodaysJourneys().some(journey =>
       journey.isSameAs(returnJourney)
     )
+    return isReturnJourney
+  }
 
-    if (isReturnJourney) baseCost = 0.5 * baseCost
+  isSameAs(passenger: Passenger) {
+    return this.metroCard.isSameAs(passenger.metroCard)
+  }
 
-    return baseCost
+  getBaseCost() {
+    return this.baseCost
+  }
+
+  static print(passengers: Passenger[]) {
+    const groupedByType = passengers.reduce((acc, p) => {
+      const list = acc[p.type]
+      if (list) list.push(p)
+      else acc[p.type] = [p]
+      return acc
+    }, {} as Record<string, Passenger[]>)
+
+    Object.entries(groupedByType).forEach(([type, passengers]) => {
+      console.log(type, ' ', passengers.length)
+    })
   }
 }
