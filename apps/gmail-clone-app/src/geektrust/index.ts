@@ -3,100 +3,82 @@ import { MetroCard } from './MetroCard'
 import { Passenger } from './Passenger'
 import { Station } from './Station'
 
-export function main(fileContent: string) {
-  const requests = new FileRequestsFactory(fileContent).createRequests()
-}
+class Simulator {
+  private metroCards: MetroCard[] = []
+  private passengers: Passenger[] = []
+  private airport = new AirportStation()
+  private centralStation = new CentralStation()
 
-// abstract class Request {
-//   constructor(protected type: string) {}
-
-//   getType() {
-//     return this.type
-//   }
-// }
-
-interface RequestsFactory {
-  createRequests(): void
-}
-
-class FileRequestsFactory implements RequestsFactory {
-  constructor(private fileContent: string) {}
-
-  createRequests(): void {
-    const lines = this.fileContent.split('\n')
-
-    const metroCards: MetroCard[] = []
-    const passengers: Passenger[] = []
-
-    const airport = new AirportStation()
-    const centralStation = new CentralStation()
-
-    function getPassenger(passengerType: string, metroCardId: string) {
-      const metroCard = metroCards.find(card => card.getId() === metroCardId)
-
-      if (!metroCard) throw Error('card not found')
-
-      const passenger = passengers.find(p => p.hasCard(metroCard))
-      if (passenger) return passenger
-
-      if (passengerType === 'ADULT') return new Adult(metroCard)
-      else if (passengerType === 'SENIOR_CITIZEN') return new SeniorCitizen(metroCard)
-      else return new Kid(metroCard)
-    }
+  simulate(fileContent: string) {
+    const lines = fileContent.split('\n')
 
     return lines.forEach(l => {
       const [type, ...params] = l.split(' ')
 
       if (type === 'BALANCE') {
-        metroCards.push(new MetroCard(params[0], +params[1]))
+        this.handleBalanceRequest(params)
       } else if (type === 'CHECK_IN') {
-        const passengerType = params[1]
-        const metroCardId = params[0]
-        const stationId = params[2]
-
-        const passenger = getPassenger(passengerType, metroCardId)
-
-        if (stationId === 'CENTRAL') {
-          centralStation.checkIn(passenger, new Journey(centralStation, airport))
-        } else {
-          airport.checkIn(passenger, new Journey(airport, centralStation))
-        }
-
-        passengers.push(passenger)
+        this.handleCheckInRequest(params)
       } else {
-        // return new PrintSummaryRequest(type)
-        console.log(centralStation.getCollection())
-        console.log(airport.getCollection())
+        this.handlePrintSummaryRequest()
       }
     })
   }
+
+  private handleBalanceRequest(params: string[]) {
+    const metroCard = new MetroCard(params[0], +params[1])
+    this.metroCards.push(metroCard)
+  }
+
+  private getPassenger(passengerType: string, metroCardId: string) {
+    const metroCard = this.metroCards.find(card => card.getId() === metroCardId)
+    if (!metroCard) throw Error('card not found')
+
+    const passenger = this.passengers.find(p => p.hasCard(metroCard))
+    if (passenger) return passenger
+
+    return this.createNewPassenger(passengerType, metroCard)
+  }
+
+  private createNewPassenger(passengerType: string, metroCard: MetroCard) {
+    let passenger: Passenger
+
+    if (passengerType === 'ADULT') passenger = new Adult(metroCard)
+    else if (passengerType === 'SENIOR_CITIZEN') passenger = new SeniorCitizen(metroCard)
+    else passenger = new Kid(metroCard)
+
+    this.passengers.push(passenger)
+
+    return passenger
+  }
+
+  private handleCheckInRequest(params: string[]) {
+    const passengerType = params[1]
+    const metroCardId = params[0]
+    const stationId = params[2]
+
+    const passenger = this.getPassenger(passengerType, metroCardId)
+
+    this.checkInPassenger(stationId, passenger)
+  }
+
+  private checkInPassenger(stationId: string, passenger: Passenger) {
+    if (stationId === 'CENTRAL') {
+      this.centralStation.checkIn(passenger, new Journey(this.centralStation, this.airport))
+    } else {
+      this.airport.checkIn(passenger, new Journey(this.airport, this.centralStation))
+    }
+  }
+
+  private handlePrintSummaryRequest() {
+    console.log(this.centralStation.getCollection())
+    console.log(this.airport.getCollection())
+  }
 }
 
-// class BalanceRequest extends Request {
-//   constructor(protected type: string, private metroCard: MetroCard) {
-//     super(type)
-//   }
-
-//   // getMetroCardId() {
-//   //   return this.metroCardId
-//   // }
-
-//   // getBalance() {
-//   //   return this.balance
-//   // }
-// }
-
-// class CheckInRequest extends Request {
-//   constructor(protected type: string, private passenger: Passenger, private station: Station) {
-//     super(type)
-//   }
-// }
-
-// class PrintSummaryRequest extends Request {
-//   constructor(protected type: string) {
-//     super(type)
-//   }
-// }
+export function main(fileContent: string) {
+  new Simulator().simulate(fileContent)
+}
 
 class Adult extends Passenger {
   constructor(card: MetroCard) {
