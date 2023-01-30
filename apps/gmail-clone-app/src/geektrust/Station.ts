@@ -3,28 +3,31 @@ import { InsufficientBalanceError } from './MetroCard'
 import { Passenger } from './Passenger'
 
 export abstract class Station {
-  protected collection: number
-  protected discount: number
-  protected name: string
-  protected checkedInPassengers: Passenger[] = []
+  constructor(
+    protected name: string,
+    protected collection: number,
+    protected discount: number,
+    protected checkedInPassengers: Passenger[]
+  ) {}
 
-  constructor(name: string) {
-    this.collection = 0
-    this.discount = 0
-    this.name = name
-  }
-
-  addPassenger(passenger: Passenger) {
+  protected addPassenger(passenger: Passenger) {
     const found = this.checkedInPassengers.find(p => p.isSameAs(passenger))
     if (!found) this.checkedInPassengers.push(passenger)
   }
 
-  makeJourney(passenger: Passenger, toStation: Station) {
-    const journey = new Journey(this, toStation)
-    this.checkIn(passenger, journey)
+  public isSameAs(station: Station) {
+    return this.name === station.getName()
   }
 
-  private checkIn(passenger: Passenger, journey: Journey) {
+  getCollection() {
+    return this.collection
+  }
+
+  getName() {
+    return this.name
+  }
+
+  protected checkIn(passenger: Passenger, journey: Journey) {
     const passengerCost = passenger.getBaseCost()
     const discount = getDiscount()
 
@@ -59,12 +62,13 @@ export abstract class Station {
     }
   }
 
-  isSameAs(station: Station) {
-    return this.name === station.name
+  getDiscount() {
+    return this.discount
   }
 
-  getCollection() {
-    return this.collection
+  makeJourney(passenger: Passenger, toStation: Station) {
+    const journey = new Journey(this, toStation)
+    this.checkIn(passenger, journey)
   }
 
   printSummary() {
@@ -74,13 +78,8 @@ export abstract class Station {
   }
 }
 
-export class CentralStation extends Station {
-  constructor() {
-    super('CENTRAL')
-  }
-}
-export class AirportStation extends Station {
-  constructor() {
-    super('AIRPORT')
+export class MetroStation extends Station {
+  constructor(name: string) {
+    super(name, 0, 0, [])
   }
 }

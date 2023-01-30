@@ -1,13 +1,18 @@
 import { MemoryInput } from './input/Input'
 import { MetroCard } from './MetroCard'
 import { MetroPassengerFactory, Passenger } from './Passenger'
-import { AirportStation, CentralStation, Station } from './Station'
+import { MetroStation, Station } from './Station'
 
 class Simulator {
   private metroCards: MetroCard[] = []
   private passengers: Passenger[] = []
-  private airport = new AirportStation()
-  private centralStation = new CentralStation()
+  private airport: Station
+  private centralStation: Station
+
+  constructor() {
+    this.airport = new MetroStation('AIRPORT')
+    this.centralStation = new MetroStation('CENTRAL')
+  }
 
   simulate(fileContent: string) {
     const input = new MemoryInput(fileContent)
