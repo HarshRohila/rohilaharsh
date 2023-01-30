@@ -1,7 +1,7 @@
-import { Journey } from './Journey'
+import { MemoryInput } from './input/Input'
 import { MetroCard } from './MetroCard'
-import { Passenger } from './Passenger'
-import { Station } from './Station'
+import { MetroPassengerFactory, Passenger } from './Passenger'
+import { AirportStation, CentralStation, Station } from './Station'
 
 class Simulator {
   private metroCards: MetroCard[] = []
@@ -10,9 +10,10 @@ class Simulator {
   private centralStation = new CentralStation()
 
   simulate(fileContent: string) {
-    const lines = fileContent.split('\n')
+    const input = new MemoryInput(fileContent)
+    const requests = input.getRequests()
 
-    return lines.forEach(l => {
+    return requests.forEach(l => {
       const [type, ...params] = l.split(' ')
 
       if (type === 'BALANCE') {
@@ -31,8 +32,7 @@ class Simulator {
   }
 
   private getPassenger(passengerType: string, metroCardId: string) {
-    const metroCard = this.metroCards.find(card => card.getId() === metroCardId)
-    if (!metroCard) throw Error('card not found')
+    const metroCard = this.getMetroCard(metroCardId)
 
     const passenger = this.passengers.find(p => p.hasCard(metroCard))
     if (passenger) return passenger
@@ -40,12 +40,15 @@ class Simulator {
     return this.createNewPassenger(passengerType, metroCard)
   }
 
-  private createNewPassenger(passengerType: string, metroCard: MetroCard) {
-    let passenger: Passenger
+  private getMetroCard(metroCardId: string) {
+    const metroCard = this.metroCards.find(card => card.getId() === metroCardId)
+    if (!metroCard) throw Error('card not found')
+    return metroCard
+  }
 
-    if (passengerType === 'ADULT') passenger = new Adult(metroCard)
-    else if (passengerType === 'SENIOR_CITIZEN') passenger = new SeniorCitizen(metroCard)
-    else passenger = new Kid(metroCard)
+  private createNewPassenger(passengerType: string, metroCard: MetroCard) {
+    const passengerFactory = new MetroPassengerFactory(metroCard)
+    const passenger = passengerFactory.create(passengerType)
 
     this.passengers.push(passenger)
 
@@ -63,11 +66,18 @@ class Simulator {
   }
 
   private checkInPassenger(stationId: string, passenger: Passenger) {
+    let fromStation: Station
+    let toStation: Station
+
     if (stationId === 'CENTRAL') {
-      this.centralStation.checkIn(passenger, new Journey(this.centralStation, this.airport))
+      fromStation = this.centralStation
+      toStation = this.airport
     } else {
-      this.airport.checkIn(passenger, new Journey(this.airport, this.centralStation))
+      fromStation = this.airport
+      toStation = this.centralStation
     }
+
+    fromStation.makeJourney(passenger, toStation)
   }
 
   private handlePrintSummaryRequest() {
@@ -78,31 +88,4 @@ class Simulator {
 
 export function main(fileContent: string) {
   new Simulator().simulate(fileContent)
-}
-
-class Adult extends Passenger {
-  constructor(card: MetroCard) {
-    super(card, 200, 'ADULT')
-  }
-}
-class Kid extends Passenger {
-  constructor(card: MetroCard) {
-    super(card, 50, 'KID')
-  }
-}
-class SeniorCitizen extends Passenger {
-  constructor(card: MetroCard) {
-    super(card, 100, 'SENIOR_CITIZEN')
-  }
-}
-
-class CentralStation extends Station {
-  constructor() {
-    super('CENTRAL')
-  }
-}
-class AirportStation extends Station {
-  constructor() {
-    super('AIRPORT')
-  }
 }

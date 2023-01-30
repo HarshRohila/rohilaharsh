@@ -19,12 +19,14 @@ export abstract class Station {
     if (!found) this.checkedInPassengers.push(passenger)
   }
 
-  checkIn(passenger: Passenger, journey: Journey) {
-    const passengerCost = passenger.getBaseCost()
-    const isReturnJourney = passenger.isReturnJourney(journey)
+  makeJourney(passenger: Passenger, toStation: Station) {
+    const journey = new Journey(this, toStation)
+    this.checkIn(passenger, journey)
+  }
 
-    let discount = 0
-    if (isReturnJourney) discount = passengerCost * 0.5
+  private checkIn(passenger: Passenger, journey: Journey) {
+    const passengerCost = passenger.getBaseCost()
+    const discount = getDiscount()
 
     const journeyCost = passengerCost - discount
     this.discount += discount
@@ -47,6 +49,14 @@ export abstract class Station {
 
     this.collection += journeyCost
     this.addPassenger(passenger)
+
+    function getDiscount() {
+      const isReturnJourney = passenger.isReturnJourney(journey)
+
+      let discount = 0
+      if (isReturnJourney) discount = passengerCost * 0.5
+      return discount
+    }
   }
 
   isSameAs(station: Station) {
@@ -61,5 +71,16 @@ export abstract class Station {
     console.log(`TOTAL_COLLECTION ${this.name} ${this.collection} ${this.discount}`)
     console.log(`PASSENGER_TYPE_SUMMARY`)
     Passenger.print(this.checkedInPassengers)
+  }
+}
+
+export class CentralStation extends Station {
+  constructor() {
+    super('CENTRAL')
+  }
+}
+export class AirportStation extends Station {
+  constructor() {
+    super('AIRPORT')
   }
 }
