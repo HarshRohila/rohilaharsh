@@ -1,0 +1,2 @@
+export const TRANSACTION_FEE_PERCENT = 0.02
+export const DISCOUNT_PERCENT = 0.5

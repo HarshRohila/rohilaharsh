@@ -1,3 +1,4 @@
+import { DISCOUNT_PERCENT, TRANSACTION_FEE_PERCENT } from './constants'
 import { Journey } from './Journey'
 import { InsufficientBalanceError } from './MetroCard'
 import { Passenger } from './Passenger'
@@ -28,38 +29,45 @@ export abstract class Station {
   }
 
   protected checkIn(passenger: Passenger, journey: Journey) {
-    const passengerCost = passenger.getBaseCost()
-    const discount = getDiscount()
+    const passengerJourney = this.createPassengerJourney(passenger, journey)
 
-    const journeyCost = passengerCost - discount
+    const journeyCost = passengerJourney.getJourneyCost()
+    this.addToCollection(journeyCost)
+
+    this.addPassenger(passenger)
+  }
+
+  private createPassengerJourney(passenger: Passenger, journey: Journey) {
+    const passengerJourney = new PassengerJourney(passenger, journey)
+
+    const discount = passengerJourney.getDiscount()
     this.discount += discount
 
+    this.tryJourney(passengerJourney)
+
+    return passengerJourney
+  }
+
+  private tryJourney(passengerJourney: PassengerJourney) {
     try {
-      passenger.makeJourney(journey, journeyCost)
+      passengerJourney.makeJourney()
     } catch (err) {
-      if (err instanceof InsufficientBalanceError) {
-        const rechargeAmount = journeyCost - passenger.getBalance()
-        const serviceCharge = rechargeAmount * 0.02
-        this.collection += serviceCharge
-
-        passenger.recharge(rechargeAmount)
-
-        passenger.makeJourney(journey, journeyCost)
-      } else {
-        throw err
-      }
+      if (err instanceof InsufficientBalanceError)
+        this.handleInsufficientBalanceError(passengerJourney)
+      else throw err
     }
+  }
 
-    this.collection += journeyCost
-    this.addPassenger(passenger)
+  private handleInsufficientBalanceError(passengerJourney: PassengerJourney) {
+    const serviceCharge = passengerJourney.getServiceCharge()
 
-    function getDiscount() {
-      const isReturnJourney = passenger.isReturnJourney(journey)
+    this.addToCollection(serviceCharge)
 
-      let discount = 0
-      if (isReturnJourney) discount = passengerCost * 0.5
-      return discount
-    }
+    passengerJourney.rechargeAndDoJourney()
+  }
+
+  private addToCollection(amount: number) {
+    this.collection += amount
   }
 
   getDiscount() {
@@ -81,5 +89,57 @@ export abstract class Station {
 export class MetroStation extends Station {
   constructor(name: string) {
     super(name, 0, 0, [])
+  }
+}
+
+class PassengerJourney {
+  constructor(private passenger: Passenger, private journey: Journey) {}
+
+  getDiscount() {
+    const { passenger, journey } = this
+
+    const passengerCost = passenger.getBaseCost()
+    const isReturnJourney = passenger.isReturnJourney(journey)
+
+    let discount = 0
+    if (isReturnJourney) discount = passengerCost * DISCOUNT_PERCENT
+    return discount
+  }
+
+  rechargeAndDoJourney() {
+    const { passenger } = this
+    const rechargeAmount = this.getRechargeAmount()
+    passenger.recharge(rechargeAmount)
+    this.makeJourney()
+  }
+
+  getServiceCharge() {
+    const rechargeAmount = this.getRechargeAmount()
+    const serviceCharge = rechargeAmount * TRANSACTION_FEE_PERCENT
+
+    return serviceCharge
+  }
+
+  getRechargeAmount() {
+    const { passenger } = this
+    const journeyCost = this.getJourneyCost()
+    const rechargeAmount = journeyCost - passenger.getBalance()
+    return rechargeAmount
+  }
+
+  makeJourney() {
+    const { passenger, journey } = this
+    const journeyCost = this.getJourneyCost()
+    passenger.makeJourney(journey, journeyCost)
+  }
+
+  getJourneyCost() {
+    const { passenger } = this
+
+    const passengerCost = passenger.getBaseCost()
+    const discount = this.getDiscount()
+    const journeyCost = passengerCost - discount
+
+    return journeyCost
   }
 }

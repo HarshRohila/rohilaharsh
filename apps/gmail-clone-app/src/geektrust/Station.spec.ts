@@ -1,26 +1,17 @@
 import { MetroCard } from './MetroCard'
-import { MetroPassengerFactory, PassengerFactory } from './Passenger'
+import { MetroPassengerFactory, Passenger, PassengerFactory } from './Passenger'
 import { MetroStation, Station } from './Station'
+import { DISCOUNT_PERCENT, TRANSACTION_FEE_PERCENT } from './constants'
 
 describe('Station', () => {
+  let fromStation: Station
+  let toStation: Station
+  beforeEach(() => {
+    fromStation = new MetroStation('Pune')
+    toStation = new MetroStation('Delhi')
+  })
+
   describe('makeJourney', () => {
-    let fromStation: Station
-    let toStation: Station
-    beforeEach(() => {
-      fromStation = new MetroStation('Pune')
-      toStation = new MetroStation('Delhi')
-    })
-
-    it('applies discount if return journey', () => {
-      const passenger = createPassenger()
-      passenger.isReturnJourney = jest.fn().mockReturnValue(true)
-
-      fromStation.makeJourney(passenger, toStation)
-
-      const expectedDiscount = passenger.getBaseCost() / 2
-      expect(fromStation.getDiscount()).toBe(expectedDiscount)
-    })
-
     it('charges station fee if metro card not having enough balance', () => {
       const balance = 150
       const passenger = createPassenger({ balance })
@@ -28,10 +19,36 @@ describe('Station', () => {
       fromStation.makeJourney(passenger, toStation)
 
       const cost = passenger.getBaseCost()
-      const expectedFee = (cost - balance) * 0.02
+      const expectedFee = (cost - balance) * TRANSACTION_FEE_PERCENT
       expect(fromStation.getCollection()).toBe(cost + expectedFee)
     })
   })
+})
+
+describe('Return Journey', () => {
+  let passenger: Passenger
+  let fromStation: Station
+  let toStation: Station
+
+  beforeAll(() => {
+    fromStation = new MetroStation('Pune')
+    toStation = new MetroStation('Delhi')
+
+    passenger = createPassenger()
+    passenger.isReturnJourney = jest.fn().mockReturnValue(true)
+  })
+
+  it('applies discount if return journey', () => {
+    fromStation.makeJourney(passenger, toStation)
+
+    const expectedDiscount = passenger.getBaseCost() * DISCOUNT_PERCENT
+    expect(fromStation.getDiscount()).toBe(expectedDiscount)
+  })
+
+  // it('does NOt apply return journey discount if travlled 3rd time', () => {
+  //   fromStation.makeJourney(passenger, toStation)
+
+  // })
 })
 
 function createPassenger({ balance } = { balance: 200 }) {
