@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on rohilaHarsh</title>
+    <link>https://www.rohilaharsh.in/posts/</link>
+    <description>Recent content in Posts on rohilaHarsh</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 May 2022 08:41:09 +0530</lastBuildDate><atom:link href="https://www.rohilaharsh.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Clean Code Book Summary</title>
+      <link>https://www.rohilaharsh.in/posts/clean-code-learnings/</link>
+      <pubDate>Mon, 16 May 2022 08:41:09 +0530</pubDate>
+      
+      <guid>https://www.rohilaharsh.in/posts/clean-code-learnings/</guid>
+      <description>The book Clean Code by Robert C Martin, changed the way I think about and write code.
+Why Clean Code? Have a look at the image below which is from the book
+I love this image. It clearly shows the frustration of developers reading bad code.
+Clean code leads to code which other developers can understand quickly. Developers can easily change code without breaking any existing features.
+A code which takes more time to make changes and is difficult to understand will decrease the team productivity</description>
+    </item>
+    
+    <item>
+      <title>Top 10 Tools I found productive when working with TypeScript</title>
+      <link>https://www.rohilaharsh.in/posts/productive-js-tools/</link>
+      <pubDate>Mon, 16 May 2022 08:01:01 +0530</pubDate>
+      
+      <guid>https://www.rohilaharsh.in/posts/productive-js-tools/</guid>
+      <description>There are lots of software tools freely available to use. Some of them highly impacts the way we work, and they can let us do more in less time
+If you are someone working with TypeScript/JavaScript, checkout the following productivity tools if they work for you
+1. Volta Are you telling your team to install a particular version of Node.js for a project? Or working with multiple projects requiring different Node.</description>
+    </item>
+    
+    <item>
+      <title>Stencil for React Devs</title>
+      <link>https://www.rohilaharsh.in/posts/stencil-for-react-devs/</link>
+      <pubDate>Mon, 09 May 2022 08:21:03 +0530</pubDate>
+      
+      <guid>https://www.rohilaharsh.in/posts/stencil-for-react-devs/</guid>
+      <description>What is Stencil? Stencil is one of the best tools out there to build web components. The following is from Stencil’s official website
+ Stencil is a compiler that generates Web Components (more specifically, Custom Elements). Stencil combines the best concepts of the most popular frameworks into a simple build-time tool.
+ Comparison With React There are many things common in Stencil and React
+JSX/TSX templates Stencil also uses JSX templates with few differences compared to React</description>
+    </item>
+    
+  </channel>
+</rss>

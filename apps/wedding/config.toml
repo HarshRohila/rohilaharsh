@@ -1,0 +1,30 @@
+baseURL = 'https://www.rohilaharsh.in/'
+languageCode = 'en-us'
+title = 'rohilaHarsh'
+theme = "ananke"
+disqusShortname = 'a-web-dev-blog'
+enableRobotsTXT = true
+googleAnalytics = "G-EFC3FRJ2GM"
+
+[[params.ananke_socials]]
+name = "github"
+url = "https://github.com/HarshRohila"
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/rohilaharsh"
+
+[[params.ananke_socials]]
+name = "stackoverflow"
+url = "https://stackoverflow.com/users/5798816/harsh-rohila"
+
+
+[params]
+  body_classes = "avenir bg-washed-yellow"
+	post_content_classes = "avenir"
+	show_reading_time = true
+	description = "A blog about web development. Mostly."
+	custom_css = ["custom.scss"]
+	site_logo = "img/logo.png"
+
+
