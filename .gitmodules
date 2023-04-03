@@ -1,3 +1,6 @@
 [submodule "apps/web-dev-blog/themes/ananke"]
 	path = apps/web-dev-blog/themes/ananke
 	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "apps/wedding/themes/hugo-scroll"]
+	path = apps/wedding/themes/hugo-scroll
+	url = https://github.com/zjedi/hugo-scroll.git

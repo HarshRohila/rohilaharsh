@@ -4,6 +4,7 @@
     "first-nx-app": "apps/first-nx-app",
     "first-nx-app-e2e": "apps/first-nx-app-e2e",
     "gmail-clone-app": "apps/gmail-clone-app",
-    "web-dev-blog": "apps/web-dev-blog"
+    "web-dev-blog": "apps/web-dev-blog",
+    "wedding": "apps/wedding"
   }
 }

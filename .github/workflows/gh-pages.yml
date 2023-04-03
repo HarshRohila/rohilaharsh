@@ -14,6 +14,7 @@ jobs:
     outputs:
       gmail-clone-app: ${{ steps.filter.outputs.gmail-clone-app }}
       web-dev-blog: ${{ steps.filter.outputs.web-dev-blog }}
+      wedding: ${{ steps.filter.outputs.wedding }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -27,6 +28,39 @@ jobs:
               - 'apps/gmail-clone-app/**'
             web-dev-blog:
               - 'apps/web-dev-blog/**'
+            wedding:
+              - 'apps/wedding/**'
+  deploy-wedding:
+    needs: changes
+    if: ${{ needs.changes.outputs.wedding == 'true' }}
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: apps/wedding
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build
+        run: HUGO_ENV=production hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          personal_token: ${{ secrets.REPO_ACCESS }}
+          external_repository: HarshRohila/wedding
+          publish_branch: master
+          publish_dir: ./apps/wedding/public
   deploy-web-dev-blog:
     needs: changes
     if: ${{ needs.changes.outputs.web-dev-blog == 'true' }}
