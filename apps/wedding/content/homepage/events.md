@@ -1,12 +1,13 @@
 ---
-title: "The Services I Offer"
-header_menu_title: "Services"
-navigation_menu_title: "My Services"
+title: 'Wedding Events'
+header_menu_title: 'Events'
+navigation_menu_title: 'Events'
 weight: 2
 header_menu: true
 ---
 
 Feature notice: This section displays options to customize title:
+
 - has a normal section title (`title` = "The Services I Offer"),
 - custom welcome screen title (`header_menu_title` = "Services"),
 - custom navigation menu title (`navigation_menu_title` = "My Services").

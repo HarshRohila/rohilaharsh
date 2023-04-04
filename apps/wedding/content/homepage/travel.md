@@ -1,5 +1,5 @@
 ---
-title: "About Me"
+title: 'Travel'
 weight: 3
 header_menu: true
 ---
