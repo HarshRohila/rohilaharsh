@@ -5,5 +5,5 @@ header_image: 'images/cover-image.jpg'
 header_logo: 'images/chef-hat.png'
 # Headers are safeHTML, you can use HTML tags such as b,i,u,br
 header_headline: 'Jaagriti & Harsh'
-header_subheadline: '<b>Nutrition</b> Coach & <b>Chef</b> Consultant'
+header_subheadline: 'SEPTEMBER 21, 2023 ‧ SOLAN'
 ---
