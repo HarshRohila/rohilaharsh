@@ -4,4 +4,4 @@ weight: 4
 header_menu: true
 ---
 
-{{<photo-gallery gallery_dir="images" >}}
+{{<photo-gallery gallery_dir="gallery" >}}

@@ -3,7 +3,7 @@
   {{ range (readDir (print "/static/" $dir)) }} {{- $image := resources.Get (printf "%s/%s" $dir
   .Name) -}} {{- $imageurl := printf "%s/%s" $dir .Name -}} {{- $imagetitle := index (split .Name
   ".") 0 -}}
-  <a href="{{ $imageurl }}">
+  <a href="{{ $imageurl }}" class="{{ $imagetitle }}">
     <img alt="{{ $imagetitle }}" src="{{ $imageurl }}" />
   </a>
 
