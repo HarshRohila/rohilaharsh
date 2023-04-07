@@ -1,6 +1,13 @@
-
-
 # Rohilaharsh
+
+## Setup For Dev
+
+- This project uses `Volta` to manage Node.js version. Install it and it should automatically use correct version mentioned in `package.json`
+- Install dependencies `npm i`
+
+## Projects in this Monorepo
+
+- [Wedding Website](./apps/wedding/README.md)
 
 This project was generated using [Nx](https://nx.dev).
 
@@ -78,8 +85,6 @@ Run `nx graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
 
 ## ☁ Nx Cloud
 
