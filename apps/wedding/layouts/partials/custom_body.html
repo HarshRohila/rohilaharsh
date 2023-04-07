@@ -1,0 +1,11 @@
+<script type="module">
+  import lightgallery from 'https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/+esm'
+  import lgThumbnail from 'https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.es5.js'
+  import lgZoom from 'https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.es5.js'
+
+  lightgallery(document.getElementById('lightgallery'), {
+    plugins: [lgThumbnail, lgZoom],
+    thumbnail: true,
+    speed: 500
+  })
+</script>
