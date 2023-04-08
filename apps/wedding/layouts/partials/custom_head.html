@@ -5,75 +5,281 @@
      You may use this template to add custom CSS to your site like so: -->
 
 <style>
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* adjust the opacity as needed */
-  }
+     .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.3);
+          /* adjust the opacity as needed */
+     }
 
-  .blog-title,
-  .blog-description {
-    color: #f2efe8;
-  }
+     .bounce-in-top {
+          -webkit-animation: bounce-in-top 3s both;
+          animation: bounce-in-top 3s both
+     }
 
-  a.btn {
-    background-color: #ff6200;
-  }
+     @-webkit-keyframes bounce-in-top {
+          0% {
+               -webkit-transform: translateY(-500px);
+               transform: translateY(-500px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in;
+               opacity: 0
+          }
 
-  .blog-title {
-    font-family: 'Tangerine', serif;
-    font-size: 125px;
-  }
-  .blog-description {
-    font-style: italic;
-    font-size: 40px;
-  }
-  @media only screen and (max-width: 768px) {
-    .blog-title {
-      font-size: 70px;
-    }
-  }
-  @media only screen and (max-width: 768px) {
-    .blog-description {
-      font-size: 25px;
-    }
-  }
+          38% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out;
+               opacity: 1
+          }
 
-  .custom-iframe,
-  .google-map {
-    width: 100%;
-  }
+          55% {
+               -webkit-transform: translateY(-65px);
+               transform: translateY(-65px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in
+          }
 
-  #lightgallery {
-    display: grid;
-    grid-template-columns: auto auto;
-    width: 100%;
-  }
+          72% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out
+          }
 
-  #lightgallery .B_Roka_2 {
-    align-self: end;
-  }
+          81% {
+               -webkit-transform: translateY(-28px);
+               transform: translateY(-28px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in
+          }
 
-  #site-head {
-    background-image: url('images/cover-image.jpg');
-  }
-  @media only screen and (max-width: 768px) {
-    #site-head {
-      background-image: url('images/cover-image-mobile.jpeg');
-    }
-  }
+          90% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out
+          }
+
+          95% {
+               -webkit-transform: translateY(-8px);
+               transform: translateY(-8px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in
+          }
+
+          100% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out
+          }
+     }
+
+     @keyframes bounce-in-top {
+          0% {
+               -webkit-transform: translateY(-500px);
+               transform: translateY(-500px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in;
+               opacity: 0
+          }
+
+          38% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out;
+               opacity: 1
+          }
+
+          55% {
+               -webkit-transform: translateY(-65px);
+               transform: translateY(-65px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in
+          }
+
+          72% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out
+          }
+
+          81% {
+               -webkit-transform: translateY(-28px);
+               transform: translateY(-28px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in
+          }
+
+          90% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out
+          }
+
+          95% {
+               -webkit-transform: translateY(-8px);
+               transform: translateY(-8px);
+               -webkit-animation-timing-function: ease-in;
+               animation-timing-function: ease-in
+          }
+
+          100% {
+               -webkit-transform: translateY(0);
+               transform: translateY(0);
+               -webkit-animation-timing-function: ease-out;
+               animation-timing-function: ease-out
+          }
+     }
+
+     .blog-title,
+     .blog-description {
+          color: #f2efe8;
+     }
+
+     a.btn {
+          background-color: #ff6200;
+     }
+
+     .blog-title {
+          font-family: 'Tangerine', serif;
+          font-size: 125px;
+     }
+
+     .roll-in-left {
+          -webkit-animation: roll-in-left 3.2s ease-out both;
+          animation: roll-in-left 3.2s ease-out both
+     }
+
+     .text-focus-in {
+          -webkit-animation: text-focus-in 3s cubic-bezier(.55, .085, .68, .53) both;
+          animation: text-focus-in 2s cubic-bezier(.55, .085, .68, .53) both
+     }
+
+     @-webkit-keyframes text-focus-in {
+          0% {
+               -webkit-filter: blur(12px);
+               filter: blur(12px);
+               opacity: 0
+          }
+
+          100% {
+               -webkit-filter: blur(0);
+               filter: blur(0);
+               opacity: 1
+          }
+     }
+
+     @keyframes text-focus-in {
+          0% {
+               -webkit-filter: blur(12px);
+               filter: blur(12px);
+               opacity: 0
+          }
+
+          100% {
+               -webkit-filter: blur(0);
+               filter: blur(0);
+               opacity: 1
+          }
+     }
+
+     @-webkit-keyframes roll-in-left {
+          0% {
+               -webkit-transform: translateX(-800px) rotate(-540deg);
+               transform: translateX(-800px) rotate(-540deg);
+               opacity: 0
+          }
+
+          100% {
+               -webkit-transform: translateX(0) rotate(0deg);
+               transform: translateX(0) rotate(0deg);
+               opacity: 1
+          }
+     }
+
+     @keyframes roll-in-left {
+          0% {
+               -webkit-transform: translateX(-800px) rotate(-540deg);
+               transform: translateX(-800px) rotate(-540deg);
+               opacity: 0
+          }
+
+          100% {
+               -webkit-transform: translateX(0) rotate(0deg);
+               transform: translateX(0) rotate(0deg);
+               opacity: 1
+          }
+     }
+
+     .blog-title,
+     .blog-description {
+          color: #f2efe8;
+     }
+
+     a.btn {
+          background-color: #ff6200;
+     }
+
+     .blog-title {
+          font-family: 'Tangerine', serif;
+          font-size: 125px;
+     }
+
+     .blog-description {
+          font-style: italic;
+          font-size: 40px;
+     }
+
+     @media only screen and (max-width: 768px) {
+          .blog-title {
+               font-size: 70px;
+          }
+     }
+
+     @media only screen and (max-width: 768px) {
+          .blog-description {
+               font-size: 25px;
+          }
+     }
+
+     .custom-iframe,
+     .google-map {
+          width: 100%;
+     }
+
+     #lightgallery {
+          display: grid;
+          grid-template-columns: auto auto;
+          width: 100%;
+     }
+
+     #lightgallery .B_Roka_2 {
+          align-self: end;
+     }
+
+     #site-head {
+          background-image: url('images/cover-image.jpg');
+     }
+
+     @media only screen and (max-width: 768px) {
+          #site-head {
+               background-image: url('images/cover-image-mobile.jpeg');
+          }
+     }
 </style>
 
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery-bundle.min.css"
-  integrity="sha512-nUqPe0+ak577sKSMThGcKJauRI7ENhKC2FQAOOmdyCYSrUh0GnwLsZNYqwilpMmplN+3nO3zso8CWUgu33BDag=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery-bundle.min.css"
+     integrity="sha512-nUqPe0+ak577sKSMThGcKJauRI7ENhKC2FQAOOmdyCYSrUh0GnwLsZNYqwilpMmplN+3nO3zso8CWUgu33BDag=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- <style>
      /* Links */
@@ -132,7 +338,7 @@
 <!-- Custom link-tags for different icons
      Generated via https://favicon.io/favicon-generator/ -->
 
-<link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | absURL }}" />
-<link rel="icon" type="image/png" sizes="32x32" href="{{ "images/favicon-32x32.png" | absURL }}" />
-<link rel="icon" type="image/png" sizes="16x16" href="{{ "images/favicon-16x16.png" | absURL }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ " images/apple-touch-icon.png" | absURL }}" />
+<link rel="icon" type="image/png" sizes="32x32" href="{{ " images/favicon-32x32.png" | absURL }}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{{ " images/favicon-16x16.png" | absURL }}" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
