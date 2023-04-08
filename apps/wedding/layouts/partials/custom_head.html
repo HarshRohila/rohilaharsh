@@ -27,10 +27,19 @@
     font-family: 'Tangerine', serif;
     font-size: 125px;
   }
-
   .blog-description {
     font-style: italic;
     font-size: 40px;
+  }
+  @media only screen and (max-width: 768px) {
+    .blog-title {
+      font-size: 70px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .blog-description {
+      font-size: 25px;
+    }
   }
 
   .custom-iframe,
@@ -46,6 +55,15 @@
 
   #lightgallery .B_Roka_2 {
     align-self: end;
+  }
+
+  #site-head {
+    background-image: url('images/cover-image.jpg');
+  }
+  @media only screen and (max-width: 768px) {
+    #site-head {
+      background-image: url('images/cover-image-mobile.jpeg');
+    }
   }
 </style>
 

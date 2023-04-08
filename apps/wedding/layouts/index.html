@@ -3,16 +3,7 @@ $headless.Resources.ByType "page" }} {{ $sections := cond .Site.BuildDrafts $sec
 $sections "Draft" "==" false) }}
 
 <!-- Welcome screen that scrolls out of view -->
-<header
-  id="site-head"
-  {{
-  with
-  .Params.header_image
-  }}style="background-image: url({{ . }})"
-  {{
-  end
-  }}
->
+<header id="site-head">
   <div class="overlay"></div>
   <div class="vertical">
     <div id="site-head-content" class="inner">
