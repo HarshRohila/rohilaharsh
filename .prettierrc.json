@@ -9,5 +9,16 @@
   "semi": false,
   "singleQuote": true,
   "tabWidth": 2,
-  "useTabs": false
+  "useTabs": false,
+  "goTemplateBracketSpacing": true,
+  "overrides": [
+    {
+      "files": [
+        "*.html"
+      ],
+      "options": {
+        "parser": "go-template"
+      }
+    }
+  ]
 }
