@@ -1,6 +1,12 @@
 ---
-title: "Welcome"
+title: "Welcome to our Wedding Celebration!"
 weight: 1
+header_menu_title: 'Welcome'
+navigation_menu_title: 'Welcome'
+header_menu: true
 ---
-
-Hi there. This section will not show up in the header menu above. Other than that, there's really not much to see here. I did however append some generated »Lorem ipsum«-paragraphs for you. Enjoy!
+We are thrilled to invite you to celebrate our special day as we embark on a journey of love and commitment.
+As software developers and hopeless romantics, we have poured our hearts and technical skills into crafting this website as a hub of information to help you plan your visit and ensure you have every detail for our big day at your fingertips. 
+ 
+ Don't forget to RSVP, as we eagerly await your arrival. 
+ Your presence means the world to us as we venture into this beautiful journey together!
