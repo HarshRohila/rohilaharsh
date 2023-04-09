@@ -4,7 +4,8 @@ $sections "Draft" "==" false) }}
 
 <!-- Welcome screen that scrolls out of view -->
 <header id="site-head">
-  <div class="overlay bounce-in-top"></div>
+  <div class="overlay bounce-in-top">
+  </div>
   <div class="vertical">
     <div id="site-head-content" class="inner bounce-in-top">
       {{ with .Params.header_logo }}<img id="blog-logo" src="{{ . }}" />{{ end }} {{ if
