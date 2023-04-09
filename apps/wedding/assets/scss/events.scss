@@ -33,11 +33,17 @@
     display: none;
   }
 }
+
 .image-container {
+  &-mobile {
+    display: none;
+  }
+
   display: block;
   max-width: 500px;
   margin: 0 auto;
   flex-shrink: 0;
+  border: 10px solid var(--text-color-2);
 
   width: 480px;
   height: 480px;
@@ -62,7 +68,10 @@
   background-color: #ffffff;
   border: 2px solid var(--text-color-2);
   position: relative;
-  min-width: 400px;
+
+  @media only screen and (min-width: 768px) {
+    min-width: 400px;
+  }
 }
 
 $overlap_distance: -70px;
@@ -76,14 +85,17 @@ ul.wedding-events {
     align-items: center;
     justify-content: center;
   }
-  li:nth-child(odd) .event-description-container {
-    left: $overlap_distance;
-  }
 
-  li:nth-child(even) {
-    flex-direction: row-reverse;
-    .event-description-container {
-      right: $overlap_distance;
+  @media only screen and (min-width: 768px) {
+    li:nth-child(odd) .event-description-container {
+      left: $overlap_distance;
+    }
+
+    li:nth-child(even) {
+      flex-direction: row-reverse;
+      .event-description-container {
+        right: $overlap_distance;
+      }
     }
   }
 
@@ -91,7 +103,7 @@ ul.wedding-events {
     display: none;
   }
 
-  li ~ li {
+  li {
     margin-top: 60px;
   }
 }
@@ -100,5 +112,14 @@ ul.wedding-events {
   color: red;
   .event-date {
     margin-top: 1em;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .image-container {
+    display: none;
+    &-mobile {
+      display: initial;
+    }
   }
 }
