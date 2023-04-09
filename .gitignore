@@ -64,6 +64,6 @@ UserInterfaceState.xcuserstate
 .env
 
 apps/web-dev-blog/public/
-apps/web-dev-blog/resources/_gen
+**/resources/_gen
 
 apps/gmail-clone-app/src/index.html

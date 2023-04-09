@@ -1,0 +1,33 @@
+{{ $events := (slice
+  (dict "eventName" "Mehndi" "image" "images/mehndi.jpg" "date" "20th September, 2023" "time" "10 AM" "dress" "Green Color")
+  (dict "eventName" "Lunch" "image" "images/lunch.jpg" "date" "20th September, 2023" "time" "2 PM" "dress" "")
+  (dict "eventName" "Engagement" "image" "images/engagement.jpg" "date" "20th September, 2023" "time" "4 PM" "dress" "Pink Color")
+  (dict "eventName" "Sangeet" "image" "images/sangeet.png" "date" "20th September, 2023" "time" "6:30 PM" "dress" "")
+  (dict "eventName" "Dinner" "image" "images/dinner.jpg" "date" "20th September, 2023" "time" "7 PM" "dress" "")
+  (dict "eventName" "Haldi" "image" "images/haldi.jpg" "date" "21st September, 2023" "time" "7 AM" "dress" "Yellow Color")
+  (dict "eventName" "Wedding" "image" "images/wedding.jpg" "date" "21st September, 2023" "time" "12 PM" "dress" "")
+  )
+}}
+
+
+<ul class="wedding-events">
+  {{ range $events }}
+    <li>
+      <div class="image-container">
+        <div id="event-4-img" class="event-img">
+          <img src="{{ .image }}" alt="{{ .eventName }}" />
+        </div>
+      </div>
+      <div class="event-description-container">
+        <div class="event-description">
+          <h3 class="event-name">{{ .eventName }}</h3>
+          <div class="event-date">{{ .date }}<br />{{ .time }}</div>
+          {{ if (ne .dress "") }}
+            <p class="event-details">Dress Code: {{ .dress }}</p>
+          {{ end }}
+          <div style="margin:10px 0;padding-bottom:30px;"></div>
+        </div>
+      </div>
+    </li>
+  {{ end }}
+</ul>
