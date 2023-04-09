@@ -1,0 +1,87 @@
+:root {
+  --text-color-2: #df9f07;
+  --frame-left-top: url('../images/frames/left-top.png');
+  --frame-right-top: url('../images/frames/right-top.png');
+  --frame-left-bottom: url('../images/frames/left-bottom.png');
+  --frame-right-bottom: url('../images/frames/right-bottom.png');
+}
+
+@media (min-width: 768px) {
+  .event-description {
+    padding: 35px 93px 0 80px !important;
+    line-height: 1 !important;
+  }
+}
+.event-description {
+  padding: 40px 60px;
+  font-size: 16px;
+  min-height: 150px;
+}
+
+.event-name,
+.travel-head {
+  color: #b60d0d;
+}
+
+.event-name,
+.travel-head {
+  font-size: 30px;
+  text-transform: capitalize;
+  /* color: var(--text-color-2); */
+  /* font-family: var(--section-content-font); */
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .image-container {
+    display: none;
+  }
+}
+.image-container {
+  display: block;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.event-description-container {
+  border: 2px solid #df9f07 !important;
+}
+.event-description-container {
+  background-image: var(--frame-left-top), var(--frame-right-top), var(--frame-left-bottom),
+    var(--frame-right-bottom);
+  background-position: 5px 5px, 99% 5px, 5px 99%, 99% 99%;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  border: 2px solid var(--text-color-2);
+  position: relative;
+  min-width: 400px;
+}
+
+ul.wedding-events {
+  margin: 0;
+  list-style-type: none;
+}
+.wedding-events li {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wedding-events .fa-li {
+  display: none;
+}
+
+.wedding-events li:nth-child(even) {
+  /* background-color: lightgray; */
+  flex-direction: row-reverse;
+}
+.wedding-events li:nth-child(odd) .event-description-container {
+  left: -70px;
+}
+.wedding-events li:nth-child(even) .event-description-container {
+  right: -70px;
+}
+
+.wedding-events li ~ li {
+  margin-top: 60px;
+}
