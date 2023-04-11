@@ -1,11 +1,18 @@
 {{ $dir := string (.Get "gallery_dir") }}
 <div id="lightgallery">
-  {{ range (readDir (print "/static/" $dir)) }} {{- $image := resources.Get (printf "%s/%s" $dir
-  .Name) -}} {{- $imageurl := printf "%s/%s" $dir .Name -}} {{- $imagetitle := index (split .Name
-  ".") 0 -}}
-  <a href="{{ $imageurl }}" class="{{ $imagetitle }}">
-    <img alt="{{ $imagetitle }}" src="{{ $imageurl }}" />
-  </a>
-
+  {{ range (readDir (print "/static/" $dir)) }}
+    {{- $image := resources.Get (printf "%s/%s" $dir
+      .Name)
+    -}}
+    {{- $imageurl := printf "%s/%s" $dir .Name -}}
+    {{- $className := index (split .Name
+      ".") 0
+    -}}
+    {{ $parts := split $className "_" }}
+    {{ $parts = after 1 $parts }}
+    {{ $imagetitle := delimit $parts " " }}
+    <a href="{{ $imageurl }}" class="{{ $className }}">
+      <img alt="{{ $imagetitle }}" src="{{ $imageurl }}" />
+    </a>
   {{ end }}
 </div>
