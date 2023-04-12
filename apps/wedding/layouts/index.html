@@ -2,6 +2,7 @@
 $headless.Resources.ByType "page" }} {{ $sections := cond .Site.BuildDrafts $sections (where
 $sections "Draft" "==" false) }}
 
+{{ partial "bg-music" }}
 <!-- Welcome screen that scrolls out of view -->
 <header id="site-head">
   <div class="overlay bounce-in-top">
