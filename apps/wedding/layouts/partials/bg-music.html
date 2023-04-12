@@ -1,0 +1,42 @@
+<audio class="bg-music">
+  <source src="audio/bg-music.mp3" type="audio/mpeg" />
+</audio>
+<a class="music-btn" onClick="togglePlay()"
+  ><i class="bi bi-music-note-beamed"></i> <i class="bi bi-volume-mute-fill"></i
+></a>
+
+<style>
+  .music-btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    padding: 8px 12px;
+    background-color: #f2efe8;
+    border-bottom-left-radius: 50%;
+  }
+  i {
+    font-size: 2.5rem;
+    color: #000;
+  }
+  .bi-volume-mute-fill {
+    display: none;
+  }
+
+  .playing .bi-music-note-beamed {
+    display: none;
+  }
+  .playing .bi-volume-mute-fill {
+    display: initial;
+  }
+</style>
+
+<script>
+  var myAudio = document.querySelector('.bg-music')
+  const musicBtn = document.querySelector('.music-btn')
+
+  function togglePlay() {
+    myAudio.paused ? myAudio.play() : myAudio.pause()
+    musicBtn.classList.toggle('playing')
+  }
+</script>
