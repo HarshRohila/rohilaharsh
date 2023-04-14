@@ -35,6 +35,9 @@
 .image-container {
   &-mobile {
     display: none;
+    > div {
+      margin-top: 1em;
+    }
   }
 
   display: block;
