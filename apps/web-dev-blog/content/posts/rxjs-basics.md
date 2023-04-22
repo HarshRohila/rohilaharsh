@@ -1,15 +1,15 @@
 ---
 title: 'RxJS Basics'
-date: 2022-12-18T09:29:13+05:30
+date: 2023-04-21T09:29:13+05:30
 author: 'Harsh Rohila'
 draft: true
 featured_image: '/img/rxjs-basics.webp'
 ---
 
-Learning RxJS was difficult for me, but it was totally worth it as it simplifies implementing many complex async features in a frontend app
+Learning RxJS was difficult for me, but it was totally worth it as it simplifies implementing many complex async features in a Frontend app
 
 
-Now I think of it, its not that difficult. In this post I will try to simplify learning RxJS. I am using RxJS with Stencil.js, so I will cover what is essential in using it in a Front-end app. Let's begin
+Now I think of it, its not that difficult. In this post I will try to simplify learning RxJS. I am using RxJS with Stencil.js, so I will cover what is essential in using it in a Frontend app. Let's begin
 
 ## Reactive Programming
 

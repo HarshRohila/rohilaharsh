@@ -1,6 +1,6 @@
 ---
 title: 'Using RxJS with Stencil.js'
-date: 2023-04-01T09:29:13+05:30
+date: 2023-04-22T09:29:13+05:30
 author: 'Harsh Rohila'
 draft: true
 featured_image: '/img/rxjs.png'
@@ -40,7 +40,7 @@ Now, lets try to define state$
 Our component will have some initial state and the state of component can change if user is doing some events(like typing in input field, clicking button) in our component, lets represent user events by streams userEvent1$, userEvent2$, ...
 
 So we can represent state$ as
-```
+```ts
 state$ = of(initialState)
 
 userEvent1$.pipe(
