@@ -3,7 +3,7 @@ title: 'Using RxJS with Stencil.js'
 date: 2022-12-18T09:29:13+05:30
 author: 'Harsh Rohila'
 draft: true
-featured_image: '/img/glimmer.png'
+featured_image: '/img/rxjs.png'
 ---
 
 RxJS is mainly popular with Angular Developers. In this post I am going to share how I used RxJS with Stencil.js to build reactive components
@@ -22,11 +22,7 @@ lets represent that state by `state$` (pronounced as state stream)
 This `state$` will emit values whenever state changes.
 The component can subscribe to this state$ to know when to update
 
-For storing state we can use `BehaviorSubject` available in RxJS. Its a special type of Subject and a Subject is a special type of stream
-
-Subject: using this stream we can produce/emit values in the stream
-
-BehaviorSubject: is a Subject which can hold state (or last produced/emitted value)
+For storing state we can use `BehaviorSubject` available in RxJS. 
 
 Lets define type of our State. Lets say we are building a Todo component, so we will store todos
 
