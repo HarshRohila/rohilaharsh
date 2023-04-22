@@ -6,16 +6,20 @@ draft: true
 featured_image: '/img/glimmer.png'
 ---
 
-RxJS is mainly popular with Angular Developers. In this post I am going to share how I used RxJS with Stencil.js
+RxJS is mainly popular with Angular Developers. In this post I am going to share how I used RxJS with Stencil.js to build reactive components
 
 Ideas in this post should be applicable to other Frontend techs too
+
+> This post assumes familiarity with RxJS, check my [RxJS basics post](/posts/rxjs-basics) for that
+
+## Thinking of reactive components
 
 A frontend component will usually have some state,
 lets represent that state by `state$` (pronounced as state stream)
 
 > I am using word "stream" to refer to Observable, as its just a stream of values
 
-This `state$` will emit values whenever state changes
+This `state$` will emit values whenever state changes.
 The component can subscribe to this state$ to know when to update
 
 For storing state we can use `BehaviorSubject` available in RxJS. Its a special type of Subject and a Subject is a special type of stream
