@@ -151,7 +151,7 @@ disconnectedCallback() {
 Now we would like the component file to be a simple view file which will just subscribe to state$ and will emit events, some other file will can have logic to manage states and events
 
 Lets create a file `facade.ts` in that file we will have state$
-> Facade is a design pattern to expose a simple interface masking more complex code
+> Facade is a design pattern to expose a simple interface masking more complex code. Idea of creating a facade is taken from this [blog post](https://thomasburlesonia.medium.com/ngrx-facades-better-state-management-82a04b9a1e39)
 
 ```ts
 // facade.ts
