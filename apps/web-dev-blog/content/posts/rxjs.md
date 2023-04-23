@@ -6,9 +6,9 @@ draft: false
 featured_image: '/img/rxjs.png'
 ---
 
-RxJS is mainly popular with Angular Developers. In this post I am going to share how I used RxJS with Stencil.js to build reactive components
+RxJS is mainly popular with Angular Developers. In this post, I am going to share how I used RxJS with Stencil.js to build reactive components.
 
-Ideas in this post should be applicable for other Frontend techs too
+Ideas in this post should be applicable to other Frontend techs too.
 
 > This post assumes familiarity with RxJS, check my [RxJS basics post](/posts/rxjs-basics) for that
 
@@ -20,26 +20,25 @@ Ideas in this post should be applicable for other Frontend techs too
 ## Reactive components
 
 A frontend component will usually have some state,
-lets represent that state by `state$` (pronounced as state stream)
+let's represent that state by `state$` (pronounced as state stream).
 
-> I am using word "stream" to refer to Observable, as its just a stream of values
+> I am using the word "stream" to refer to Observable, as it's just a stream of values.
 
-This `state$` will emit values whenever state changes.
-The component can subscribe to this state$ to know when to update
+This `state$` will emit values whenever the state changes. The component can subscribe to this state$ to know when to update.
 
 ```ts
 state$.subscribe(updateComponentState)
 ```
 
-`updateComponentState` is a function which will do changes according to framework we are using, in Stencil.js it will update `@State()` variables so stencil knows when to update view
+`updateComponentState` is a function that will do changes according to the framework we are using, in Stencil.js it will update `@State()` variables so stencil knows when to update the view.
 
-Now, lets try to define state$
+Now, let's try to define state$.
 
 ### Defining state$
 
-Our component will have some initial state and the state of component can change if user is doing some events(like typing in input field, clicking button) in our component, lets represent user events by streams userEvent1$, userEvent2$, ...
+Our component will have some initial state and the state of the component can change if a user is doing some events (like typing in an input field, or clicking a button) in our component. Let's represent user events by streams userEvent1$, userEvent2$, ...
 
-So we can represent state$ as
+So we can represent the state$ as,
 ```ts
 state$ = of(initialState)
 
@@ -54,17 +53,17 @@ userEvent2$.pipe(
 .
 .
 ```
-Whenever userEvent1 occurs it will run the logic 1 and will update in state$, similarly it can work for other events
+Whenever userEvent1 occurs it will run the logic 1 and will update in state$, similarly, it can work for other events.
 
-Note that, we need to define logic 1, logic 2 only once, then UI should work, event will run through logic pipeline to update state
+Note that, we need to define logic 1, and logic 2 only once, then UI should work, the events will run through the logic pipeline to update the state.
 
-Based on this understanding lets define all thees more concretely
+Based on this understanding let's define all these more concretely.
 
-- Because we need to update state$ on user events and those state changes should be available to the component which already subscribed to state$, we can use `Subject` for this. Using subject we can do `state$.next(newState)` and that will put new state in state$. And this subject will need to hold some value, so we can use `BehaviorSubject`
-- Because of similar reasons we can use `Subject` for userEvent streams also, but these streams don't need to hold values, so it can use `Subject` only instead of `BehaviorSubject`
+- Because we need to update state$ on user events and those state changes should be available to the component which already subscribed to state$, we can use `Subject` for this. Using subject we can do `state$.next(newState)` and that will put the new state in state$. And this subject will need to hold some value, so we can use `BehaviorSubject`.
+- Because of similar reasons, we can use `Subject` for userEvent streams also, but these streams don't need to hold values, so it can use `Subject` only instead of `BehaviorSubject`.
 
 
-Let's define type of our State. I am considering example of a To-Do App, so we will store Todos
+Let's define the type of our State. I am considering an example of a To-Do App, so we will store Todos.
 
 ```ts
 interface State {
@@ -77,7 +76,7 @@ interface Todo {
 }
 ```
 
-Lets define some initial state of our component
+Let's define the initial state of our component.
 
 ```ts
 const initialState: State = {
@@ -94,7 +93,8 @@ const initialState: State = {
 }
 ```
 
-Now state$ can be defined
+Now the state$ can be defined as,
+
 ```ts
 const state$ = new BehaviourSubject<State>(initialState)
 ```
@@ -103,9 +103,9 @@ const state$ = new BehaviourSubject<State>(initialState)
 state$.subscribe(updateComponentState)
 ```
 
-To avoid memory leak, we also need to unsubscribe. Instead of unsubscribe, we can just complete the stream on disconnect/destroy of component
+To avoid memory leaks, we also need to unsubscribe. Instead of unsubscribe, we can just complete the stream on disconnect/destroy of the component.
 
-For that RxJS having `takeUntil` operator. Lets use that
+For that RxJS has `takeUntil` operator. Let's use that.
 
 ```ts
 state$.pipe(
@@ -115,9 +115,9 @@ state$.pipe(
 
 But where to put this code?
 
-To listen for all state changes we need to do this once before render of component
+To listen for all state changes we need to do this once before rendering of the component.
 
-Stencil having `componentWillLoad` hook for that. Lets put this in
+Stencil having `componentWillLoad` hook for that. Let's put this in.
 
 ```ts
 componentWillLoad() {
@@ -127,11 +127,11 @@ componentWillLoad() {
 }
 ```
 
-Lets define `disconnected$` stream now, as that's easy. You can think of `disconnected$` as an event which occured in component and on that event we need to stop subscribing to state changes
+Let's define the `disconnected$` stream now, as that's easy. You can think of `disconnected$` as an event which occurrs in component and on that event we need to stop subscribing to state changes
 
-Stencil.js having `disconnectedCallback` hook for knowing when the component is disconnected from the DOM
+Stencil.js has `disconnectedCallback` hook for knowing when the component is disconnected from the DOM.
 
-But we need this in stream form to be able to use with RxJS. We can use `Subject` for this, as it can emit value when component is disconnected.
+But we need this in stream form to be able to use it with RxJS. We can use `Subject` for this, as it can emit value when the component is disconnected.
 
 ```ts
 disconnected$ = new Subject<void>()
@@ -148,10 +148,11 @@ disconnectedCallback() {
 }
 ```
 
-Now we would like the component file to be a simple view file which will just subscribe to state$ and will emit events, some other file will can have logic to manage states and events
+Now we would like the component file to be a simple view file that will just subscribe to the state$ and will emit events, some other file can have logic to manage states and events.
 
-Lets create a file `facade.ts` in that file we will have state$
-> Facade is a design pattern to expose a simple interface masking more complex code. Idea of creating a facade is taken from this [blog post](https://thomasburlesonia.medium.com/ngrx-facades-better-state-management-82a04b9a1e39)
+Let's create a file `facade.ts`, in that file we will have the state$.
+
+> A facade is a design pattern to expose a simple interface masking more complex code. The idea of creating a facade is taken from this [blog post](https://thomasburlesonia.medium.com/ngrx-facades-better-state-management-82a04b9a1e39).
 
 ```ts
 // facade.ts
@@ -172,9 +173,9 @@ export const state$ = new BehaviourSubject<State>(initialState)
 
 ## User Events
 
-Let's add a Delete todo feature. For that user can click on a button next to a todo to delete it
+Let's add a Delete todo feature. For that, the user can click on a button next to a todo to delete it.
 
-Its template can look like below
+Its template can look like below.
 
 ```jsx
 render() {
@@ -190,7 +191,7 @@ render() {
 
 ```
 
-Event handler for delete can look like below
+The event handler for delete can look like the below.
 ```ts
 deleteTodoEvent = events.createDeleteEvent(this.disconnected$);
 
@@ -203,7 +204,7 @@ private createDeleteTodoHandler = (todo: Todo) => {
 };
 ```
 
-where `events` is defined in `facade.ts` file as below
+Where `events` is defined in the `facade.ts` file below
 
 ```ts
 // facade.ts
