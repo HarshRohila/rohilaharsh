@@ -5,7 +5,7 @@ author: 'Harsh Rohila'
 draft: true
 ---
 
-This post is about command patterns found in modern frontend frameworks.
+This post is about common patterns found in modern frontend frameworks.
 
 ## 1. Template
 
