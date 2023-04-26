@@ -2,7 +2,8 @@
 title: 'Using TypeScipt for Scripts and IAAC'
 date: 2023-04-25T20:07:09+05:30
 author: 'Harsh Rohila'
-draft: true
+featured_image: '/img/ts-scripts.jpg'
+draft: false
 ---
 
 I am using TypeScript for everything I code, Frontend, Backend, AWS Infrastructure as Code (IAAC), and writing scripts. In this post, I will cover less common scenarios of writing scripts and IAAC in TypeScript.
