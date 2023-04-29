@@ -9,3 +9,5 @@
     speed: 500
   })
 </script>
+{{ $js := resources.Get "ts/app/index.ts" | js.Build }}
+<script src="{{ $js.Permalink }}" defer></script>
