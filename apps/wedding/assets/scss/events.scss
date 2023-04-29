@@ -124,3 +124,36 @@ ul.wedding-events {
     }
   }
 }
+
+// desktop animation
+@media only screen and (min-width: 768px) {
+  li:nth-child(odd) .event-description-container {
+    transform: translateX(100%);
+  }
+  li:nth-child(even) .event-description-container {
+    transform: translateX(-100%);
+  }
+  li .event-description-container {
+    opacity: 0;
+    transition: transform 0.7s ease-out;
+    transition-property: transform, opacity;
+    &.slide-in {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+// mobile animation
+@media only screen and (max-width: 768px) {
+  .event-description-container {
+    transition: opacity 1s;
+    opacity: 0;
+    transform: scale(0.8);
+    transition-property: opacity, transform;
+    &.show-up {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
