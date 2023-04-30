@@ -43,7 +43,7 @@
   display: block;
   max-width: 500px;
   margin: 0 auto;
-  flex-shrink: 0;
+  flex-shrink: 1;
   border: 10px solid var(--text-color-2);
 
   width: 480px;
@@ -71,7 +71,7 @@
   position: relative;
 
   @media only screen and (min-width: 768px) {
-    min-width: 400px;
+    min-width: 350px;
   }
 }
 
@@ -128,10 +128,10 @@ ul.wedding-events {
 // desktop animation
 @media only screen and (min-width: 768px) {
   li:nth-child(odd) .event-description-container {
-    transform: translateX(100%);
+    transform: translateX(30%);
   }
   li:nth-child(even) .event-description-container {
-    transform: translateX(-100%);
+    transform: translateX(-30%);
   }
   li .event-description-container {
     opacity: 0;
