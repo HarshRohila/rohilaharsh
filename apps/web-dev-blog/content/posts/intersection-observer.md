@@ -2,7 +2,7 @@
 title: 'Animation on Scroll with Intersection Observer API'
 date: 2023-04-30T09:29:13+05:30
 author: 'Harsh Rohila'
-draft: true
+draft: false
 featured_image: '/img/intersection-observer.avif'
 ---
 
