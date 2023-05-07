@@ -1,4 +1,4 @@
-const CACHE_VERSION = 4
+const CACHE_VERSION = 5
 
 const BASE_CACHE_FILES = ['/manifest.json', '/favicon.ico', '/img/logo.png', '/img/cover.jpg']
 
@@ -114,11 +114,11 @@ function installServiceWorker() {
       return cache.addAll(OFFLINE_CACHE_FILES)
     }),
     caches.open(CACHE_VERSIONS.notFound).then(cache => {
-      const subAppNotFoundPages = SubApps.APP_NAMES.map(appName => {
-        return SubApps.newSubApp(appName).getNotFoundPage()
-      })
+      // const subAppNotFoundPages = SubApps.APP_NAMES.map(appName => {
+      //   return SubApps.newSubApp(appName).getNotFoundPage()
+      // })
 
-      return cache.addAll([...NOT_FOUND_CACHE_FILES, ...subAppNotFoundPages])
+      return cache.addAll(NOT_FOUND_CACHE_FILES)
     })
   ]).then(() => {
     return self.skipWaiting()
@@ -267,9 +267,7 @@ self.addEventListener('fetch', event => {
                   const requestUrl = event.request.url
                   if (SubApps.isSubAppUrl(requestUrl)) {
                     const subApp = SubApps.newSubApp(requestUrl)
-                    return caches.open(CACHE_VERSIONS.notFound).then(cache => {
-                      return cache.match(subApp.getNotFoundPage())
-                    })
+                    return fetch(subApp.getNotFoundPage())
                   } else {
                     return caches.open(CACHE_VERSIONS.notFound).then(cache => {
                       return cache.match(NOT_FOUND_PAGE)
