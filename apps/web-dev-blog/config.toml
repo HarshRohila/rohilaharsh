@@ -6,8 +6,6 @@ disqusShortname = 'a-web-dev-blog'
 enableRobotsTXT = true
 googleAnalytics = "G-EFC3FRJ2GM"
 
-disableKinds = ["404"]
-
 [[params.ananke_socials]]
 name = "github"
 url = "https://github.com/HarshRohila"
