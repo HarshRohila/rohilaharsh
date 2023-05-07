@@ -1,4 +1,4 @@
-const CACHE_VERSION = 5
+const CACHE_VERSION = 1
 
 const BASE_CACHE_FILES = ['/manifest.json', '/favicon.ico', '/img/logo.png', '/img/cover.jpg']
 
@@ -8,30 +8,6 @@ const NOT_FOUND_CACHE_FILES = ['/404.html']
 
 const OFFLINE_PAGE = '/offline/index.html'
 const NOT_FOUND_PAGE = '/404.html'
-
-const SubApps = {
-  APP_NAMES: ['youtube-frontend'],
-  isSubAppUrl: url => {
-    return url.split('/').some(part => {
-      return SubApps.APP_NAMES.some(app => app === part)
-    })
-  },
-  getAppName(url) {
-    const urlParts = url.split('/')
-    return SubApps.APP_NAMES.find(appName => {
-      urlParts.some(part => part === appName)
-    })
-  },
-  newSubApp(url) {
-    const appName = SubApps.getAppName(url)
-
-    return {
-      getNotFoundPage() {
-        return appName + NOT_FOUND_PAGE
-      }
-    }
-  }
-}
 
 const CACHE_VERSIONS = {
   assets: 'assets-v' + CACHE_VERSION,
@@ -114,10 +90,6 @@ function installServiceWorker() {
       return cache.addAll(OFFLINE_CACHE_FILES)
     }),
     caches.open(CACHE_VERSIONS.notFound).then(cache => {
-      // const subAppNotFoundPages = SubApps.APP_NAMES.map(appName => {
-      //   return SubApps.newSubApp(appName).getNotFoundPage()
-      // })
-
       return cache.addAll(NOT_FOUND_CACHE_FILES)
     })
   ]).then(() => {
@@ -264,15 +236,9 @@ self.addEventListener('fetch', event => {
                   }
                   return response
                 } else {
-                  const requestUrl = event.request.url
-                  if (SubApps.isSubAppUrl(requestUrl)) {
-                    const subApp = SubApps.newSubApp(requestUrl)
-                    return fetch(subApp.getNotFoundPage())
-                  } else {
-                    return caches.open(CACHE_VERSIONS.notFound).then(cache => {
-                      return cache.match(NOT_FOUND_PAGE)
-                    })
-                  }
+                  return caches.open(CACHE_VERSIONS.notFound).then(cache => {
+                    return cache.match(NOT_FOUND_PAGE)
+                  })
                 }
               })
               .then(response => {
