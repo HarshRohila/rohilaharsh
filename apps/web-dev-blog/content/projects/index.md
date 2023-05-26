@@ -14,19 +14,25 @@ It makes using Custom Events easy
 
 [![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/react-custom-events)
 
-## 2. [Todo List](https://www.rohilaharsh.in/todo-react/)
+## 2. [PipedRx - An ad-free YouTube Frontend](https://www.rohilaharsh.in/youtube-frontend)
 
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HarshRohila/todo-react)
+An Ad-free YouTube Frontend which can be used instead of original YouTube. This is using RxJS, Redux and Stencil.js.
 
-## 3. [Movie Search Bar](https://www.rohilaharsh.in/autocomplete-react/)
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HarshRohila/youtube-frontend)
 
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HarshRohila/autocomplete-react)
-
-## 4. [Forms Library](https://www.npmjs.com/package/react-changeset)
+## 3. [Forms Library](https://www.npmjs.com/package/react-changeset)
 
 Make validating form elements easy
 
 [![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/react-changeset)
+
+## 4. [Todo List](https://www.rohilaharsh.in/todo-react/)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HarshRohila/todo-react)
+
+## 5. [Movie Search Bar](https://www.rohilaharsh.in/autocomplete-react/)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HarshRohila/autocomplete-react)
 
 # Others
 
