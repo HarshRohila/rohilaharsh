@@ -11,3 +11,15 @@
 </script>
 {{ $js := resources.Get "ts/app/index.ts" | js.Build }}
 <script src="{{ $js.Permalink }}" defer></script>
+<script src="js/flipdown.min.js"></script>
+
+<script>
+  const datetime = new Date(2023, 8, 21)
+
+  const el = document.querySelector('#flipdown')
+  const flipdown = new FlipDown(datetime.getTime() / 1000, el, {
+    theme: 'light' // or dark
+  })
+
+  flipdown.start()
+</script>

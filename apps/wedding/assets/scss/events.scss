@@ -157,3 +157,11 @@ ul.wedding-events {
     }
   }
 }
+
+#flipdown.flipdown {
+  margin: auto;
+  margin-top: 20px;
+  .rotor-group-heading:before {
+    color: white;
+  }
+}
