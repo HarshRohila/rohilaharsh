@@ -116,6 +116,12 @@ ul.wedding-events {
   }
 }
 
+@mixin mobile() {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .image-container {
     display: none;
@@ -145,7 +151,7 @@ ul.wedding-events {
 }
 
 // mobile animation
-@media only screen and (max-width: 768px) {
+@include mobile() {
   .event-description-container {
     transition: opacity 1s;
     opacity: 0;
@@ -163,5 +169,8 @@ ul.wedding-events {
   margin-top: 20px;
   .rotor-group-heading:before {
     color: white;
+    @include mobile() {
+      font-size: 1rem;
+    }
   }
 }
