@@ -174,3 +174,15 @@ ul.wedding-events {
     }
   }
 }
+
+#site-head {
+  > .vertical {
+    vertical-align: bottom;
+  }
+  @include mobile() {
+    padding-bottom: 0;
+    #blog-logo {
+      visibility: hidden;
+    }
+  }
+}
