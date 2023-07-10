@@ -17,6 +17,7 @@
   font-size: 16px;
   min-height: 150px;
   text-align: left;
+  line-height: 2rem;
   .location i {
     color: red;
     font-size: 1em;
@@ -35,6 +36,11 @@
 .event-date,
 .location {
   text-align: left;
+}
+
+.location {
+  margin-top: 16px;
+  display: block;
 }
 
 @media (min-width: 768px) {
