@@ -246,5 +246,5 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{{ " images/favicon-32x32.png" | absURL }}" />
 <link rel="icon" type="image/png" sizes="16x16" href="{{ " images/favicon-16x16.png" | absURL }}" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
-{{ $style := resources.Get "scss/events.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+{{ $style := resources.Get "scss/index.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" />
