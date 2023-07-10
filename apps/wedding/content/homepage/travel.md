@@ -16,7 +16,7 @@ We have booked a room for you at the **Pine Grove Hotel** in **Solan**. Your det
 
 ###### Transport
 
-{{< fa far fa-bus >}} A bus is arranged for people coming from **Shamli**, **Tikroul** and **Saharanpur**.
+{{< fa far fa-bus >}} A bus is arranged for people coming from **Shamli**, **Tikroul** and **Saharanpur** on **20th September**.
 
 {{< fa far fa-clock >}} **Bus Timings**
 

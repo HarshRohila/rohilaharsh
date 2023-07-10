@@ -1,11 +1,12 @@
 {{ $events := (slice
-  (dict "eventName" "Mehndi" "image" "images/mehndi.webp" "date" "20th September, 2023" "time" "10 AM" "dress" "Green Color")
-  (dict "eventName" "Lunch" "image" "images/lunch.webp" "date" "20th September, 2023" "time" "2 PM" "dress" "")
-  (dict "eventName" "Engagement" "image" "images/engagement.webp" "date" "20th September, 2023" "time" "4 PM" "dress" "Pink Color")
-  (dict "eventName" "Sangeet" "image" "images/sangeet.webp" "date" "20th September, 2023" "time" "6:30 PM" "dress" "")
-  (dict "eventName" "Dinner" "image" "images/dinner.webp" "date" "20th September, 2023" "time" "7 PM" "dress" "")
-  (dict "eventName" "Haldi" "image" "images/haldi.webp" "date" "21st September, 2023" "time" "7 AM" "dress" "Yellow Color")
-  (dict "eventName" "Wedding" "image" "images/wedding.webp" "date" "21st September, 2023" "time" "12 PM" "dress" "")
+  (dict "eventName" "Mehndi" "image" "images/mehndi.webp" "date" "20th September, Wednesday" "time" "10 AM" "dress" "Green Color")
+  (dict "eventName" "Lunch" "image" "images/lunch.webp" "date" "20th September, Wednesday" "time" "2 PM" "dress" "")
+  (dict "eventName" "Engagement" "image" "images/engagement.webp" "date" "20th September, Wednesday" "time" "4 PM" "dress" "Pink Color")
+  (dict "eventName" "Sangeet" "image" "images/sangeet.webp" "date" "20th September, Wednesday" "time" "6:30 PM" "dress" "")
+  (dict "eventName" "Dinner" "image" "images/dinner.webp" "date" "20th September, Wednesday" "time" "7 PM" "dress" "")
+  (dict "eventName" "Haldi" "image" "images/haldi.webp" "date" "21st September, Thursday" "time" "7 AM" "dress" "Yellow Color")
+  (dict "eventName" "Wedding" "image" "images/wedding.webp" "date" "21st September, Thursday" "time" "12 PM" "dress" "")
+  (dict "eventName" "Reception At Pune" "image" "images/dinner.webp" "date" "26th September, Tuesday" "time" "7 PM" "dress" "" "location" "Shiv Shakti Banquet Hall, Kharadi, Pune")
   )
 }}
 
@@ -29,6 +30,14 @@
           <div class="event-date">{{ .date }}<br />{{ .time }}</div>
           {{ if (ne .dress "") }}
             <p class="event-details">Dress Code: {{ .dress }}</p>
+          {{ end }}
+          {{ if (ne .location nil) }}
+            <a
+              class="location"
+              target="_blank"
+              href="https://www.google.com/maps/place/%E0%A4%B9%E0%A5%89%E0%A4%9F%E0%A5%87%E0%A4%B2+%E0%A4%B6%E0%A4%BF%E0%A4%B5%E0%A4%B6%E0%A4%95%E0%A5%8D%E0%A4%A4%E0%A5%80+%E0%A4%AA%E0%A5%8D%E0%A4%AF%E0%A5%81%E0%A4%85%E0%A4%B0+%E0%A4%B5%E0%A5%8D%E0%A4%B9%E0%A5%87%E0%A4%9C+%E0%A4%AB%E0%A5%85%E0%A4%AE%E0%A4%BF%E0%A4%B2%E0%A5%80+%E0%A4%B0%E0%A5%87%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A5%8D%E0%A4%B0%E0%A4%BE,+21%2F6,+Mundhwa+-+Kharadi+Rd,+Thite+Vasti,+Thite+Nagar,+Kharadi,+Pune,+Maharashtra+411014/@18.5442938,73.9358735,17z/data=!4m9!1m2!2m1!1sshiv+shakti+banquet+hall!3m5!1s0x3bc2c17d89a0d067:0xca1827f7d37869e8!8m2!3d18.5442938!4d73.9358735!16s%2Fg%2F11g61z6b4l"
+              ><i class="fa-fw fas fa-up-right-from-square"></i><span>{{ .location }}</span></a
+            >
           {{ end }}
           <div style="margin:10px 0;padding-bottom:30px;"></div>
         </div>

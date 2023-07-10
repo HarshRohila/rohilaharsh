@@ -16,6 +16,12 @@
   padding: 40px 60px;
   font-size: 16px;
   min-height: 150px;
+  text-align: left;
+  .location i {
+    color: red;
+    font-size: 1em;
+    margin-right: 5px;
+  }
 }
 
 .event-name,
@@ -24,6 +30,11 @@
   font-size: 30px;
   text-transform: capitalize;
   font-weight: 300;
+}
+.event-name,
+.event-date,
+.location {
+  text-align: left;
 }
 
 @media (min-width: 768px) {
