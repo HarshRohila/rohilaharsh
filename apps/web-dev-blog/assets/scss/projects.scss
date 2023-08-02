@@ -1,0 +1,11 @@
+@import './mixins';
+
+@include phone() {
+  article.pv5 {
+    padding-top: 0;
+  }
+}
+
+.github-stars {
+  padding: 0 5px;
+}
