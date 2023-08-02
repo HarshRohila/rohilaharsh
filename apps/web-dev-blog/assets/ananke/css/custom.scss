@@ -1,3 +1,9 @@
+@import './variables';
+@import '../../fontawesome/scss/fontawesome.scss';
+@import '../../fontawesome/scss/regular.scss';
+@import '../../fontawesome/scss/solid.scss';
+@import '../../fontawesome/scss/brands.scss';
+
 div.f4 {
   font-size: 1rem;
 }
@@ -24,4 +30,8 @@ nav .home-nav {
   .title {
     font-size: 2rem;
   }
+}
+
+.fa-github {
+  margin-left: 10px;
 }

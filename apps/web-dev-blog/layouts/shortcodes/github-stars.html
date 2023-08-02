@@ -1,0 +1,13 @@
+<span class="github-stars"></span>
+
+<script>
+  document.body.addEventListener('script-loaded', () => {
+    const APP_NAME = 'web-dev-blog'
+    window[APP_NAME].getStarsFromRepoUrl('https://github.com/HarshRohila/react-custom-events').then(
+      stars => {
+        const el = document.querySelector('.github-stars')
+        el.innerText = stars
+      }
+    )
+  })
+</script>

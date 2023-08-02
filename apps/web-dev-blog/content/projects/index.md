@@ -8,7 +8,7 @@ menu:
 
 # React Projects
 
-## 1. [React Custom Events Library](https://www.npmjs.com/package/react-custom-events)
+## 1. [React Custom Events Library](https://www.npmjs.com/package/react-custom-events) [{{< fa fa-brands fa-github >}}](https://github.com/HarshRohila/react-custom-events) {{< github-stars >}} {{< fa far fa-star >}}
 
 It makes using Custom Events easy
 
