@@ -1,4 +1,5 @@
 @import './variables';
+@import '../../scss/mixins';
 @import '../../fontawesome/scss/fontawesome.scss';
 @import '../../fontawesome/scss/regular.scss';
 @import '../../fontawesome/scss/solid.scss';
@@ -17,11 +18,6 @@ nav .home-nav {
     bottom: 8px;
   }
 }
-@mixin phone() {
-  @media only screen and (max-width: 767px) {
-    @content;
-  }
-}
 
 @include phone() {
   .header-text {
@@ -34,4 +30,8 @@ nav .home-nav {
 
 .fa-github {
   margin-left: 10px;
+}
+
+.nested-links a {
+  color: #a45454;
 }
