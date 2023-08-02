@@ -3,10 +3,9 @@
 <script data-url="{{ .Get "url" }}">
   ;(function () {
     const scriptEl = document.currentScript
+    const APP_NAME = 'web-dev-blog'
 
-    document.body.addEventListener('script-loaded', () => {
-      const APP_NAME = 'web-dev-blog'
-
+    const setStar = () => {
       const url = scriptEl.getAttribute('data-url')
 
       // 'https://github.com/HarshRohila/react-custom-events'
@@ -19,6 +18,12 @@
           el.innerText = stars
         }
       })
-    })
+    }
+
+    if (window[APP_NAME]) {
+      setStar()
+    } else {
+      document.body.addEventListener('script-loaded', setStar)
+    }
   })()
 </script>
