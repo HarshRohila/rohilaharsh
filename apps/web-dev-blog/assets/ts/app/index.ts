@@ -24,7 +24,6 @@ async function initializeGetStars() {
       const { stargazers_count } = response.data
       return stargazers_count
     } catch (error) {
-      console.error('Error retrieving star count:', error)
       return 0
     }
   }

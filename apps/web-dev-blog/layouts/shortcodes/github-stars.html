@@ -1,13 +1,24 @@
 <span class="github-stars"></span>
 
-<script>
-  document.body.addEventListener('script-loaded', () => {
-    const APP_NAME = 'web-dev-blog'
-    window[APP_NAME].getStarsFromRepoUrl('https://github.com/HarshRohila/react-custom-events').then(
-      stars => {
-        const el = document.querySelector('.github-stars')
-        el.innerText = stars
-      }
-    )
-  })
+<script data-url="{{ .Get "url" }}">
+  ;(function () {
+    const scriptEl = document.currentScript
+
+    document.body.addEventListener('script-loaded', () => {
+      const APP_NAME = 'web-dev-blog'
+
+      const url = scriptEl.getAttribute('data-url')
+
+      // 'https://github.com/HarshRohila/react-custom-events'
+      window[APP_NAME].getStarsFromRepoUrl(url).then(stars => {
+        const el = scriptEl.previousElementSibling
+
+        if (!stars) {
+          el.parentElement.style.display = 'none'
+        } else {
+          el.innerText = stars
+        }
+      })
+    })
+  })()
 </script>
