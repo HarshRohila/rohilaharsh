@@ -10,7 +10,7 @@ menu:
 
 It makes using Custom Events easy.
 
-[{{< fa fa-brands fa-github >}} {{< github-stars url="https://github.com/HarshRohila/react-custom-events" >}} {{< fa fas fa-star >}}](https://github.com/HarshRohila/react-custom-events)
+[{{< github-stars url="https://github.com/HarshRohila/react-custom-events" label="rce" >}}](https://github.com/HarshRohila/react-custom-events)
 
 [![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/react-custom-events)
 
@@ -18,7 +18,7 @@ It makes using Custom Events easy.
 
 An AWS CDK library to create Secure Parameter Store on AWS.
 
-[{{< fa fa-brands fa-github >}} {{< github-stars url="https://github.com/HarshRohila/cdk-secure-parameter-store" >}} {{< fa fas fa-star >}}](https://github.com/HarshRohila/cdk-secure-parameter-store)
+[{{< github-stars url="https://github.com/HarshRohila/cdk-secure-parameter-store" label="csps">}}](https://github.com/HarshRohila/cdk-secure-parameter-store)
 
 [![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/cdk-secure-parameter-store)
 

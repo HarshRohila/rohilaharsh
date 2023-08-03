@@ -1,29 +1,13 @@
-<span class="github-stars"></span>
+<div class="star-template {{ .Get "label" }}">
+  <i class="fa-fw fa-brands fa-github"></i>
+  <span class="github-stars {{ .Get "label" }}">...</span>
+  <i class="fa-fw fas fa-star"></i>
+</div>
 
-<script data-url="{{ .Get "url" }}">
-  ;(function () {
-    const scriptEl = document.currentScript
-    const APP_NAME = 'web-dev-blog'
-
-    const setStar = () => {
-      const url = scriptEl.getAttribute('data-url')
-
-      // 'https://github.com/HarshRohila/react-custom-events'
-      window[APP_NAME].getStarsFromRepoUrl(url).then(stars => {
-        const el = scriptEl.previousElementSibling
-
-        if (!stars) {
-          el.parentElement.style.display = 'none'
-        } else {
-          el.innerText = stars
-        }
-      })
-    }
-
-    if (window[APP_NAME]) {
-      setStar()
-    } else {
-      document.body.addEventListener('script-loaded', setStar)
-    }
-  })()
-</script>
+{{ $js := resources.Get "ts/app/github-stars.ts" | js.Build | resources.Minify }}
+<script
+  src="{{ $js.Permalink }}"
+  data-url="{{ .Get "url" }}"
+  data-label="{{ .Get "label" }}"
+  defer
+></script>
