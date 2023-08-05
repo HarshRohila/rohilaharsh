@@ -8,7 +8,7 @@ Here, we've gathered all the information you need to make your travel and stay a
 
 ###### {{< fa far fa-hotel >}} Accomodation
 
-We have booked a room for you at the **Pine Grove Hotel** in **Solan**. Your details have been provided to the hotel and you just need to show a valid ID at the reception to check in.
+An accommodation has been arranged for you. Your details have been provided to the hotel and you just need to show a valid ID at the reception to check in.
 
 {{< fa far fa-location-dot >}} **Hotel Location**
 
