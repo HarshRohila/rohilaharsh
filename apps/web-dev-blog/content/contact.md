@@ -2,7 +2,9 @@
 title: Contact
 description: I'd like to hear from you
 type: page
-menu: main
+menu:
+  main:
+    weight: 3
 ---
 
 {{< form-contact action="https://getform.io/f/df773996-1067-468e-a216-cb6cb269fede" >}}
