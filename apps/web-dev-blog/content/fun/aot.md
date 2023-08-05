@@ -13,6 +13,8 @@ Some series are worth your time. These are the type which demonstrates how creat
 
 ## About this show
 
+![AOT](/img/aot.webp)
+
 Attack on Titan is an [anime](https://en.wikipedia.org/wiki/Anime), which started in 2013. Its having 4 seasons. As of writing this post, its IMDb rating is 9.1.
 
 ## Environment of the show
