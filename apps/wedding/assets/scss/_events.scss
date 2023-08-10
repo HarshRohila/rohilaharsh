@@ -19,7 +19,7 @@
   text-align: left;
   line-height: 2rem;
   .location i {
-    color: red;
+    color: var(--dark);
     font-size: 1em;
     margin-right: 5px;
   }
@@ -27,7 +27,7 @@
 
 .event-name,
 .travel-head {
-  color: #b60d0d;
+  color: var(--dark);
   font-size: 30px;
   text-transform: capitalize;
   font-weight: 300;
@@ -83,7 +83,7 @@
     var(--frame-right-bottom);
   background-position: 5px 5px, 99% 5px, 5px 99%, 99% 99%;
   background-repeat: no-repeat;
-  background-color: #ffffff;
+  background-color: var(--light);
   border: 2px solid var(--text-color-2);
   position: relative;
 
@@ -127,7 +127,7 @@ ul.wedding-events {
 }
 
 .event-description {
-  color: red;
+  color: var(--dark);
   .event-date {
     margin-top: 1em;
   }

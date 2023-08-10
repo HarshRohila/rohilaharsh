@@ -23,3 +23,10 @@ h2 {
     margin-bottom: 10px;
   }
 }
+
+.post-holder {
+  background-color: var(--light);
+  &.dark {
+    background-color: var(--dark);
+  }
+}
