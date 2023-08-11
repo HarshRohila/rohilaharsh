@@ -199,7 +199,7 @@ ul.wedding-events {
   @include mobile() {
     padding-bottom: 0;
     #blog-logo {
-      visibility: hidden;
+      transform: scale(0.7);
     }
     .btn.site-menu {
       padding: 3px 10px;
