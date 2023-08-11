@@ -37,7 +37,9 @@ An accommodation has been arranged for you. Your details have been provided to t
 
 ###### {{< fa far fa-city >}} About Solan
 
-Nestled in the verdant foothills of the Himalayas, Solan is a breathtakingly beautiful city in Himachal Pradesh. Its picturesque landscapes, with dense forests, rolling hills, and sparkling streams, make it a nature lover's paradise. The city's pleasant weather throughout the year, with cool summers and snowy winters, adds to its charm. Solan's stunning vistas, coupled with its rich cultural heritage and warm hospitality, make it a truly enchanting destination for travelers seeking natural beauty and tranquility.
+Nestled in the verdant foothills of the Himalayas, Solan is a breathtakingly beautiful city in Himachal Pradesh. Its picturesque landscapes, with dense forests, rolling hills, and sparkling streams, make it a nature lover's paradise. The city's pleasant weather throughout the year, with cool summers and snowy winters, adds to its charm.
+
+In late September, Solan's afternoons are pleasantly mild, with temperatures around 20-25°C, allowing us to revel in outdoor festivities. However, do pack a sweater for the evenings, as temperatures might dip to 10-15°C.
 
 ###### {{< fa far fa-location >}} Wedding Venue
 
