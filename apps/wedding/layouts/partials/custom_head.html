@@ -37,6 +37,7 @@
   }
 
   #site-head {
+    padding: 0;
     background-image: url('images/cover-image.webp');
     display: table;
     width: 100%;
@@ -46,11 +47,14 @@
   #site-head > .vertical {
     vertical-align: bottom;
   }
-
-  @media only screen and (max-width: 500px) {
-    #site-head {
-      padding: 10% 0;
-    }
+  #site-head-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #site-head-content > .top {
+    flex: 1;
+    margin-top: 18%;
   }
 
   @media only screen and (max-width: 768px) {
@@ -186,7 +190,6 @@
   @media only screen and (max-width: 768px) {
     .blog-title {
       font-size: 70px;
-      margin-bottom: 50%;
     }
   }
 

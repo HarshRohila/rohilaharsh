@@ -1,64 +1,100 @@
-{{ define "main" }} {{ $headless := .Site.GetPage "/homepage" }} {{ $sections :=
-$headless.Resources.ByType "page" }} {{ $sections := cond .Site.BuildDrafts $sections (where
-$sections "Draft" "==" false) }}
+{{ define "main" }}
+  {{ $headless := .Site.GetPage "/homepage" }}
+  {{ $sections :=
+    $headless.Resources.ByType "page"
+  }}
+  {{ $sections := cond .Site.BuildDrafts $sections (where
+    $sections "Draft" "==" false)
+  }}
 
-{{ partial "bg-music" }}
-<!-- Welcome screen that scrolls out of view -->
-<header id="site-head">
-  <div class="overlay bounce-in-top">
-  </div>
-  <div class="vertical">
-    <div id="site-head-content" class="inner bounce-in-top">
-      {{ with .Params.header_logo }}<img id="blog-logo" src="{{ . }}" alt="Logo" />{{ end }} {{ if
-      .Site.Params.title_guard }}
-      <div class="title-and-description-guard">
-        {{ end }} {{ with .Params.header_headline }}
-        <h1 class="blog-title roll-in-left">{{ . | safeHTML }}</h1>
-        {{ end }} {{ with .Params.header_subheadline }}
-        <h2 class="blog-description">{{ . | safeHTML }}</h2>
-        {{ end }} {{ if .Site.Params.title_guard }}
-      </div>
-      {{ end }} {{ range where $sections ".Params.header_menu" "eq" true }} {{ $button_title :=
-      .Title }} {{ with .Params.header_menu_title }}{{ $button_title = . }}{{ end }} {{ if isset
-      .Params "external" }}
-      <a class="btn site-menu" href="{{ .Params.external  }}">{{ $button_title }}&nbsp;<icon
-          class="fa fa-external-link"></icon></a>
-      {{ else }} {{ $fnav_title := .Title }}{{ with .Params.navigation_menu_title }}{{ $fnav_title =
-      . }}{{ end }}
-      <a class="btn site-menu" data-title-anchor="{{ anchorize $fnav_title }}">{{ $button_title }}</a>
-      {{ end }} {{ end }}
-      <i id="header-arrow" class="fa fa-angle-down"></i>
-      <div id="flipdown" class="flipdown"></div>
-      <div class="scroll-indicator">
-        <i class="fas fa-chevron-down"></i>
+  {{ partial "bg-music" }}
+  <!-- Welcome screen that scrolls out of view -->
+  <header id="site-head">
+    <div class="overlay bounce-in-top"></div>
+    <div class="vertical">
+      <div id="site-head-content" class="inner bounce-in-top">
+        <div class="top">
+          {{ with .Params.header_logo }}
+            <img id="blog-logo" src="{{ . }}" alt="Logo" />
+          {{ end }}
+
+          {{ with .Params.header_headline }}
+            <h1 class="blog-title roll-in-left">{{ . | safeHTML }}</h1>
+          {{ end }}
+          {{ with .Params.header_subheadline }}
+            <h2 class="blog-description">{{ . | safeHTML }}</h2>
+          {{ end }}
+        </div>
+        <div class="btns-container">
+          {{ range where $sections ".Params.header_menu" "eq" true }}
+            {{ $button_title := .Title }}
+            {{ with .Params.header_menu_title }}
+              {{ $button_title = . }}
+            {{ end }}
+            {{ if isset .Params "external" }}
+              <a class="btn site-menu" href="{{ .Params.external }}"
+                >{{ $button_title }}&nbsp;
+                <icon class="fa fa-external-link"></icon>
+              </a>
+            {{ else }}
+              {{ $fnav_title := .Title }}{{ with .Params.navigation_menu_title }}
+                {{ $fnav_title = . }}
+              {{ end }}
+              <a class="btn site-menu" data-title-anchor="{{ anchorize $fnav_title }}"
+                >{{ $button_title }}</a
+              >
+            {{ end }}
+          {{ end }}
+        </div>
+        <i id="header-arrow" class="fa fa-angle-down"></i>
+        <div id="flipdown" class="flipdown"></div>
+        <div class="scroll-indicator">
+          <i class="fas fa-chevron-down"></i>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<main class="content" role="main">
-  <!-- Render sticky left navigation menu -->
-  <div class="fixed-nav"></div>
+  <main class="content" role="main">
+    <!-- Render sticky left navigation menu -->
+    <div class="fixed-nav"></div>
 
-  <!-- Render single-page content -->
-  {{ $content := where $sections "Params.external" "==" nil }} {{ range $index_val, $elem_val :=
-  $content }} {{ $fnav_title := .Title }}{{ with .Params.navigation_menu_title }}{{ $fnav_title = .
-  }}{{ end }}
-  <div
-    class="post-holder{{ if and (ne .Site.Params.invertSectionColors true) (not (modBool $index_val 2)) }} dark{{ else if and (eq .Site.Params.invertSectionColors true) (modBool $index_val 2) }} dark{{ end }}">
-    <article id="{{ anchorize $fnav_title }}"
-      class="post {{ if eq $index_val 0 }}first{{ end }} {{ if eq (add $index_val 1) (len $content) }}last{{ end }}">
-      <header class="post-header">
-        <h2 class="post-title" data-fnav-title="{{ $fnav_title | safeHTMLAttr }}">
-          {{ .Title | safeHTML }}
-        </h2>
-      </header>
-      <section class="post-content">{{ .Content }}</section>
-    </article>
-    <div
-      class="post-after{{ if and (ne .Site.Params.invertSectionColors true) (modBool $index_val 2) }} light{{ else if and (eq .Site.Params.invertSectionColors true) (not (modBool $index_val 2)) }} light{{ end }}">
-    </div>
-  </div>
-  {{ end }}
-</main>
+    <!-- Render single-page content -->
+    {{ $content := where $sections "Params.external" "==" nil }}
+    {{ range $index_val, $elem_val :=
+      $content
+    }}
+      {{ $fnav_title := .Title }}{{ with .Params.navigation_menu_title }}
+        {{ $fnav_title = . }}
+      {{ end }}
+      <div
+        class="post-holder{{ if and (ne .Site.Params.invertSectionColors true) (not (modBool $index_val 2)) }}
+          dark
+        {{ else if and (eq .Site.Params.invertSectionColors true) (modBool $index_val 2) }}
+          dark
+        {{ end }}"
+      >
+        <article
+          id="{{ anchorize $fnav_title }}"
+          class="post {{ if eq $index_val 0 }}
+            first
+          {{ end }} {{ if eq (add $index_val 1) (len $content) }}last{{ end }}"
+        >
+          <header class="post-header">
+            <h2 class="post-title" data-fnav-title="{{ $fnav_title | safeHTMLAttr }}">
+              {{ .Title | safeHTML }}
+            </h2>
+          </header>
+          <section class="post-content">{{ .Content }}</section>
+        </article>
+        <div
+          class="post-after{{ if and (ne .Site.Params.invertSectionColors true) (modBool $index_val 2) }}
+            light
+          {{ else if and (eq .Site.Params.invertSectionColors true) (not (modBool $index_val 2)) }}
+            light
+          {{ end }}"
+        ></div>
+      </div>
+    {{ end }}
+  </main>
 {{ end }}
