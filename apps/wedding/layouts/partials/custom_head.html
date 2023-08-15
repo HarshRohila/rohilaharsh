@@ -87,7 +87,7 @@
   }
 
   .bounce-in-top {
-    animation: bounce-in-top 1s ease-in;
+    animation: bounce-in-top 3s both;
   }
 
   @keyframes bounce-in-top {
@@ -97,10 +97,40 @@
       opacity: 0;
     }
 
-    100% {
+    38% {
       transform: translateY(0);
       animation-timing-function: ease-out;
       opacity: 1;
+    }
+
+    55% {
+      transform: translateY(-65px);
+      animation-timing-function: ease-in;
+    }
+
+    72% {
+      transform: translateY(0);
+      animation-timing-function: ease-out;
+    }
+
+    81% {
+      transform: translateY(-28px);
+      animation-timing-function: ease-in;
+    }
+
+    90% {
+      transform: translateY(0);
+      animation-timing-function: ease-out;
+    }
+
+    95% {
+      transform: translateY(-8px);
+      animation-timing-function: ease-in;
+    }
+
+    100% {
+      transform: translateY(0);
+      animation-timing-function: ease-out;
     }
   }
 
@@ -118,16 +148,8 @@
     font-size: 125px;
   }
 
-  @keyframes text-focus-in {
-    0% {
-      filter: blur(12px);
-      opacity: 0;
-    }
-
-    100% {
-      filter: blur(0);
-      opacity: 1;
-    }
+  .roll-in-left {
+    animation: roll-in-left 3.2s ease-out both;
   }
 
   @keyframes roll-in-left {
