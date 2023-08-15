@@ -9,7 +9,8 @@
   lightgallery(document.getElementById('lightgallery'), {
     plugins: [lgThumbnail, lgZoom],
     thumbnail: true,
-    speed: 500
+    speed: 500,
+    exThumbImage: 'data-src'
   })
 </script>
 {{ $js := resources.Get "ts/app/index.ts" | js.Build }}

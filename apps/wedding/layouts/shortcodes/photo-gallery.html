@@ -11,7 +11,7 @@
     {{ $parts := split $className "_" }}
     {{ $parts = after 1 $parts }}
     {{ $imagetitle := delimit $parts " " }}
-    <a href="{{ $imageurl }}" class="{{ $className }}">
+    <a href="{{ $imageurl }}" class="{{ $className }}" data-src="{{ $imageurl }}">
       <img alt="{{ $imagetitle }}" data-src="{{ $imageurl }}" class="lazyload" />
     </a>
   {{ end }}
