@@ -40,7 +40,9 @@
               {{ $fnav_title := .Title }}{{ with .Params.navigation_menu_title }}
                 {{ $fnav_title = . }}
               {{ end }}
-              <a class="btn site-menu" data-title-anchor="{{ anchorize $fnav_title }}"
+              <a
+                class="btn site-menu twinkle-button"
+                data-title-anchor="{{ anchorize $fnav_title }}"
                 >{{ $button_title }}</a
               >
             {{ end }}

@@ -1,1 +1,21 @@
 @import './events';
+
+@mixin twinkle-animation($delay) {
+  animation: twinkle 1.5s infinite $delay;
+}
+
+@for $i from 1 through 5 {
+  .twinkle-button:nth-child(#{$i}) {
+    @include twinkle-animation($i * 0.5s);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
