@@ -97,7 +97,7 @@
       opacity: 0;
     }
 
-    30% {
+    38% {
       transform: translateY(0);
       animation-timing-function: ease-out;
       opacity: 1;
@@ -148,16 +148,8 @@
     font-size: 125px;
   }
 
-  @keyframes text-focus-in {
-    0% {
-      filter: blur(12px);
-      opacity: 0;
-    }
-
-    100% {
-      filter: blur(0);
-      opacity: 1;
-    }
+  .roll-in-left {
+    animation: roll-in-left 3.2s ease-out both;
   }
 
   @keyframes roll-in-left {
@@ -184,10 +176,6 @@
   .blog-title {
     font-family: 'Tangerine', serif;
     font-size: 125px;
-  }
-
-  .roll-in-left {
-    animation: roll-in-left 3.2s ease-in both;
   }
 
   .blog-description {
