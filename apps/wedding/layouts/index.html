@@ -9,7 +9,7 @@ $sections "Draft" "==" false) }}
   </div>
   <div class="vertical">
     <div id="site-head-content" class="inner bounce-in-top">
-      {{ with .Params.header_logo }}<img id="blog-logo" src="{{ . }}" />{{ end }} {{ if
+      {{ with .Params.header_logo }}<img id="blog-logo" src="{{ . }}" alt="Logo" />{{ end }} {{ if
       .Site.Params.title_guard }}
       <div class="title-and-description-guard">
         {{ end }} {{ with .Params.header_headline }}

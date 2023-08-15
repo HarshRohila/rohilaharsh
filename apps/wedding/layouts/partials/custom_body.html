@@ -1,3 +1,5 @@
+{{ $style := resources.Get "scss/body.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}" />
 <script type="module">
   import lightgallery from 'https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/+esm'
   import lgThumbnail from 'https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.es5.js'
