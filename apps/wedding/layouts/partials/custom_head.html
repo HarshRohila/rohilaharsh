@@ -5,6 +5,76 @@
      You may use this template to add custom CSS to your site like so: -->
 
 <style>
+  html,
+  body {
+    height: 100%;
+  }
+
+  /* Style for the scroll indicator container */
+  .scroll-indicator {
+    animation: bounce 2s infinite;
+    padding: 10px;
+  }
+  .scroll-indicator i {
+    color: var(--light);
+  }
+
+  /* Animation keyframes for the bounce effect */
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  /* #site-head > * {
+    display: none;
+  } */
+  #site-head {
+    background-image: url('images/cover-image.webp');
+    display: table;
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+  }
+  #site-head > .vertical {
+    vertical-align: bottom;
+  }
+
+  @media only screen and (max-width: 500px) {
+    #site-head {
+      padding: 10% 0;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    #site-head {
+      height: 100%;
+      background-image: url('images/cover-image-mobile.webp');
+      background-size: auto 100%;
+      padding-bottom: 0;
+    }
+
+    #blog-logo {
+      transform: scale(0.8);
+      background-color: var(--light);
+      border-radius: 25%;
+      padding: 6px;
+    }
+    .btn.site-menu {
+      padding: 3px 10px;
+    }
+  }
+
   .overlay {
     position: absolute;
     top: 0;
@@ -20,7 +90,7 @@
   }
 
   .bounce-in-top {
-    animation: bounce-in-top 3s both;
+    animation: bounce-in-top 1s ease-in;
   }
 
   @keyframes bounce-in-top {
@@ -30,12 +100,12 @@
       opacity: 0;
     }
 
-    38% {
+    108% {
       transform: translateY(0);
       animation-timing-function: ease-out;
       opacity: 1;
     }
-
+    /* 
     55% {
       transform: translateY(-65px);
       animation-timing-function: ease-in;
@@ -64,7 +134,7 @@
     100% {
       transform: translateY(0);
       animation-timing-function: ease-out;
-    }
+    } */
   }
 
   .blog-title,
@@ -81,13 +151,13 @@
     font-size: 125px;
   }
 
-  .roll-in-left {
-    animation: roll-in-left 3.2s ease-out both;
-  }
+  /* .roll-in-left {
+    animation: roll-in-left 1s ease-in both;
+  } */
 
-  .text-focus-in {
+  /* .text-focus-in {
     animation: text-focus-in 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-  }
+  } */
 
   @keyframes text-focus-in {
     0% {
@@ -154,16 +224,6 @@
     display: grid;
     grid-template-columns: auto auto;
     width: 100%;
-  }
-
-  #site-head {
-    background-image: url('images/cover-image.webp');
-  }
-
-  @media only screen and (max-width: 768px) {
-    #site-head {
-      background-image: url('images/cover-image-mobile.webp');
-    }
   }
 </style>
 

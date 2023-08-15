@@ -191,21 +191,3 @@ ul.wedding-events {
     }
   }
 }
-
-#site-head {
-  > .vertical {
-    vertical-align: bottom;
-  }
-  @include mobile() {
-    padding-bottom: 0;
-    #blog-logo {
-      transform: scale(0.8);
-      background-color: var(--light);
-      border-radius: 25%;
-      padding: 6px;
-    }
-    .btn.site-menu {
-      padding: 3px 10px;
-    }
-  }
-}
