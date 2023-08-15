@@ -16,7 +16,7 @@
     <li>
       <div class="image-container">
         <div id="event-4-img" class="event-img">
-          <img src="{{ .image }}" alt="{{ .eventName }}" />
+          <img data-src="{{ .image }}" alt="{{ .eventName }}" class="lazyload" />
         </div>
       </div>
       <div class="event-description-container">
@@ -24,7 +24,7 @@
           <h3 class="event-name">{{ .eventName }}</h3>
           <div class="image-container-mobile">
             <div id="event-4-img" class="event-img">
-              <img src="{{ .image }}" alt="{{ .eventName }}" />
+              <img data-src="{{ .image }}" alt="{{ .eventName }}" class="lazyload" />
             </div>
           </div>
           <div class="event-date">{{ .date }}<br />{{ .time }}</div>
