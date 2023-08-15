@@ -245,3 +245,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
 {{ $style := resources.Get "scss/index.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" />
+
+{{ $style := resources.Get "scss/async.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link
+  rel="preload"
+  href="{{ $style.Permalink }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
+<noscript><link rel="stylesheet" href="{{ $style.Permalink }}" /></noscript>
