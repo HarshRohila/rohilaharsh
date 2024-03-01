@@ -35,3 +35,14 @@ nav .home-nav {
 .nested-links a {
   color: #a45454;
 }
+
+.post-cards {
+  $bg_color: #fffffa;
+  box-shadow: 0px 5px 10px 2px rgba(#3e2b1c, 0.1);
+  background-color: $bg_color;
+  border-radius: 10px;
+  overflow: hidden;
+  > div > div {
+    background-color: $bg_color;
+  }
+}
