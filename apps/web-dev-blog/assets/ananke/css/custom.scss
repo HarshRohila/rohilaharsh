@@ -19,10 +19,11 @@ nav .home-nav {
   }
 }
 
+.header-text {
+  display: none;
+}
+
 @include phone() {
-  .header-text {
-    display: none;
-  }
   .title {
     font-size: 2rem;
   }
