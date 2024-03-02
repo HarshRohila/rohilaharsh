@@ -2,8 +2,8 @@
 title: 'Callback Pattern'
 date: 2024-03-01T09:29:13+05:30
 author: 'Harsh Rohila'
-draft: true
-featured_image: '/img/rxjs_zip_cover.jpeg'
+draft: false
+featured_image: '/img/callback_cover.jpeg'
 ---
 
 ## A different view of Functions
@@ -20,7 +20,7 @@ let sum = function (a, b) {
 
 The idea of storing a function in variable might seem weird to new JS developers, but this is a powerful feature of JS. This can be used in interesting ways.
 
-Also, JS is not the only language having this, it is there in many languages, but might not be very straight forward, like in Java, Lambda is doing the same thing
+Also, JS is not the only language having this, it is there in many languages, but might not be very straight forward. In Java, Lambda feature can do the same thing
 
 ```java
 import java.util.function.Consumer;
@@ -39,7 +39,7 @@ func = multiply
 
 ```
 
-This is a powerful feature because it allows functions to be passed as parameters to other functions, and can make code more readable or [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+This is a powerful feature. Because we can have function in variable we can pass it around. We can pass it as parameter to other functions, which can make code more readable or [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
 
 ## Callback Pattern
 
@@ -65,16 +65,16 @@ In above code, logger function is passed as parameter to sum function, So logger
 
 > Note: To remember this, you can say we are passing a function A to other function B to be "called back" when B is done. Hence, callback. The control returns back to A when B is done.
 
-You're maybe wondering someone will do this. Well yes, this is a trivial example, but this can be useful when sum is an async operation. Consider below snippet.
+You're maybe wondering why someone will do this. Well yes, this is a trivial example, but this can be useful when the sum function is an async function. Consider below snippet.
 
 ```JS
 httpGet("https://some-api.com/users", logger)
 
 ```
 
-Here, lets say httpGet is making a HTTP GET request to given API. We don't know when that API will finish, so we pass a callback to it. When it will finish it can run the callback, so we can get result in our passed function.
+Here, lets say `httpGet` is making a HTTP GET request to given API. We don't know when that API will finish, so we pass a callback to it. When it will finish it can run the callback, so we can get result in our passed function.
 
-Callback returning error is a common patter in such cases. E.g.
+Callback returning error is a common pattern in such cases. E.g.
 
 ```JS
 httpGet("https://some-api.com/users", function processResult(err, result) {
@@ -83,7 +83,7 @@ httpGet("https://some-api.com/users", function processResult(err, result) {
 })
 ```
 
-This was very common before Promise API came in JS, now most libraries have converted this Callback type of API to Promises.
+This was very common before Promise API came in JS. Now most libraries have converted this Callback type of API to Promises.
 
 But that doesn't mean callbacks are not used anymore.
 
@@ -91,7 +91,7 @@ But that doesn't mean callbacks are not used anymore.
 
 ### Open-Close scenarios
 
-Consider cases in which we need to do 2 opposite operations, like file open-close, memory allocate and memory de-allocate. Code for file can look like below
+Consider cases in which we need to do 2 opposite operations, like file open-close, memory allocate and memory de-allocate. Code for file operations can look like below
 
 ```JS
 let fileDesc = file.open()
@@ -99,7 +99,7 @@ processFile(fileDesc)
 file.close()
 ```
 
-Lets say you are doing this multiple times in your code. So every time you need to write open and close, that is repetition of code. Also Developer may forget to close file, or in case of memory, Dev can forget to clear memory.
+Lets say you are doing this multiple times in your code. That means, every time you need to write open and close function calls, that is repetition of code. Also, developer may forget to close the file, or in case of memory, developer can forget to clear memory.
 
 To avoid repetition of code we can create a function like below
 
@@ -114,9 +114,45 @@ function fileProcessor(processFile) {
 Now this can be used multiple times in your code like below.
 
 ```JS
-fileProcessor(function logContents () {
+fileProcessor(function logContents(fileDesc) {
   console.log(fileDesc.contents)
 })
 ```
 
-Above code will automatically open and close file every time, we just need to pass `fileProcessor` function a parameter(function) which will process file.
+Above code will automatically open and close file every time we call it. We just need to pass `fileProcessor` function a parameter(function) which will process the file.
+
+### Single place Error Handling
+
+I was using Supabase database in one of my projects. Its Query Database API looks like below
+
+```JS
+const { data, error } = await supabase
+  .from('countries')
+  .select('name')
+```
+
+I wanted to do single place error handling for each of the query database operations I will do in my app. Note that, these queries will be different for different types of data and these will be at multiple places in codebase. Can you think of a solution for doing single place error handling in this case?
+
+One way can be, create a function(lets say `dbQuery`) which will call this query function and we can do error handling in `dbQuery` function. It can look like below
+
+```js
+async function dbQuery(supabaseQuery) {
+  const { data, error } = await supabaseQuery()
+
+  if (isErrorOfMyInterest(error)) throw new MyCustomError()
+
+  return data
+}
+```
+
+Now you can use this `dbQuery` function in any place of your app like below
+
+```js
+dbQuery(() => {
+  return supabase.from('countries').select('name')
+})
+```
+
+Now all supabase queries' errors will get handled, and we have written error handling at single place only. This is using callback pattern only, as we are passing callback to `dbQuery` function.
+
+These are the few examples of how callback patterns can be used. Hope you found this interesting.
