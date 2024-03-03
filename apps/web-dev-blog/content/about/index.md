@@ -1,5 +1,6 @@
 ---
 title: 'About'
+type: about
 menu:
   main:
     weight: 2
@@ -9,7 +10,11 @@ Hi
 
 I am **Harsh Rohila**, working as a Software Engineer.
 
-I am a **TypeScript Full Stack** Developer, developing **Serverless** Apps(AWS) and **Web Components**(Stencil.js), and also doing **CI/CD** with Jenkins and AWS CodePipelines. I am using TypeScript(AWS CDK) to create all AWS **Cloud infrastructure**
+Below is my experience graph
+
+{{< custom-canvas id="exp-chart" height="400px" >}}
+
+I am a **TypeScript Full Stack** Developer, developing **Kubernetes**, **Serverless** Apps(AWS) and **Web Components**(Stencil.js), and also doing **CI/CD** with Jenkins and AWS CodePipelines. I am using TypeScript(AWS CDK) to create all AWS **Cloud infrastructure**
 
 This blog is to share what I learned from my experience in this field.
 
