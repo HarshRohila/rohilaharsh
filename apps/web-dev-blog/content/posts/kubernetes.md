@@ -2,7 +2,7 @@
 title: 'Kubernetes, using TypeScript'
 date: 2024-03-02T09:29:13+05:30
 author: 'Harsh Rohila'
-draft: true
+draft: false
 featured_image: '/img/k8s.png'
 ---
 
