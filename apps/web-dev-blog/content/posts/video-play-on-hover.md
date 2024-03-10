@@ -1,9 +1,9 @@
 ---
 title: "Implementing YouTube's feature - Play video on thumbnail hover"
-date: 2024-03-11T09:29:13+05:30
+date: 2024-03-10T09:29:13+05:30
 author: 'Harsh Rohila'
 draft: false
-featured_image: '/img/callback_cover.jpeg'
+featured_image: '/img/hover-thumbnail.gif'
 ---
 
 Today I implemented a feature of YouTube in my [app](https://rohilaharsh.in/youtube-frontend). This feature will play video on hover of the thumbnail of a video.
