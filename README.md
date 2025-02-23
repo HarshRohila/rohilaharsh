@@ -8,6 +8,7 @@
 ## Projects in this Monorepo
 
 - [Wedding Website](./apps/wedding/README.md)
+- [Web Dev Blog](./apps/web-dev-blog/README.md)
 
 This project was generated using [Nx](https://nx.dev).
 
