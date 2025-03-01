@@ -1,10 +1,4 @@
-function setScrolledPx(ev = {}) {
-  console.log(ev)
-  const scrolledPx = window.scrollY
-  requestAnimationFrame(() => {
-    document.documentElement.style.setProperty('--scrolled-px', scrolledPx.toString())
-  })
-}
+import { setScrolledPx } from './utils/setScrolledPx'
 
 function setHeaderHeight() {
   const headerHeight = document.querySelector('header')!.clientHeight

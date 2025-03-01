@@ -9,6 +9,10 @@
   --scrolled-px: 0;
 }
 
+html {
+  background-color: black;
+}
+
 .home,
 .fun {
   header {
@@ -18,6 +22,8 @@
       @include tabletAndBelow() {
         --max-translateY: 143px;
       }
+
+      transition: transform;
 
       --translateY: Min(calc(1 * var(--scrolled-px) * 1px), var(--max-translateY));
       --transform: translateY(var(--translateY));
