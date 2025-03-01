@@ -9,32 +9,35 @@
   --scrolled-px: 0;
 }
 
-header {
-  overflow: hidden;
-  nav {
-    --max-translateY: 230px;
-    @include tabletAndBelow() {
-      --max-translateY: 143px;
-    }
+.home,
+.fun {
+  header {
+    overflow: hidden;
+    nav {
+      --max-translateY: 230px;
+      @include tabletAndBelow() {
+        --max-translateY: 143px;
+      }
 
-    --translateY: Min(calc(1 * var(--scrolled-px) * 1px), var(--max-translateY));
-    --transform: translateY(var(--translateY));
-    transform: var(--transform);
-  }
-  .title-container {
-    @include tabletAndBelow() {
-      transform-origin: top left;
+      --translateY: Min(calc(1 * var(--scrolled-px) * 1px), var(--max-translateY));
+      --transform: translateY(var(--translateY));
+      transform: var(--transform);
     }
-    transform: scale(calc(1 - var(--scrolled-px) / var(--header-height)))
-      translateY(calc(1 * var(--scrolled-px) * 1px));
+    .title-container {
+      @include tabletAndBelow() {
+        transform-origin: top left;
+      }
+      transform: scale(calc(1 - var(--scrolled-px) / var(--header-height)))
+        translateY(calc(1 * var(--scrolled-px) * 1px));
 
-    --opacity-speed: 2;
-    @include tabletAndBelow() {
-      --opacity-speed: 3;
+      --opacity-speed: 2;
+      @include tabletAndBelow() {
+        --opacity-speed: 3;
+      }
+
+      --opacity: calc(1 - var(--opacity-speed) * var(--scrolled-px) / var(--header-height));
+      opacity: var(--opacity);
     }
-
-    --opacity: calc(1 - var(--opacity-speed) * var(--scrolled-px) / var(--header-height));
-    opacity: var(--opacity);
   }
 }
 
