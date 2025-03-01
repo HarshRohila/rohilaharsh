@@ -2,8 +2,8 @@
   {{ partial "page-header.html" . }}
   {{ $style := resources.Get "scss/projects.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.Permalink }}" />
-  {{ $js := resources.Get "ts/app/index.ts" | js.Build }}
-  <script type="module" src="{{ $js.Permalink }}" defer></script>
+  {{ $js := resources.Get "ts/app/projects.ts" | js.Build }}
+  <script type="module" src="{{ $js.Permalink }}"></script>
 {{ end }}
 {{ define "main" }}
   <div class="flex-l mt2 mw8 center">
