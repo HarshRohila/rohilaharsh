@@ -46,7 +46,7 @@
         <span class="f6 mv4 dib tracked"> - {{ i18n "readingTime" .ReadingTime }} </span>
         <span class="f6 mv4 dib tracked"> - {{ i18n "wordCount" .WordCount }} </span>
       {{ end }}
-    <applause-button style="width: 58px; height: 58px" multiclap="true" url="{{ .Permalink }}"/>
+    <applause-button style="width: 58px; height: 58px" multiclap="true" url="{{ .Permalink }}" api="https://applause.chabouis.fr"/>
 
     </header>
     <div class="nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | default "serif"}} f4 nested-links {{ $.Param "text_color" | default "mid-gray" }} {{ cond (eq $.Site.Language.LanguageDirection "rtl") "pl4-l" "pr4-l" }}">
@@ -54,7 +54,7 @@
       {{- partial "tags.html" . -}}
       <div class="mt6 instapaper_ignoref">
 				<div>
-					<applause-button style="width: 58px; height: 58px" multiclap="true" url="{{ .Permalink }}"/>
+					<applause-button style="width: 58px; height: 58px" multiclap="true" url="{{ .Permalink }}" api="https://applause.chabouis.fr"/>
 				</div>
       {{ if .Site.DisqusShortname }}
         {{ template "_internal/disqus.html" . }}
