@@ -4,12 +4,12 @@ const Chart = window.Chart
 ;(async function () {
   const myData = [
     { category: 'Language', label: 'JavaScript', value: 1, color: '#F1E05A' },
-    { category: 'Language', label: 'TypeScript', value: 4, color: '#3178C6' },
+    { category: 'Language', label: 'TypeScript', value: 6, color: '#3178C6' },
     { category: 'Front-End', label: 'Ember.js', value: 2, color: '#D95941' },
-    { category: 'Front-End', label: 'React.js', value: 0.5, color: '#149ECA' },
+    { category: 'Front-End', label: 'React.js', value: 1.5, color: '#149ECA' },
     { category: 'Front-End', label: 'Stencil.js', value: 1.5, color: '#4C48FF' },
-    { category: 'Back-End', label: 'Serverless Framework', value: 1, color: '#CA4640' },
-    { category: 'Back-End', label: 'Nest.js', value: 1, color: '#EA2844' },
+    { category: 'Back-End', label: 'Serverless Framework', value: 1.5, color: '#CA4640' },
+    { category: 'Back-End', label: 'Nest.js', value: 1.5, color: '#EA2844' },
     { category: 'Cloud', label: 'AWS', value: 4, color: '#EC7211' },
     { category: 'Dev-Ops', label: 'Jenkins', value: 1, color: '#335061' },
     { category: 'Dev-Ops', label: 'AWS Codepipeline', value: 1, color: '#FF9900' },
