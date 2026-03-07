@@ -1,17 +1,18 @@
 {{ define "main" }}
-  <article class="pa3 pa4-ns nested-copy-line-height">
-    <section
-      class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy {{ $.Param "text_color" | default "mid-gray" }}"
-    >
-      {{- .Content -}}
-    </section>
-    <section class="flex-ns flex-wrap justify-around mt5">
-      {{ range .Paginator.Pages }}
-        <div class="relative w-100 w-30-l mb4 bg-white post-cards">
-          {{ .Render "summary" }}
-        </div>
+  <div class="list-page">
+    <div class="container">
+      <h1 class="list-title">{{ .Title }}</h1>
+      {{ with .Content }}
+        <div class="list-description">{{ . }}</div>
       {{ end }}
-    </section>
-    {{- template "_internal/pagination.html" . -}}
-  </article>
+
+      <div class="posts-list">
+        {{ range .Paginator.Pages }}
+          {{ .Render "summary-with-image" }}
+        {{ end }}
+      </div>
+
+      {{ template "_internal/pagination.html" . }}
+    </div>
+  </div>
 {{ end }}

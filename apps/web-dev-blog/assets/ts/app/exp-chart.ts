@@ -1,6 +1,12 @@
 // @ts-expect-error
 const Chart = window.Chart
 
+const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+const textColor = isDark ? '#c8c2b8' : '#1f2328'
+const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.1)'
+
+Chart.defaults.color = textColor
+
 ;(async function () {
   const myData = [
     { category: 'Language', label: 'JavaScript', value: 1, color: '#F1E05A' },
@@ -33,10 +39,22 @@ const Chart = window.Chart
           title: {
             display: true,
             text: 'Years of Experience'
+          },
+          grid: {
+            color: gridColor
+          },
+          border: {
+            color: gridColor
           }
         },
         y: {
-          stacked: true
+          stacked: true,
+          grid: {
+            color: gridColor
+          },
+          border: {
+            color: gridColor
+          }
         }
       }
     },

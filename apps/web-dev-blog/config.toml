@@ -20,8 +20,7 @@ url = "https://stackoverflow.com/users/5798816/harsh-rohila"
 
 
 [params]
-  body_classes = "figtree bg-washed-yellow"
-	post_content_classes = "avenir"
+  mainSections = ["posts"]
 	show_reading_time = true
 	description = "A blog about web development. Mostly."
 	custom_css = ["custom.scss"]

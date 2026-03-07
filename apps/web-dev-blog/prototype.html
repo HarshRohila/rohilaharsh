@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rohilaHarsh — Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --font-heading: 'Inter', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --max-width: 780px;
+      --radius: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #131210;
+      --bg-secondary: #1a1916;
+      --bg-card: #1a1916;
+      --bg-card-hover: #22201b;
+      --bg-nav: rgba(19, 18, 16, 0.85);
+      --text-primary: #e8e4de;
+      --text-secondary: #9e9688;
+      --text-muted: #6e6658;
+      --accent: #d4a574;
+      --accent-glow: rgba(212, 165, 116, 0.15);
+      --border: #2a2620;
+      --border-hover: #3a3530;
+      --code-bg: #131210;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 0 0 1px var(--border);
+      --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 1px var(--border-hover);
+      --gradient-hero: linear-gradient(135deg, #d4a574 0%, #b8864e 50%, #a67038 100%);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #fafaf8;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8f6f2;
+      --bg-nav: rgba(250, 250, 248, 0.85);
+      --text-primary: #1f2328;
+      --text-secondary: #656d76;
+      --text-muted: #8b949e;
+      --accent: #8b5e3c;
+      --accent-glow: rgba(139, 94, 60, 0.1);
+      --border: #d8dee4;
+      --border-hover: #bcc3cd;
+      --code-bg: #0d1117;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 0 0 1px var(--border);
+      --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.1), 0 0 0 1px var(--border-hover);
+      --gradient-hero: linear-gradient(135deg, #8b5e3c 0%, #a0752e 50%, #7a5230 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      transition: background var(--transition), color var(--transition);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-nav);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      transition: color var(--transition);
+    }
+    .nav-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+    }
+    .nav-logo-text { display: inline; }
+    .nav-logo-text span { color: var(--accent); }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 12px;
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .social-links a:hover {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .social-links svg { width: 18px; height: 18px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      position: relative;
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: var(--accent-glow);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+      margin-left: 8px;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .theme-toggle svg { width: 18px; height: 18px; }
+    .sun-icon { display: none; }
+    .moon-icon { display: block; }
+    [data-theme="light"] .sun-icon { display: block; }
+    [data-theme="light"] .moon-icon { display: none; }
+
+    /* ── Hamburger Button ── */
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+    .hamburger:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .hamburger svg { width: 18px; height: 18px; }
+    .hamburger .icon-close { display: none; }
+    .hamburger.active .icon-menu { display: none; }
+    .hamburger.active .icon-close { display: block; }
+
+    /* ── Mobile Nav Overlay ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-primary);
+      z-index: 99;
+      padding: 24px;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .mobile-nav.open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-nav a {
+      display: block;
+      padding: 14px 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background var(--transition);
+    }
+    .mobile-nav a:hover,
+    .mobile-nav a:active {
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+    .mobile-nav .mobile-social {
+      display: flex;
+      gap: 8px;
+      padding: 20px 16px 0;
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-nav .mobile-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0;
+      font-size: 0;
+      transition: all var(--transition);
+    }
+    .mobile-nav .mobile-social a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .mobile-nav .mobile-social svg { width: 20px; height: 20px; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      max-width: 100%;
+      margin: 0;
+      padding: 80px 24px 60px;
+      background: url('static/img/cover.jpg') center/cover no-repeat;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--bg-primary) 0%, rgba(0,0,0,0.55) 40%, var(--bg-primary) 100%);
+      transition: background var(--transition);
+    }
+    [data-theme="light"] .hero::before {
+      background: linear-gradient(to bottom, var(--bg-primary) 0%, rgba(255,255,255,0.6) 40%, var(--bg-primary) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-label::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 6vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .hero-gradient-text {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .hero-line {
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-hero);
+      border-radius: 2px;
+      margin-top: 32px;
+    }
+
+    /* ── Posts Section ── */
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .section-link {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity var(--transition);
+    }
+    .section-link:hover { opacity: 0.7; }
+
+    /* ── Post Cards ── */
+    .posts { display: flex; flex-direction: column; gap: 16px; }
+
+    .post-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 28px 28px 24px;
+      box-shadow: var(--shadow-card);
+      transition: all var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      cursor: pointer;
+    }
+    .post-card:hover {
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .post-tag {
+      background: var(--accent-glow);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .post-card-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .post-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition);
+    }
+    .post-card:hover .post-card-image img {
+      transform: scale(1.03);
+    }
+
+    .post-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+      transition: color var(--transition);
+    }
+    .post-card:hover h2 { color: var(--accent); }
+
+    .post-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .post-card .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .post-card .read-more svg {
+      width: 14px; height: 14px;
+      transition: transform var(--transition);
+    }
+    .post-card:hover .read-more svg { transform: translateX(4px); }
+
+    /* ── Code Block Example ── */
+    .code-example {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    pre {
+      background: var(--code-bg) !important;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #e6edf3;
+    }
+    pre .keyword { color: #ff7b72; }
+    pre .string { color: #a5d6ff; }
+    pre .function { color: #d2a8ff; }
+    pre .comment { color: #6e7681; }
+    pre .type { color: #79c0ff; }
+    pre .variable { color: #ffa657; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      transition: border-color var(--transition);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-links svg { width: 20px; height: 20px; }
+
+    /* ── Single Post Preview ── */
+    .single-post {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .single-post-header {
+      padding: 60px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .single-post-header h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .single-post-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+    .single-post-body h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 40px 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .single-post-body p { margin-bottom: 20px; }
+    .single-post-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .divider hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 60px;
+    }
+
+    .preview-label {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Tablet ── */
+    @media (max-width: 768px) {
+      .nav-links a { padding: 6px 10px; font-size: 0.82rem; }
+      .nav-links { gap: 2px; }
+      .hero { padding: 60px 24px 48px; }
+      .hero p { font-size: 1.1rem; }
+      .section { padding-bottom: 60px; }
+      .single-post-header { padding: 48px 0 32px; }
+      .single-post-body h2 { font-size: 1.3rem; margin-top: 32px; }
+      pre { padding: 20px; font-size: 0.8rem; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .nav-inner { padding: 0 16px; }
+      .nav-links { display: none; }
+      .social-links { border-left: none; margin-left: 0; padding-left: 0; }
+      .hamburger { display: flex; }
+      .mobile-nav.open { display: block; }
+
+      .hero { padding: 44px 16px 36px; }
+      .hero-label { font-size: 0.72rem; }
+      .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); margin-bottom: 16px; }
+      .hero p { font-size: 1rem; line-height: 1.65; }
+      .hero-line { margin-top: 24px; }
+
+      .section, .code-example, .single-post, .divider { padding-left: 16px; padding-right: 16px; }
+      .section { padding-bottom: 48px; }
+      .section-header { margin-bottom: 24px; }
+      .section-title { font-size: 0.95rem; }
+
+      .post-card { padding: 20px 18px 18px; }
+      .post-card h2 { font-size: 1.1rem; line-height: 1.4; }
+      .post-card p { font-size: 0.88rem; -webkit-line-clamp: 3; }
+      .post-meta { gap: 8px; font-size: 0.75rem; flex-wrap: wrap; }
+      .post-tag { font-size: 0.7rem; padding: 2px 8px; }
+      .post-card .read-more { margin-top: 12px; font-size: 0.82rem; }
+
+      pre { padding: 16px; font-size: 0.78rem; line-height: 1.6; border-radius: 8px; }
+
+      .single-post-header { padding: 36px 0 24px; margin-bottom: 28px; }
+      .single-post-header h1 { font-size: 1.5rem; }
+      .single-post-body { font-size: 0.98rem; }
+      .single-post-body h2 { font-size: 1.25rem; margin-top: 28px; }
+
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; padding: 24px 16px; }
+      .footer-text { font-size: 0.8rem; }
+
+      .preview-label { padding: 28px 16px; font-size: 0.72rem; }
+      .divider hr { margin-bottom: 40px; }
+    }
+
+    /* ── Small phones ── */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero p { font-size: 0.92rem; }
+      .post-card h2 { font-size: 1rem; }
+      .nav-logo { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><img src="static/img/logo.png" alt="rohilaHarsh logo"><span class="nav-logo-text">rohila<span>Harsh</span></span></a>
+      <div style="display:flex;align-items:center;">
+        <ul class="nav-links">
+          <li><a href="#">Posts</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="social-links">
+          <a href="https://github.com/HarshRohila" aria-label="GitHub" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/rohilaharsh" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://stackoverflow.com/users/5798816/harsh-rohila" aria-label="Stack Overflow" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15 21h-10v-2h10v2zm6-11.665l-1.621-9.335-1.993.346 1.62 9.335 1.994-.346zm-5.964 6.937l-9.746-.975-.186 2.016 9.755.879.177-1.92zm.538-2.587l-9.276-2.608-.526 1.954 9.306 2.5.496-1.846zm1.204-2.413l-8.297-4.864-1.029 1.743 8.298 4.865 1.028-1.744zm1.866-1.467l-5.339-7.829-1.672 1.14 5.339 7.829 1.672-1.14zm-2.644 4.195v8h-12v-8h-2v10h16v-10h-2z"/></svg>
+          </a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+          <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#" onclick="closeMenu()">Posts</a></li>
+      <li><a href="#" onclick="closeMenu()">Projects</a></li>
+      <li><a href="#" onclick="closeMenu()">About</a></li>
+      <li><a href="#" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-label">Available for interesting projects</div>
+      <h1>Harsh Rohila<br><span class="hero-gradient-text">Web Development.</span><br>Mostly.</h1>
+      <p>Software engineer writing about TypeScript, frontend architecture, clean code, and building things that scale.</p>
+      <div class="hero-line"></div>
+    </div>
+  </section>
+
+  <!-- Recent Posts -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Recent Posts</span>
+      <a href="#" class="section-link">All Posts &rarr;</a>
+    </div>
+
+    <div class="posts">
+      <a href="#" class="post-card">
+        <div class="post-card-image">
+          <img src="static/img/ts-result-type.webp" alt="Result Type in TypeScript">
+        </div>
+        <div class="post-meta">
+          <span class="post-tag">TypeScript</span>
+          <span>Jan 2025</span>
+          <span>&middot;</span>
+          <span>6 min read</span>
+        </div>
+        <h2>Forcing Error Handling in TypeScript: A Result Type Implementation</h2>
+        <p>Ever found yourself debugging a production issue only to discover that your API call crashed at runtime? In TypeScript, developers often use Promises and forget to handle errors, leading to runtime crashes that could have been prevented at compile time.</p>
+        <span class="read-more">Read article <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="#" class="post-card">
+        <div class="post-card-image">
+          <img src="static/img/clean_arch.webp" alt="Clean Architecture in Frontend">
+        </div>
+        <div class="post-meta">
+          <span class="post-tag">Architecture</span>
+          <span>Dec 2024</span>
+          <span>&middot;</span>
+          <span>8 min read</span>
+        </div>
+        <h2>Clean Architecture in Frontend</h2>
+        <p>Recently, the term "Clean Architecture" was discussed in my company. It sounded interesting, so I started thinking about whether we could use it in frontend projects too. I read "Clean Architecture" by Robert C. Martin and tried applying it.</p>
+        <span class="read-more">Read article <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="#" class="post-card">
+        <div class="post-card-image">
+          <img src="static/img/hover-thumbnail.gif" alt="Play video on thumbnail hover">
+        </div>
+        <div class="post-meta">
+          <span class="post-tag">Frontend</span>
+          <span>Nov 2024</span>
+          <span>&middot;</span>
+          <span>4 min read</span>
+        </div>
+        <h2>Implementing YouTube's Feature — Play Video on Thumbnail Hover</h2>
+        <p>Today I implemented a feature of YouTube in my app. This feature will play video on hover of the thumbnail of a video, creating a preview experience similar to what YouTube offers.</p>
+        <span class="read-more">Read article <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="#" class="post-card">
+        <div class="post-card-image">
+          <img src="static/img/k8s.png" alt="Kubernetes using TypeScript">
+        </div>
+        <div class="post-meta">
+          <span class="post-tag">DevOps</span>
+          <span>Oct 2024</span>
+          <span>&middot;</span>
+          <span>5 min read</span>
+        </div>
+        <h2>Kubernetes, Using TypeScript</h2>
+        <p>Exploring how to interact with Kubernetes clusters using TypeScript, leveraging the Kubernetes client library for type-safe infrastructure management and automation.</p>
+        <span class="read-more">Read article <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Code Block Preview -->
+  <div class="divider"><hr></div>
+
+  <div class="preview-label">Code Block Styling Preview</div>
+
+  <section class="code-example">
+    <pre><code><span class="comment">// Result type for type-safe error handling</span>
+<span class="keyword">type</span> <span class="type">Result</span>&lt;<span class="type">T</span>, <span class="type">E</span>&gt; =
+  | { <span class="variable">ok</span>: <span class="keyword">true</span>;  <span class="variable">value</span>: <span class="type">T</span> }
+  | { <span class="variable">ok</span>: <span class="keyword">false</span>; <span class="variable">error</span>: <span class="type">E</span> };
+
+<span class="keyword">async function</span> <span class="function">fetchUser</span>(<span class="variable">id</span>: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">Result</span>&lt;<span class="type">User</span>, <span class="type">ApiError</span>&gt;&gt; {
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> <span class="variable">res</span> = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">`/api/users/${id}`</span>);
+    <span class="keyword">return</span> { <span class="variable">ok</span>: <span class="keyword">true</span>, <span class="variable">value</span>: <span class="keyword">await</span> <span class="variable">res</span>.<span class="function">json</span>() };
+  } <span class="keyword">catch</span> (<span class="variable">e</span>) {
+    <span class="keyword">return</span> { <span class="variable">ok</span>: <span class="keyword">false</span>, <span class="variable">error</span>: <span class="function">toApiError</span>(<span class="variable">e</span>) };
+  }
+}</code></pre>
+  </section>
+
+  <!-- Single Post Preview -->
+  <div class="divider"><hr></div>
+
+  <div class="preview-label">Single Post Page Preview</div>
+
+  <section class="single-post">
+    <div class="single-post-header">
+      <div class="post-meta">
+        <span class="post-tag">TypeScript</span>
+        <span>January 15, 2025</span>
+        <span>&middot;</span>
+        <span>6 min read</span>
+      </div>
+      <h1>Forcing Error Handling in TypeScript: A Result Type Implementation</h1>
+    </div>
+
+    <div class="single-post-body">
+      <h2>The Problem: Runtime Crashes</h2>
+      <p>Ever found yourself debugging a production issue only to discover that your API call crashed at runtime? You're not alone. In TypeScript, developers often use Promises and forget to handle errors, leading to runtime crashes that could have been prevented at compile time.</p>
+      <p>Languages like Java have a built-in solution: <strong>checked exceptions</strong>. They force developers to handle potential errors before the code even compiles. But TypeScript doesn't have this — so we need to build our own safety net.</p>
+
+      <h2>The Solution: Result Types</h2>
+      <p>By wrapping our return values in a <a href="#">Result type</a>, we can force callers to explicitly handle both success and error cases. The compiler becomes our safety net, catching unhandled errors before they ever reach production.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-text">&copy; rohilaHarsh 2025. Built with intention.</span>
+      <div class="footer-links">
+        <a href="#" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.querySelector('.hamburger');
+      const isOpen = nav.classList.contains('open');
+      if (isOpen) {
+        closeMenu();
+      } else {
+        nav.style.display = 'block';
+        requestAnimationFrame(() => nav.classList.add('open'));
+        btn.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.querySelector('.hamburger');
+      nav.classList.remove('open');
+      btn.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => { if (!nav.classList.contains('open')) nav.style.display = 'none'; }, 300);
+    }
+
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+</body>
+</html>
