@@ -27,46 +27,4 @@ document.addEventListener('DOMContentLoaded', () => {
       setTheme(current === 'dark' ? 'light' : 'dark')
     })
   }
-
-  const menuToggle = document.getElementById('mobile-menu-toggle')
-  const overlay = document.getElementById('mobile-nav-overlay')
-
-  if (menuToggle && overlay) {
-    menuToggle.addEventListener('click', () => {
-      const isOpen = overlay.classList.contains('open')
-      if (isOpen) {
-        closeMenu(overlay, menuToggle)
-      } else {
-        overlay.style.display = 'block'
-        requestAnimationFrame(() => overlay.classList.add('open'))
-        menuToggle.setAttribute('aria-expanded', 'true')
-        document.body.style.overflow = 'hidden'
-      }
-    })
-
-    overlay.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => closeMenu(overlay, menuToggle))
-    })
-
-    document.addEventListener('click', (e) => {
-      if (
-        overlay.classList.contains('open') &&
-        !overlay.contains(e.target as Node) &&
-        !menuToggle.contains(e.target as Node)
-      ) {
-        closeMenu(overlay, menuToggle)
-      }
-    })
-  }
 })
-
-function closeMenu(overlay: HTMLElement, toggle: HTMLElement) {
-  overlay.classList.remove('open')
-  toggle.setAttribute('aria-expanded', 'false')
-  document.body.style.overflow = ''
-  setTimeout(() => {
-    if (!overlay.classList.contains('open')) {
-      overlay.style.display = 'none'
-    }
-  }, 300)
-}

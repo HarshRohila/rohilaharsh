@@ -5,9 +5,7 @@
     <div class="hero-content">
       <div class="hero-label">Available for interesting projects</div>
       <h1 class="hero-title">{{ .Title | default .Site.Title }}<br><span class="hero-gradient-text">Web Development.</span><br>Mostly.</h1>
-      {{ with .Params.description }}
-        <p class="hero-tagline">{{ . | safeHTML }}</p>
-      {{ end }}
+      <p class="hero-tagline">Software engineer writing about TypeScript, frontend architecture, and clean code patterns.</p>
       <div class="hero-line"></div>
     </div>
   </section>

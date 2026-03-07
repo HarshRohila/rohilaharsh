@@ -1,14 +1,9 @@
 <header class="site-header" id="site-header">
-  <div class="container header-inner">
+  <div class="container header-top">
     <a href="{{ .Site.Home.RelPermalink }}" class="logo">
       {{ with .Site.Params.site_logo }}<img src="{{ . | absURL }}" alt="{{ $.Site.Title }} logo">{{ end }}
       <span class="logo-text">rohila<span>Harsh</span></span>
     </a>
-    <nav class="main-nav" id="main-nav">
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
-      {{ end }}
-    </nav>
     <div class="header-actions">
       <div class="header-social">
         {{ range .Site.Params.ananke_socials }}
@@ -39,19 +34,11 @@
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
-      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </div>
-</header>
-
-<div class="mobile-nav-overlay" id="mobile-nav-overlay">
-  <ul>
+  <nav class="container header-nav">
     {{ range .Site.Menus.main }}
-      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
     {{ end }}
-  </ul>
-</div>
+  </nav>
+</header>
