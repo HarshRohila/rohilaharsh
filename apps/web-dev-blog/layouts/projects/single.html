@@ -5,19 +5,14 @@
   {{ $js := resources.Get "ts/app/projects.ts" | js.Build }}
   <script type="module" src="{{ $js.Permalink }}"></script>
 {{ end }}
+
 {{ define "main" }}
-  <div class="flex-l mt2 mw8 center">
-    <article class="center cf pv5 ph3 ph4-ns mw7">
-      <header>
-        <h1 class="f1 title">
-          {{ .Title }}
-        </h1>
-      </header>
-      <div
-        class="nested-copy-line-height lh-copy f4 nested-links {{ $.Param "text_color" | default "mid-gray" }}"
-      >
+  <div class="content-page">
+    <div class="page-container">
+      <h1 class="page-title">{{ .Title }}</h1>
+      <div class="page-content">
         {{ .Content }}
       </div>
-    </article>
+    </div>
   </div>
 {{ end }}

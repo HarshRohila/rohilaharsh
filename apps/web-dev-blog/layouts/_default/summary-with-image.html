@@ -1,29 +1,22 @@
 {{ $featured_image := partial "func/GetFeaturedImage.html" . }}
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      {{ if $featured_image }}
-          {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
-        {{ $featured_image := (trim $featured_image "/") | absURL }}
-        <div class="{{ cond (eq $.Site.Language.LanguageDirection "rtl") "pl3-ns" "pr3-ns" }} mb4 mb0-ns w-100 w-40-ns cover-image-container">
-          <a href="{{.RelPermalink}}" class="db grow">
-            <img src="{{ $featured_image }}" class="img" alt="image from {{ .Title }}">
-          </a>
-        </div>
-      {{ end }}
-      <div class="blah w-100{{ if $featured_image }} w-60-ns {{ cond (eq $.Site.Language.LanguageDirection "rtl") "pr3-ns" "pl3-ns" }}{{ end }}">
-        <h1 class="f3 fw1 figtree mt0 lh-title">
-          <a href="{{.RelPermalink}}" class="color-inherit dim link">
-            {{ .Title }}
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          {{ .Summary }}
-        </div>
-          <a href="{{.RelPermalink}}" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">{{ $.Param "read_more_copy" | default (i18n "readMore") }}</a>
-        {{/* TODO: add author
-        <p class="f6 lh-copy mv0">By {{ .Author }}</p> */}}
-      </div>
+<a href="{{ .RelPermalink }}" class="post-card">
+  {{ if $featured_image }}
+    {{ $featured_image = (trim $featured_image "/") | absURL }}
+    <div class="post-card-image">
+      <img src="{{ $featured_image }}" alt="{{ .Title }}" loading="lazy">
     </div>
+  {{ end }}
+  <div class="post-meta">
+    {{ if not .Date.IsZero }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "Jan 2, 2006" }}
+      </time>
+    {{ end }}
+    {{ if $.Site.Params.show_reading_time }}
+      <span class="reading-time">{{ i18n "readingTime" .ReadingTime }}</span>
+    {{ end }}
   </div>
-</article>
+  <h3 class="post-card-title">{{ .Title }}</h3>
+  <p class="post-card-excerpt">{{ .Summary | plainify | truncate 150 }}</p>
+  <span class="read-more-link">Read article <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+</a>

@@ -1,7 +1,6 @@
 {{ define "header" }}
-  {{ partial "page-header.html" . }}
+  {{ partial "site-navigation.html" . }}
 {{ end }}
-
 {{ define "main" }}
   <div class="content-page">
     <div class="page-container">
@@ -11,7 +10,4 @@
       </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-  {{ $js := resources.Get "ts/app/exp-chart.ts" | js.Build }}
-  <script type="module" src="{{ $js.Permalink }}" defer></script>
 {{ end }}

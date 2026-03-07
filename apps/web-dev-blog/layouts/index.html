@@ -1,0 +1,95 @@
+{{ define "main" }}
+  {{ $mainSections := .Site.Params.mainSections | default (slice "posts") }}
+  {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
+  {{ $section_count := len $section }}
+
+  {{ if ge $section_count 1 }}
+    {{/* Featured Post (latest) */}}
+    {{ $featured := index $section 0 }}
+    <section class="section" style="padding-top: 48px;">
+      <div class="section-header">
+        <span class="section-label">Latest Post</span>
+      </div>
+      <article class="featured-card">
+        {{ $featured_image := $featured.Params.featured_image }}
+        {{ if $featured_image }}
+          <div class="featured-card-image">
+            <a href="{{ $featured.RelPermalink }}">
+              <img src="{{ $featured_image | absURL }}" alt="{{ $featured.Title }}" loading="lazy">
+            </a>
+          </div>
+        {{ end }}
+        <div class="featured-card-body">
+          <div class="post-meta">
+            {{ if not $featured.Date.IsZero }}
+              <time datetime="{{ $featured.Date.Format "2006-01-02" }}">
+                {{ $featured.Date.Format "Jan 2, 2006" }}
+              </time>
+            {{ end }}
+            {{ if $.Site.Params.show_reading_time }}
+              <span class="reading-time">{{ i18n "readingTime" $featured.ReadingTime }}</span>
+            {{ end }}
+          </div>
+          <h3 class="featured-card-title">
+            <a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a>
+          </h3>
+          <p class="featured-card-excerpt">{{ $featured.Summary | plainify | truncate 200 }}</p>
+          <a href="{{ $featured.RelPermalink }}" class="read-more-btn">Read Article &rarr;</a>
+        </div>
+      </article>
+    </section>
+
+    {{/* Recent Posts */}}
+    {{ if ge $section_count 2 }}
+      {{ $recent := first 4 (after 1 $section) }}
+      {{ if $recent }}
+        <section class="section">
+          <div class="section-header">
+            <span class="section-label">Recent Posts</span>
+            {{ $section_name := index $mainSections 0 }}
+            {{ with $.Site.GetPage "section" $section_name }}
+              <a href="{{ .RelPermalink }}" class="section-link">All Posts &rarr;</a>
+            {{ end }}
+          </div>
+          <div class="posts-list">
+            {{ range $recent }}
+              {{ .Render "summary-with-image" }}
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* More Posts */}}
+    {{ if ge $section_count 6 }}
+      {{ $more := first 6 (after 5 $section) }}
+      {{ if $more }}
+        <section class="section">
+          <div class="section-header">
+            <span class="section-label">More</span>
+          </div>
+          <ul class="more-posts-list">
+            {{ range $more }}
+              <li class="more-post-item">
+                <a href="{{ .RelPermalink }}">
+                  <span class="more-post-title">{{ .Title }}</span>
+                  <span class="more-post-meta">
+                    {{ if not .Date.IsZero }}
+                      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    {{ end }}
+                  </span>
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+          {{ $section_name := index $mainSections 0 }}
+          {{ with $.Site.GetPage "section" $section_name }}
+            <div class="all-posts-link">
+              <a href="{{ .RelPermalink }}" class="read-more-btn">All Posts &rarr;</a>
+            </div>
+          {{ end }}
+        </section>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
