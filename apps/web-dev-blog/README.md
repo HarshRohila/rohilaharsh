@@ -12,4 +12,4 @@
 ## Deploy
 
 - It uses Github actions for deployment.
-- Need to renew secret (secrets.REPO_ACCESS) every year. Provide Content read-write access to home page repo - "harshrohila.github.io"
+- Need to renew secret (secrets.REPO_ACCESS) every year. Provide Content read-write access to home page repo - "harshrohila.github.io". To Create PAT token, visit profile, go to settings, dev settings
