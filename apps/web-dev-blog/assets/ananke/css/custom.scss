@@ -143,6 +143,11 @@ img {
       color: var(--text-primary);
       background: var(--accent-glow);
     }
+
+    &.active {
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
   }
 }
 

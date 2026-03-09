@@ -37,8 +37,9 @@
     </div>
   </div>
   <nav class="container header-nav">
+    {{ $currentPage := . }}
     {{ range .Site.Menus.main }}
-      <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
+      <a href="{{ .URL }}" title="{{ .Name }}"{{ if $currentPage.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a>
     {{ end }}
   </nav>
 </header>
