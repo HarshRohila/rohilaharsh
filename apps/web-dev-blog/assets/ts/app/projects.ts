@@ -49,5 +49,5 @@ async function setupVueJs() {
         message: 'hi'
       }
     }
-  }).mount('body')
+  }).mount('#projects-app')
 }
