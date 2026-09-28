@@ -44,13 +44,18 @@ Edit `./skills/<skill-name>/SKILL.md` (and any supporting files) per user reques
 ### Step 4 — Publish (confirm with user first)
 
 Show the exact command to the user and wait for confirmation before running.
-`publish` pushes to the current repo's origin (`https://github.com/procore/material-management-ui-service.git`):
+
+Default publish target:
+- Repo: `HarshRohila/rohilaharsh` (`https://github.com/HarshRohila/rohilaharsh.git`)
+- Branch: `skills`
+
+`skills-pm publish` pushes to the **current directory's** `origin`. If this workspace's origin is not `HarshRohila/rohilaharsh`, clone that repo (branch `skills`) somewhere outside the project, copy `./skills/<skill-name>/` into the clone's `skills/<skill-name>/`, and run publish from the clone.
 
 ```bash
-skills-pm publish -b harsh/skills -s <skill-name>
+skills-pm publish -b skills -s <skill-name>
 ```
 
-Branch defaults to `harsh/skills`. Adjust only if the metadata `ref` differs.
+Branch defaults to `skills`. Adjust only if the metadata `ref` differs.
 
 ### Step 5 — Refresh installed skill
 
@@ -58,10 +63,10 @@ Re-add from remote so the installed symlink points to the freshly published vers
 
 ```bash
 # project-installed
-skills-pm add procore/material-management-ui-service -s <skill-name> -b harsh/skills
+skills-pm add HarshRohila/rohilaharsh -s <skill-name> -b skills
 
 # globally-installed
-skills-pm add procore/material-management-ui-service -s <skill-name> -b harsh/skills -g
+skills-pm add HarshRohila/rohilaharsh -s <skill-name> -b skills -g
 ```
 
 ---
@@ -111,10 +116,11 @@ Fill in full skill instructions per user requirements, applying `create-skill` b
 ### Step 3 — Publish (confirm with user first)
 
 Show the exact command to the user and wait for confirmation before running.
-`publish` pushes to origin (`https://github.com/procore/material-management-ui-service.git`):
+
+Same default as Mode A: repo `HarshRohila/rohilaharsh`, branch `skills`. If this workspace's origin is not that repo, clone it and publish from the clone (see Mode A Step 4).
 
 ```bash
-skills-pm publish -b harsh/skills -s <skill-name>
+skills-pm publish -b skills -s <skill-name>
 ```
 
 ### Step 4 — Install: decide scope
@@ -125,8 +131,8 @@ Infer from the skill's purpose — ask the user if unclear:
 
 ```bash
 # project-local
-skills-pm add procore/material-management-ui-service -s <skill-name> -b harsh/skills
+skills-pm add HarshRohila/rohilaharsh -s <skill-name> -b skills
 
 # global
-skills-pm add procore/material-management-ui-service -s <skill-name> -b harsh/skills -g
+skills-pm add HarshRohila/rohilaharsh -s <skill-name> -b skills -g
 ```
